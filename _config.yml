@@ -2,7 +2,7 @@ name: undefined
 
 source:      ./src
 destination: ./build
-plugins:     ./src/_plugins
+plugins:     ./_plugins
 layouts:     ./src/_layouts
 include:     []
 exclude:     []
@@ -46,7 +46,7 @@ rdiscount:
   extensions: []
 
 redcarpet:
-  extensions: []
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 
 kramdown:
   auto_ids: true
