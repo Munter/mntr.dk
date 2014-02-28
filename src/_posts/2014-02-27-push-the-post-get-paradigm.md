@@ -5,13 +5,13 @@ date:   2014-02-27 19:15:29
 categories: web development performance assetgraph spdy http2
 ---
 
-# PUSH, the post GET paradigm
+# PUSH, the post-GET paradigm
 
 Web performance these days is non-optional. If your web page is slow you lose business. Our visitors are an impatient lot, and though they are not actively counting milliseconds, web developers have to, just in order to keep visitors' thoughts away from cat videos and flappy bird.
 
 In our hunt for milliseconds we, the web developers, are going through a great ordeal just to keep up. We are following [the 14 rules](http://stevesouders.com/hpws/rules.php), we are fighting off marketings [bigger is better](http://www.milwaukeepolicenews.com/) and we are setting up automated torture machines for our code. All for the milliseconds, all to keep our visitors' attention.
 
-Needless to say, reshaping, contorting, torturing your code in order to conform to the 14 rules, also leaves you with something that is utterly unapproachable from a developers standpoint. Well optimized production grade static assets are almost as far away from good development practices as you can possibly come. One module per file? Forget it, too expensive. Each image as a separate file? You must be crazy, go decode this Base64 or pull out an image editor to reconstruct it from a sprite. And that JavaScript error you're trying to debug? Start unwrapping uglified concatenated code in your head, under time pressure of course, production is down you know...
+Needless to say, reshaping, contorting, torturing your code in order to conform to the 14 rules, also leaves you with something that is utterly unapproachable from a developers standpoint. Well optimized production grade static assets are almost as far away from good development practices as you can possibly come. One module per file? Forget it, too expensive. Each image as a separate file? You must be crazy, go decode this Base64 or pull out an image editor to reconstruct it from a sprite. And that JavaScript error you're trying to debug? Start unwrapping uglified concatenated code in your head, under time pressure of course; production is down you know...
 
 Unmaintainable. Complex. Prone to errors.
 
@@ -20,7 +20,7 @@ We are being held hostage by the protocols that serve us. I hope you haven't dev
 
 ## All hail SPDY/HTTP2
 
-Our savior is here. SPDY promises deliverance from all the hardships we have endured. In the future we will all have [gzipped HTTP headers](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-2.6.10.1-Compression), [multiplexed HTTP streams](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-4.3-One-Connection-Per-Domain) mitigating a lot of hand shaking and [slow-start](http://en.wikipedia.org/wiki/Slow-start). All of this with keep-alive that works properly. Oh the rejoicing. And all that for just the cost of [adding SSL](http://en.wikipedia.org/wiki/SPDY#Design).
+Our savior is here. SPDY promises deliverance from all the hardships we have endured. In the future we will all have [gzipped HTTP headers](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-2.6.10.1-Compression), [multiplexed HTTP streams](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-4.3-One-Connection-Per-Domain) mitigating a lot of hand shaking and [slow-start](http://en.wikipedia.org/wiki/Slow-start)s. All of this with keep-alive that works properly. Oh the rejoicing. And all that for just the cost of [adding SSL](http://en.wikipedia.org/wiki/SPDY#Design).
 
 Wait, what?
 
@@ -32,10 +32,11 @@ And even in this new world of SPDY, our old rules of minification still apply. C
 
 There may be a way to change the game though.
 
+**NOTE**: HTTP/2 [does not](http://http2.github.io/http2-spec/#discover-http) require SSL.
 
 ## PUSHing the limits
 
-SPDY offers us an interesting new tool. PUSH streams. Your SPDY enabled server is suddenly able to initiate new multiplexed streams during existing requests, sending you stuff you didn't even ask for... yet. While this may sound a bit ominous, the gist of it is that if the server knows what assets you are about to ask for, it is able to initiate a PUSH stream of those assets directly to your browser, before the browser even knew it needed them.
+SPDY offers us an interesting new tool. PUSH streams. Your SPDY enabled server is suddenly able to initiate new multiplexed streams during existing requests, sending stuff the client hasn't even asked for... yet. While this may sound a bit ominous, the gist of it is that if the server knows what assets the client is about to ask for, it is able to initiate a PUSH stream of those assets, storing them directly in the browser cache, before the browser even knew it needed them.
 
 That latency I told you about before, caused by GET request round trips? Magically vanished!
 
@@ -49,7 +50,7 @@ Our HTTP optimized build systems bundled code in as few files as possible. The p
 
 But imagine serving every asset individually. Suddenly a change to single file means you only need to push that specific file to the browser cache. All the rest of the assets, the ones you haven't touched? Still cached. No re-download.
 
-So you might rightfully ask, how can the server know if the browser has an asset cached already if the browser doesn't initiate a request for the asset, not sending any request headers for that particular file? Good question. It can't know. Instead the server just opens the flood gates by   starting a PUSH stream for every asset you need, and starts pumping. For the server, and the performance hungry engineer, it's all about saturating the bandwidth as much as possible and getting that data over the wire.
+So you might rightfully ask, how can the server know if the browser has an asset cached already if the browser doesn't initiate a request for the asset, not sending any request headers for that particular file? Good question. It can't know. Instead the server just opens the flood gates by starting a PUSH stream for every asset you need, and starts pumping. For the server, and the performance hungry engineer, it's all about saturating the bandwidth as much as possible and getting that data over the wire.
 
 Each PUSH request start with a header though. Properly configured, say with an [ETag](http://en.wikipedia.org/wiki/HTTP_ETag) with a last modified timestamp or MD5 sum of the file content, the browser knows within the first few packets if it needs the rest of the transmission or not. The browser can simply hang up that particular stream. So the server might push a few packets in vain and stop when the browser tells it to. It's an optimistic and greedy approach. But it does leverage the cache properly, and the extra spent bytes don't cost a huge time overhead, since the stream termination request goes over the wire in the same time a normal HTTP GET round trip would take just to request some initial data from a server. It's a tradeoff, lower latency for higher data transfer.
 
@@ -74,7 +75,7 @@ You might be able to build a server that knows how to interpret [HAR files](http
 
 ### Static analysis
 
-This one is my favorite, and where I get to pitch one of my personal projects. [Assetgraph](https://github.com/assetgraph/assetgraph) can be used to statically analyze your web assets and create a graph model that contains all files and relations between them. Think of it as a browser that scrapes your entire site, except it only ever visits every resource once and can run directly on your file system. Having your static file server traverse the entire dependency graph on startup would seed it with all the contextual knowledge it needs for SDY PUSH.
+This one is my favorite, and where I get to pitch one of my personal projects. [Assetgraph](https://github.com/assetgraph/assetgraph) can be used to statically analyze your web assets and create a graph model that contains all files and relations between them. Think of it as a browser that scrapes your entire site, except it only ever visits every resource once and can run directly on your file system. Having your static file server traverse the entire dependency graph on startup would seed it with all the contextual knowledge it needs for SPDY PUSH.
 
 
 ## Science or Fiction?
@@ -87,9 +88,11 @@ So after a few hours of hacking I came up with [expush](https://github.com/Munte
 
 These are early days. It's quite buggy and has no finish at all, but it's enough to prove that this can be done. There are all sorts of bugs, like errors being thrown when reloading a page before the keep-alive dies and [Chrome not actually supporting ETag cache header response properly](https://groups.google.com/d/msg/spdy-dev/TetVOinB-LM/rODtXlx1KUQJ), so every asset is pushed over the wire in its entirety. I do think that this experiment should be enough to do some initial speed tests and comparisons with various other web performance optimization setups.
 
+> Måske værd at nævne at Assetgraph også kan minimize/bundle/..., hvilket må gøre komparative tests nemmere...
+
 So, answering the heading of this section, we are talking about science, not fiction. However I am not a benchmark expert. So if you are one, or know one, please poke me and lets see if we can get some numbers and science this thing up!
 
-Is PUSH the post GET paradigm? I hope so.
+Is PUSH the post-GET paradigm? I hope so.
 
 --
 Peter Müller, https://github.com/Munter
