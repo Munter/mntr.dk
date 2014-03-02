@@ -1,9 +1,9 @@
-name: undefined
+name: Peter Müller
 
-source:      ./src
-destination: ./build
+source:      src
+destination: build
 plugins:     ./_plugins
-layouts:     ./src/_layouts
+layouts:     _layouts
 include:     []
 exclude:     []
 keep_files:  ['.git','.svn']
@@ -12,13 +12,13 @@ timezone:    Europe/Copenhagen
 encoding:    UTF-8
 
 future:      true
-show_drafts: nil
+show_drafts: false
 limit_posts: 0
 pygments:    true
 
 relative_permalinks: true
 
-permalink:     pretty
+permalink:     /:year/:title/
 paginate_path: 'page:num'
 
 markdown:      redcarpet
@@ -32,7 +32,7 @@ host:        0.0.0.0
 port:        4000
 baseurl:     /
 url:         http://localhost:4000
-lsi:         false
+lsi:         true
 
 maruku:
   use_tex:    false
