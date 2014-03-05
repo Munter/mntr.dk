@@ -5,8 +5,6 @@ date:   2014-02-27 19:15:29
 categories: web development performance assetgraph spdy http2
 ---
 
-# PUSH, the post-GET paradigm
-
 Web performance these days is non-optional. If your web page is slow, you lose business. Our visitors are an impatient lot, and though they are not actively counting milliseconds, web developers have to, just in order to keep visitors' thoughts away from cat videos and flappy bird.
 
 In our hunt for milliseconds we, the web developers, are going through a great ordeal just to keep up. We are following [the 14 rules](http://stevesouders.com/hpws/rules.php), we are fighting off marketing's [bigger is better](http://www.milwaukeepolicenews.com/) and we are setting up automated torture machines for our code. All for the milliseconds, all to keep our visitors' attention.
