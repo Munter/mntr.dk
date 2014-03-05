@@ -4,41 +4,41 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Web, workflow, tools and random thoughts">
 
-        <!-- syntax highlighting CSS -->
-        <link rel="stylesheet" href="/css/syntax.css">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <!--<link rel="shortcut icon" href="/favicon.ico>-->
 
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/syntax.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400">
     </head>
     <body>
 
         <div class="site">
-          <div class="header">
-            <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-            <a class="extra" href="/">home</a>
-          </div>
-
-          {{ content }}
-
-          <div class="footer">
-            <div class="contact">
-              <p>
-                Peter Müller<br />
-                Frontend Engineer, Podio<br />
-                munter@fumle.dk
-              </p>
+            <div class="header">
+                <h1 class="title"><a href="/">{{ site.name }}</a></h1>
+                <a class="extra" href="/">home</a>
             </div>
-            <div class="contact">
-              <p>
-                <a href="https://github.com/Munter">github.com/Munter</a><br />
-                <a href="https://twitter.com/_munter_">twitter.com/_munter_</a><br />
-              </p>
-            </div>
-          </div>
+
+        {{ content }}
+
         </div>
+
+    <footer class="site-footer">
+        <div class="subscriptions">
+            <a class="subscribe icon-feed" href="/feed.rss"><span class="tooltip">Subscribe!</span></a>
+            <a class="subscribe icon-twitter" href="https://twitter.com/_munter_"><span class="tooltip">Follow!</span></a>
+            <a class="subscribe icon-google-plus" href="https://plus.google.com/+PeterMüllerPlus/"><span class="tooltip">Follow!</span></a>
+        </div>
+
+        <div>- Peter Müller, Frontend Engineer</div>
+    </footer>
+
+    <script type="text/javascript" src="js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
     </body>
 </html>
