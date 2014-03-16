@@ -27,7 +27,7 @@ markdown:      redcarpet
 markdown_ext:  markdown,mkd,mkdn,md
 textile_ext:   textile
 
-excerpt_separator: "\n\n"
+excerpt_separator: "\n\n\n"
 
 safe:        false
 host:        0.0.0.0
