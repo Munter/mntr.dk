@@ -1,4 +1,6 @@
-name: Peter Müller
+name: Thinking about the web
+description: An attempt to unwaste some of the time I've spent thinking about the web and how we build it best.
+url: http://mntr.github.io
 
 source:      src
 destination: build
