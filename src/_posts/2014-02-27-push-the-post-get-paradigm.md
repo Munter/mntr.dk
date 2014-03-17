@@ -21,7 +21,7 @@ We are being held hostage by the protocols that serve us. I hope you haven't dev
 
 Our savior is here. SPDY promises deliverance from all the hardships we have endured. In the future we will all have [gzipped HTTP headers](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-2.6.10.1-Compression), [multiplexed HTTP streams](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-4.3-One-Connection-Per-Domain) mitigating a lot of hand shaking and [slow-start](http://en.wikipedia.org/wiki/Slow-start)s. All of this with keep-alive that works properly. Oh the rejoicing. And all that for just the cost of [adding SSL](http://en.wikipedia.org/wiki/SPDY#Design).
 
-Wait, what?
+> Wait, what?
 
 Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are also forced to accept the added overhead of a [TLS handshake](http://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake), a slow ordeal ([tweakable though](http://unhandledexpression.com/2013/01/25/5-easy-tips-to-accelerate-ssl/)).
 
