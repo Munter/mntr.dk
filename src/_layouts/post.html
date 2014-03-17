@@ -8,15 +8,11 @@ layout: default
         <h1 class="post-title">{{ page.title }}</h1>
 
         <div class="post-meta">
-            <time datetime="{{ page.date | date_to_string }}">{{ page.date | date_to_string }}</time> —
-            {{ page.categories }}
+            <time datetime="{{ page.date | date_to_string }}">{{ page.date | date_to_string }}</time><!-- —
             {% for category in page.categories %}
                 <span class="category">#{{ category }}</span>
             {% endfor %}
-        </div>
-
-        <div class="sharing">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-via="_munter_">Tweet</a>
+        -->
         </div>
 
         <section class="post-content">
