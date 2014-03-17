@@ -19,29 +19,40 @@
     </head>
     <body>
 
-        <div class="site">
-            <div class="header">
-                <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-                <a class="extra" href="/">home</a>
+        <header class="site-head">
+            <div class="vertical">
+                <div class="site-head-content inner">
+                    <a class="blog-logo" href="/"><img src="/images/logo.svg"></a>
+                    <h1 class="blog-title">{{ site.name }}</h1>
+                    <h2 class="blog-description">{{ site.description }}</h2>
+                </div>
             </div>
+        </header>
 
+        <div class="site">
             {{ content }}
-
         </div>
 
         <footer class="site-footer">
-            <div class="subscriptions">
-                <a class="subscribe social-email" href="mailto:munter+mntr@fumle.dk"></a>
-                <a class="subscribe social-twitter" href="https://twitter.com/_munter_"></a>
-                <a class="subscribe social-github" href="https://github.com/Munter"></a>
-                <a class="subscribe social-linkedin" href="http://dk.linkedin.com/in/petermuller/"></a>
-                <a class="subscribe social-google" href="https://plus.google.com/+PeterMüllerPlus/"></a>
-                <a class="subscribe social-youtube" href="http://www.youtube.com/user/munter101"></a>
-                <a class="subscribe social-flickr" href="http://www.flickr.com/photos/petermuller/"></a>
-                <a class="subscribe social-instagram" href="http://instagram.com/ptrmllr"></a>
-            </div>
+            <div class="vertical">
+                <div class="inner">
 
-            <div>- Peter Müller, Frontend Engineer</div>
+                    <section class="author">
+                        <img class="author-avatar" src="/images/munter.png">
+                        <h4>Peter Müller</h4>
+                        <p><a href="http://copenhagenjs.dk">CopenhagenJS</a> organizer, <a href="http://github.com/assetgraph/">Assetgraph</a> maintainer, <a href="http://github.com/Munter">Open Source enthusiast</a>, JavaScript hacker and occasional <a href="http://lanyrd.com/profile/_munter_/sessions/">public speaker</a>.</p>
+                    </section>
+
+                    <div class="subscriptions">
+                        <a class="subscribe social-twitter" href="https://twitter.com/_munter_"></a>
+                        <a class="subscribe social-github" href="https://github.com/Munter"></a>
+                        <a class="subscribe social-google" href="https://plus.google.com/+PeterMüllerPlus/"></a>
+                        <a class="subscribe social-linkedin" href="http://dk.linkedin.com/in/petermuller/"></a>
+                        <a class="subscribe social-email" href="mailto:munter+mntr@fumle.dk"></a>
+                        <a class="subscribe social-rss" href="/feed.xml"></a>
+                    </div>
+                </div>
+            </div>
         </footer>
 
         <script>
@@ -54,6 +65,8 @@
           ga('send', 'pageview');
 
         </script>
+
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     </body>
 </html>
