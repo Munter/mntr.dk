@@ -87,6 +87,6 @@ So after a few hours of hacking I came up with [expush](https://github.com/Munte
 
 These are early days. It's quite buggy and has no finish at all, but it's enough to prove that this can be done. There are all sorts of bugs, like errors being thrown when reloading a page before the keep-alive dies and [Chrome not actually supporting ETag cache header response properly](https://groups.google.com/d/msg/spdy-dev/TetVOinB-LM/rODtXlx1KUQJ), so every asset is pushed over the wire in its entirety. I do think that this experiment should be enough to do some initial speed tests and comparisons with various other web performance optimization setups.
 
-As has hopefully been established by this post, latency is a big killer. If you're not convinced you should watch <a href="https://www.youtube.com/watch?v=R8W_6xWphtw">Paul Irish's Fluent 2014 keynote</a>. I hope SPDY push can make a serious contribution to speeding up the web by eliminating a lot of latency issues.
+As has hopefully been established by this post, latency is a big killer. If you're not convinced you should watch [Paul Irish's Fluent 2014 keynote](https://www.youtube.com/watch?v=R8W_6xWphtw). I hope SPDY push can make a serious contribution to speeding up the web by eliminating a lot of latency issues.
 
-I'd love to show you some numbers right now, but alas, I am not a benchmark expert. So if you are one, or know one, please <a href="https://twitter.com/_munter_">poke me</a> and lets see if we can get some numbers and science this thing up!
+I'd love to show you some numbers right now, but alas, I am not a benchmark expert. So if you are one, or know one, please [poke me](https://twitter.com/_munter_) and lets see if we can get some numbers and science this thing up!

@@ -2,12 +2,12 @@ name: Peter Müller
 description: My thoughts. The ones that didn't slip away
 url: http://munter.github.io
 
-source:      src
-destination: build
-plugins:     ./_plugins
-layouts:     _layouts
+source:      ./
+destination: ./build
+plugins:     ./src/_plugins
+layouts:     ./src/_layouts
 include:     []
-exclude:     []
+exclude:     ['Gemfile', 'Gemfile.lock', 'README.md']
 keep_files:  ['.git','.svn']
 gems:        []
 timezone:    Europe/Copenhagen
