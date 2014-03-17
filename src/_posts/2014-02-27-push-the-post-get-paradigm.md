@@ -1,13 +1,14 @@
 ---
 layout: post
 title:  "PUSH, the post GET paradigm"
-date:   2014-02-27 19:15:29
-categories: web development performance assetgraph spdy http2
+date:   2014-03-17 02:25:29
+categories: webperf spdy push assetgraph
 ---
 
 Web performance these days is non-optional. If your web page is slow, you lose business. Our visitors are an impatient lot, and though they are not actively counting milliseconds, web developers have to, just in order to keep visitors' thoughts away from cat videos and flappy bird.
 
 In our hunt for milliseconds we, the web developers, are going through a great ordeal just to keep up. We are following [the 14 rules](http://stevesouders.com/hpws/rules.php), we are fighting off marketing's [bigger is better](http://www.milwaukeepolicenews.com/) and we are setting up automated torture machines for our code. All for the milliseconds, all to keep our visitors' attention.
+
 
 Needless to say, reshaping, contorting, torturing your code in order to conform to the 14 rules, also leaves you with something that is utterly unapproachable from a developer's standpoint. Well optimized production grade static assets are almost as far away from good development practices as you can possibly get. One module per file? Forget it, too expensive. Each image as a separate file? You must be crazy, go decode this base64 or pull out an image editor to reconstruct it from a sprite. And that JavaScript error you're trying to debug? Start unwrapping uglified concatenated code in your head, under time pressure of course; production is down you know...
 
@@ -76,7 +77,7 @@ You might be able to build a server that knows how to interpret [HAR files](http
 This one is my favorite, and where I get to pitch one of my personal projects. [Assetgraph](https://github.com/assetgraph/assetgraph) can be used to statically analyze your web assets and create a graph model that contains all files and relations between them. Think of it as a browser that scrapes your entire site, except it only ever visits every resource once and can run directly on your file system. Having your static file server traverse the entire dependency graph on startup would seed it with all the contextual knowledge it needs for SPDY PUSH.
 
 
-## Science or Fiction?
+## Making it happen
 
 So I wanted to take a look at what is possible with the technology we have now, and see if we can get to the point where performance measurements and comparisons with existing solutions are actually possible. Needless to say, SPDY or HTTP2 aren't mainstream yet, but it's nice to be prepared.
 
@@ -86,6 +87,6 @@ So after a few hours of hacking I came up with [expush](https://github.com/Munte
 
 These are early days. It's quite buggy and has no finish at all, but it's enough to prove that this can be done. There are all sorts of bugs, like errors being thrown when reloading a page before the keep-alive dies and [Chrome not actually supporting ETag cache header response properly](https://groups.google.com/d/msg/spdy-dev/TetVOinB-LM/rODtXlx1KUQJ), so every asset is pushed over the wire in its entirety. I do think that this experiment should be enough to do some initial speed tests and comparisons with various other web performance optimization setups.
 
-So, answering the heading of this section, we are talking about science, not fiction. However I am not a benchmark expert. So if you are one, or know one, please poke me and lets see if we can get some numbers and science this thing up!
+As has hopefully been established by this post, latency is a big killer. If you're not convinced you should watch <a href="https://www.youtube.com/watch?v=R8W_6xWphtw">Paul Irish's Fluent 2014 keynote</a>. I hope SPDY push can make a serious contribution to speeding up the web by eliminating a lot of latency issues.
 
-Is PUSH the post-GET paradigm? I hope so.
+I'd love to show you some numbers right now, but alas, I am not a benchmark expert. So if you are one, or know one, please <a href="https://twitter.com/_munter_">poke me</a> and lets see if we can get some numbers and science this thing up!
