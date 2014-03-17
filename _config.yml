@@ -1,6 +1,6 @@
 name: Peter Müller
 description: My thoughts. The ones that didn't slip away
-url: http://munter.github.io
+url: http://mntr.dk
 
 source:      ./
 destination: ./build
