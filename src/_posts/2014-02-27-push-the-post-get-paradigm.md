@@ -27,7 +27,7 @@ Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are al
 
 So suddenly it comes down to a tradeoff. HTTP handshake overhead versus TLS handshake overhead. Which one to choose depends on the nature of your site, and that may change over time. So no simple answers here. Jimmy Durante seems to sum up [this situation](https://www.youtube.com/watch?v=bY-zmJ1VCQI) pretty well.
 
-And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](http://en.wikipedia.org/wiki/Latency_(engineering)#Packet-switched_networks) isn't a thing that magically vanishes.
+And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](http://en.wikipedia.org/wiki/Latency_\(engineering\)#Packet-switched_networks) isn't a thing that magically vanishes.
 
 There may be a way to change the game though.
 
@@ -47,7 +47,7 @@ That's right. We don't need them any more. With all the latency overhead in tran
 
 Our HTTP optimized build systems bundled code in as few files as possible. The previous best strategy was to bundle and serve all static assets with a far future expires header, hoping for a cache hit on the next visit, and thus not even triggering a GET request for the assets at all. A good strategy under the circumstances. However, a single change in just a single module will change the entire bundle, thus triggering a re-download and transferring more bytes overall, with more GET round trips needed.
 
-But imagine serving every asset individually. Suddenly a change to single file means you only need to push that specific file to the browser cache. All the rest of the assets, the ones you haven't touched? Still cached. No re-download.
+But imagine serving every asset individually. Suddenly a change to a single file means you only need to push that specific file to the browser cache. All the rest of the assets, the ones you haven't touched? Still cached. No re-download.
 
 So you might rightfully ask, how can the server know if the browser has an asset cached already if the browser doesn't initiate a request for the asset, not sending any request headers for that particular file? Good question. It can't know. Instead the server just opens the flood gates by starting a PUSH stream for every asset you might need, and starts pumping. For the server and the performance hungry engineer, it's all about saturating the bandwidth as much as possible and getting that data over the wire.
 
@@ -60,7 +60,7 @@ So how do we teach our servers about that?
 
 ## The context aware static file server
 
-The bad news: there is no specified configuration format for telling your server what to push when a specific file is requested. The [Nginx team](https://twitter.com/nginxorg) at least [came up empty handed](https://twitter.com/nginxorg/status/436182316042301440) when asked about it. So for now we are on our own for now. However many of us are running some sort of server that we have fine grained control over. Frameworks like [express](http://expressjs.com/) certainly make modifications like these easier.
+The bad news: there is no specified configuration format for telling your server what to push when a specific file is requested. The [Nginx team](https://twitter.com/nginxorg) at least [came up empty handed](https://twitter.com/nginxorg/status/436182316042301440) when asked about it. So we are on our own for now. However many of us are running some sort of server that we have fine grained control over. Frameworks like [express](http://expressjs.com/) certainly make modifications like these easier.
 
 So let's look at some strategies for making your static web server context aware. There are a few I can think of that could be used to seed a web server with enough contextual knowledge to start leveraging SPDY PUSH.
 
