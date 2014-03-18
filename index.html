@@ -20,11 +20,16 @@ title: Thoughts - Peter Müller
         </header>
         <section class="post-excerpt">
             {{ post.excerpt }}
-            <div class="sharing">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="_munter_">Tweet</a>
-            </div>
-            <a href="{{ post.url}}">Continue reading…</a>
         </section>
+        <div class="post-meta">
+            <div class="sharing">
+                {% capture twittertext %}{% if post.twittertext %}{{ post.twittertext }}{% else %}{{ post.title }}{% endif %}{% endcapture %}
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ post.url }}" data-text="{{ twittertext }} {{ site.url }}{{ post.url }}">Tweet</a>
+            </div>
+            <p>
+                <a href="{{ post.url}}">Read full post ({{ post.content | reading_time }})</a>
+            </p>
+        </div>
     </article>
 
     {% endfor %}

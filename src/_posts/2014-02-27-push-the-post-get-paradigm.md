@@ -3,6 +3,7 @@ layout: post
 title:  "PUSH, the post GET paradigm"
 date:   2014-03-17 02:25:29
 categories: webperf spdy push assetgraph
+twittertext: "Imagine delivering web assets quicker than today, with better caching and a much simpler build process"
 ---
 
 Web performance these days is non-optional. If your web page is slow, you lose business. Our visitors are an impatient lot, and though they are not actively counting milliseconds, web developers have to, just in order to keep visitors' thoughts away from cat videos and flappy bird.
