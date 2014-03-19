@@ -47,15 +47,19 @@
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400">
 
         <!-- Open Graph stuff -->
+        <meta property="og:title" content="{{ page.title }}">
+        <meta property="og:site_name" content="{{ site.description }}">
+        <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+        <meta property="og:type" content="article">
+        {% if page.excerpt %}
+        <meta property="og:description" content="{{ page.excerpt | strip_html }}">
+        {% endif %}
         <meta property="og:image" content="{{ site.url }}/assets/images/opengraph.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="500">
         <meta property="og:image:height" content="500">
-        <meta property="og:title" content="{{ page.title }}">
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="{{ site.url }}{{ page.url }}">
 
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ site.url }}/feed.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
     </head>
     <body>
 
