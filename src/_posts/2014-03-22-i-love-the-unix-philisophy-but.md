@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "I love the Unix philosophy, but..."
-date:   2014-03-22 02:25:29
+date:   2014-03-22 22:25:29
 categories: frontend build assetgraph grunt gulp broccoli unix
 twittertext: "The unix philisophy might not cover our front end build system use case well enough"
 disqus: true
@@ -40,7 +40,7 @@ Now, I have been using Grunt as an example here, mostly because it is the oldest
 
 The big problem with all of these approaches are from my point of view that the transitional states that happen in the Yeoman/Grunt `_tmp`-directory are very often `!web`. They are files out of context, and might not even be servable as a web page in themselves at any given point in the build chain. From my point of view this adds more complexity for the user of these tools. It is up to the user to somehow configure this thing to get from a state of `!web` to a state of `web`. Many if these transforms are non-interchangeable, non-reorderable and can generally break easily if misconfigured slightly. So do we really need fine grained control of each of them?
 
-I mentioned powershell because it allows to pass more than text in it's command line pipes. This is an amazingly powerful concept that enables developers to pass on entire data models, intact with all their references.
+After the Unix tool response by the panel, I mentioned powershell because it allows to pass more than text in it's command line pipes. This is an amazingly powerful concept that enables developers to pass on entire data models, intact with all their references.
 
 While I usually hate on Microsoft for providing a pretty bad development platform out of the box on Windows, this thing is a real gem. One that is underappreciated and underutilized.
 
