@@ -24,13 +24,13 @@ layout: default
             <a href="https://twitter.com/share" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ page.url }}" data-text="{{ twittertext }}">Tweet</a>
         </div>
 
-        {% if page.disquss == 'true' %}
+        {% if page.disquss == true %}
             <div id="disqus_thread"></div>
         {% endif %}
     </article>
 
 
-    {% if page.disquss == 'true' %}
+    {% if page.disquss == true %}
         <script type="text/javascript">
             var disqus_shortname = 'mntrdk';
             (function() {

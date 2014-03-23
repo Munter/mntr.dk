@@ -4,7 +4,7 @@ title:  "I love the Unix philosophy, but..."
 date:   2014-03-23 21:05:29
 categories: frontend build assetgraph grunt gulp broccoli unix
 twittertext: "Are Unix pipes inadequate to cover our needs in frontend build systems?"
-disqus: true
+disquss: true
 ---
 
 I attended the [Edge Conference](http://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should receive high praises.
