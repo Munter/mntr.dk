@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "I love the Unix philosophy, but..."
-date:   2014-03-22 22:25:29
+date:   2014-03-23 21:05:29
 categories: frontend build assetgraph grunt gulp broccoli unix
-twittertext: "The unix philisophy might not cover our front end build system use case well enough"
+twittertext: "Are Unix pipes inadequate to cover our needs in frontend build systems?"
 disqus: true
 ---
 
