@@ -7,7 +7,7 @@ twittertext: "Are Unix pipes inadequate to cover our needs in frontend build sys
 disqus: true
 ---
 
-I attended the [Edge Conference](http://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should recive high praises.
+I attended the [Edge Conference](http://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should receive high praises.
 
 During the build system panel some remarks were made about the Unix philosophy in response to a question I asked. I did get a counter argument in, but the available time only allowed for tweet size comments, so I don't think I got my point across properly. I'll try to go a bit in depth on my reasoning here.
 
