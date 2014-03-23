@@ -9,7 +9,7 @@ disqus: true
 
 I attended the [Edge Conference](http://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should recive high praises.
 
-During the build system panel some remarks were made about the Unix philosophy in response to a question I asked. I did get a retort in, but the available time only allowed for tweet size comments, so I don't think I ever got my point across. I'll try to go a bit in depth on my reasoning here.
+During the build system panel some remarks were made about the Unix philosophy in response to a question I asked. I did get a counter argument in, but the available time only allowed for tweet size comments, so I don't think I got my point across properly. I'll try to go a bit in depth on my reasoning here.
 
 
 My question was this (somewhat rewritten by the moderator):
@@ -28,19 +28,19 @@ These simple chains are great for tasks like pre-processing. Going from one type
 
 The production build case is an entirely different and much more complex beast.
 
-In a production build case you are not modifying single files, or collections of files of the same type. You are manipulating a web of files, a dependency graph of nodes (files) and relations (`href`, `src` et al). If your build chain does not keep these relations intact throughout the process, your data integrity is broken, you web of files turns into a bunch of files without relation.
+In a production build case you are not modifying single files, or collections of files of the same type. You are manipulating a web of files, a dependency graph of nodes (files) and relations (`href`, `src` et al). If your build chain does not keep these relations intact throughout the process, your data integrity is broken, your web of files turns into a bunch of files without relation.
 
 Since the Unix pipes standardize on a very simple interface, raw contextless text, they are an incredibly bad medium for keeping the relational integrity of this dependency graph intact. All of the currently popular build tools suffer from this problem, whether they write temporary files to disk or do incremental compilations in a stream. None of them are able to keep the integrity of the graph alive in a pipe, so they save state in temporary files.
 
-You see the symptoms of this in some of the grunt tasks that deal with graph problems (without realizing it). Problems with the file revision renaming tasks because the build chain loses the references to the files, forcing the use of regexp replacement, using patterns that do not match relative path references correctly. Problems with concatenation tasks because the inclusion order isn't taken into account, thus forcing the users to write manifest files, a duplication of information already available in a functional web page.
+You see the symptoms of this in some of the grunt tasks that, without realizing it, deal with graph problems. Problems with the file revision renaming tasks because the build chain loses the references to the files, forcing the use of regexp replacement, using patterns that do not match relative path references correctly. Problems with concatenation tasks because the inclusion order isn't taken into account, thus forcing the users to write manifest files, a duplication of information already available in a functional web page.
 
 There are many more examples of bad pratice workarounds that plugin authors have to make because the Unix philosophy doesn't give you enough freedom of expression to work with data models that can be kept intact. Combine all of these hacks and workarounds and you get a 600 line grunt configuration file that might just work, but is quite difficult to understand.
 
-Now, I have been using Grunt as an example here, mostly because it is the oldest and most widely used, but also because because the problem visibility is proportional to the configuration file size. None of the other competitors like Gulp or Broccoli have solved the dependency graph integrity problem. They might have simpler configuration, which I am a big fan of, but they require the same hacks to unbreak the state of individual assets built out of context.
+I use Grunt as an example because it is the oldest and most widely used, but also because the problem's visibility is proportional to the configuration file size. None of the other competitors like Gulp or Broccoli have solved the dependency graph integrity problem. They might have simpler configuration, which I am a big fan of, but they require the same hacks to unbreak the state of individual assets built out of context.
 
-The big problem with all of these approaches are from my point of view that the transitional states that happen in the Yeoman/Grunt `_tmp`-directory are very often broken webs. They are files out of context, and might not even be servable as a web page in themselves at any given point in the build chain. From my point of view this adds more complexity for the user of these tools. It is up to the user to somehow configure this thing to get from a state of broken web to a state of functional web. Many if these transforms are non-interchangeable, non-reorderable and can generally break easily if misconfigured slightly. So do we really need fine grained control of each of them?
+The big problem with all of these approaches are that the transitional states that occur in the Yeoman/Grunt `_tmp`-directory are very often broken webs. They are files out of context, and might not even be servable as a web page in themselves at any given point in the build chain. This adds more complexity for the user of these tools, since it is left up to the user to configure how to get from a state of broken web to a state of functional web. Many of these transforms are non-interchangeable, non-reorderable and can generally break easily if misconfigured slightly. So do we really need fine grained control of each of them?
 
-After the Unix tool response by the panel, I mentioned powershell because it allows to pass more than text in it's command line pipes. This is an amazingly powerful concept that enables developers to pass on entire data models, intact with all their references.
+After the Unix tool response by the panel, I mentioned powershell because it allows to pass more than text in it's command line pipes. This is an amazingly powerful concept that enables developers to pass on entire data models with all their references intact.
 
 While I usually hate on Microsoft for providing a pretty bad development platform out of the box on Windows, this thing is a real gem. One that is underappreciated and underutilized.
 
@@ -50,4 +50,4 @@ Had Unix pipes provided capability of piping objects instead of only text, we wo
 
 All of these implementations are workarounds to the limitations of the Unix pipe. Hack by hack we've dug ourselves deeper into our individual holes and have trench wars about which hack is best, yet we still salute Unix pipes as the end all be all of data transformation.
 
-So, I love the Unix philosophy, but it leaves some things to be desired for the use case of front end building. The pipe is simply to restrictive
+So, I love the Unix philosophy, but it leaves some things to be desired for the use case of front end building. The pipe is simply to restrictive.
