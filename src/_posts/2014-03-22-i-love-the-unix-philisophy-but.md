@@ -50,4 +50,4 @@ Had Unix pipes provided capability of piping objects instead of only text, we wo
 
 All of these implementations are workarounds to the limitations of the Unix pipe. Hack by hack we've dug ourselves deeper into our individual holes and have trench wars about which hack is best, yet we still salute Unix pipes as the end all be all of data transformation.
 
-So, I love the Unix philosophy, but it leaves some things to be desired for the use case of front end building. The pipe is simply to0 restrictive.
+So, I love the Unix philosophy, but it leaves some things to be desired for the use case of front end building. The pipe is simply too restrictive.
