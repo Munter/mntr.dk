@@ -24,13 +24,64 @@ Like many bigger projects Assetgraph has some project specific vocabulary. We've
 
 
 ### Asset
-TODO
+
+An Asset in Assetgraph is a model of the contents of a file including its metadata. Assets have a bunch of base properties that are relevant to all asset types, like content-type, url, file name, file extension, loaded state, inlined or not. All Assets have a `rawSrc` getter and setter, giving you direct access to the raw file behind the asset. They also have a bunch of convenience methods like `md5Hex`, `clone` and `replaceWith`, along with a `populate` method to parse and find outgoing relations in the source code fo the asset.
+
+The most interesting things happen in the Asset constructors for more specific data types, like [`Html`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/Html.js) or [`JavaScript`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/JavaScript.js), where each Asset instance also has a highlevel instance of the Assets types data model. For HTML this is the DOM, modelled with [jsdom](https://www.npmjs.org/package/jsdom). For JavaScript it's the [uglify-js](https://www.npmjs.org/package/uglify-js) AST.
+
+Using these highlevel interfaces you have the abolity to manipulate each assets as you see fit, using familiar highlevel abstractions you would also find in the browser.
+
+You might want to take a look at the [full list of already implemented Asset types](https://github.com/assetgraph/assetgraph/tree/master/lib/assets).
 
 ### Relation
-TODO
+
+A Relation in Assetgraph defined the edges of the graph. The bind the Assets together and define what depends on what and where. Relations not only keep track of which file need what other file. They also keep track of where exactly the relation came from. Be it a Html Script node src attribute or a CSS background image url token. Relations automatically update references when Assets move around, making the dependency graph stable at all times without broken links.
+
+Relations have `type`, `to`, `from`, `href` and `href` properties that are highly relevant when querying the graph for them.
+
+There are a bunch of convenience functions available to more lowlevel graph manipulation, which I'll skip for now as this is just an introduction.
+
+Here is [the full list of Assetgraph Relations](https://github.com/assetgraph/assetgraph/tree/master/lib/relations).
 
 ### Query
-TODO
+
+The Assetgraph Query model is a [MongoDB inspired](http://docs.mongodb.org/manual/tutorial/query-documents/) model where you can combine some simple boolean AND, OR, NOT statements into a powerful expression to specificly target only the Assets or Relations you are interested in.
+
+Each query is a function that matches the properties of each Asset or Relation with the corresponding property or the object in the query. The query object can use strings, numbers, arrays, regexes, user defined functions and even recursive query objects to match the subject.
+
+Some examples:
+
+``` javascript
+var query = require('assetgraph').query;
+
+var simple = query({
+    type: 'Html',
+    isLoaded: true
+});
+
+var boolean = query.or({
+    url: /^http:/
+}, {
+    fileName: function (fileName) {
+        return fileName.length > 8;
+    }
+});
+
+var nested = query({
+    type: 'HtmlAnchor',
+    from: {
+        isInline: false
+    },
+    to: {
+        isImage: true
+    }
+});
+
+```
+
+Most interactions with Assetgraph happen trough queries to the graph. It is recommended that you get to know the query model if you want to be an effective tool maker. Often times you'll see simple query objects being passet to Assetgrapg methods or Transforms without the `query()` call. Assetgraph will automatically turn such objects into queries for your convenience.
+
+Take a look at the [Assetgraph Query source code](https://github.com/assetgraph/assetgraph/blob/master/lib/query.js).
 
 ### Assetgraph
 TODO
