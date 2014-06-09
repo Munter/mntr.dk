@@ -8,19 +8,19 @@ disquss: true
 draft: true
 ---
 
-When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be a highlevel interface to your websites, while still providing lowlevel interfaces to individual assets. A toolkit that lets your build your own tools that fit more specificly to your need.
+When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be a high level interface for your websites, while still providing low level interfaces to individual assets. A toolkit that lets you build your own tools that fit more specific to your need.
 
-I have spoken at lengths about how Assetgraph differs from other build tools that mostly are variations over a theme of thin configurable unix tool wrappers. In the following I will assume you have already heard me sing Assetgraphs praises. If you haven't, [here is your chance](https://www.youtube.com/watch?v=N_gRlmmF4Rc).
+I have spoken at lengths about how Assetgraph differs from other build tools that most are variations over a theme of thin configurable unix tool wrappers. In the following I will assume you have already heard me sing Assetgraphs praises. If you haven't, [here is your chance](https://www.youtube.com/watch?v=N_gRlmmF4Rc).
 
 Assetgraph is a node module and this post assumes that you are relatively comfortable writing and executing node scripts. By the end you should have learned enough about Assetgraph to get your hands dirty and write your own tools with it.
 
 
-Terms and Definitions
+Assetgraph Vocabulary
 ---------------------
 
 Before we get started it's useful to get some vocabulary straight. If you want to skip to the part where you get your hands dirty, [click here]().
 
-Like many bigger projects Assetgraph has some project specific vocabulary. We've tried no to be to magical about the terms we chose, so hopefully you'll get what things are from their name. Some times the inherent properties that go with the names are non-obvious though. This is an attempt at an explanation
+Like many bigger projects Assetgraph has some project specific vocabulary. We've tried not to be too magical about the terms we chose, so hopefully you'll get what things are from their name. Sometimes the inherent properties that go with the names are non-obvious though. This is an attempt at an explanation
 
 
 ### Asset
@@ -45,9 +45,9 @@ TODO
 Minimum Assetgraph Lifecycle
 ----------------------------
 
-While tool have great diversity, there will always be ome common boilerplate that needs to be written in order to bootstrap it. The same goes for Assetgraph based ones. The typical bootstrapping configurations of tools that manipulate web assets have to set up some configuration of basic project setup, where to find the iles to manipulate and so forth. This will be an explanation of how a bare minimum setup will look with Assetgraph.
+While tools have great diversity, there will always be some common boilerplate that needs to be written in order to bootstrap it. The same goes for Assetgraph based ones. The typical bootstrapping configurations of tools that manipulate web assets have to set up some configuration of basic project setup, where to find the files to manipulate and so forth. This will be an explanation of how a bare minimum setup will look with Assetgraph.
 
-First, it's important to remember that Assetgraph can only work with websites if their internal references are valid. This may sound like an obvious best practice, since that is the only way a website can actually be loaded in a browser. Sadly I need to point this out, as most existing web performance build chains actually set you up with non-working websites, that are then assembled by the tool or some configuration of a static file server. If you want to get the most out of Assetgraph, build your websites so they work in the browser with no magic in between. Incidentally this simplifies your workflow greatly and lessens the pain for frontend developers considerably, so I consider it best pratice.
+First, it's important to remember that Assetgraph can only work with websites if their internal references are valid. This may sound like an obvious best practice, since that is the only way a website can actually be loaded in a browser. Sadly I need to point this out, as most existing web performance build chains actually set you up with non-working websites, that are then assembled by the tool or some configuration of a static file server. If you want to get the most out of Assetgraph, build your websites so they work in the browser with no magic in between. Incidentally this simplifies your workflow greatly and lessens the pain for front-end developers considerably, so I consider it best pratice.
 
 Now, let's get started. Consider a website structure like this one:
 
@@ -124,27 +124,27 @@ queue.run();
 
 We're hooking into the Assetgraph emitted event `addAsset` and logging some basic information about the event and the asset that was added to the graph. Try running your script now, and you should actually see some output in your console. There are more events you can hook into, to get some more insight into the internals of Assetgraph: `addAsset`, `removeAsset`, `addRelation`, `removeRelation`, `beforeTransform`, `afterTransform`.
 
-Further more there are some different error levels that are especially useful to hook into in order to get some more useful information for debugging your code: `info`, `warn`, `error`. These last ones are conditions of increasing severity.
+Furthermore there are some different error levels that are especially useful to hook into in order to get some more useful information for debugging your code: `info`, `warn`, `error`. These last ones are conditions of increasing severity.
 
-`info` is usually used when Assetgraph sees a potential error situation in your web application code, but a fix has already been applied. This could be trying to bundle scripts where one or more of them are leaking strict mode to the global scope, or exceeding the IE max style sheet rules number. Don't worry to much about `info` events.
+`info` is usually used when Assetgraph sees a potential error situation in your web application code, but a fix has already been applied. This could be trying to bundle scripts where one or more of them are leaking strict mode to the global scope, or exceeding the IE max style sheet rules number. Don't worry too much about `info` events.
 
-If you see `warn` events you should take note, as these usually describe problems in your web application that have to be fixed by you. Things like parse errors or missing files that would cause a 404 reponse in production etc.
+If you see `warn` events you should take note, as these usually describe problems in your web application that have to be fixed by you. Things like parse errors or missing files that would cause a 404 response in production etc.
 
-The `error` event is the most severe. This is usually only emitted when a completely non-recoverable error has been encountered, or a library throws unexpectecly. It usually makes sense to just stop running your script if you hit this one. It's also likely that when you get `error` level events that we'd like to hear about it, as it might indicate a missing error handling in Assetgraph. Please [report these to us](https://www.github.com/assetgraph/assetgraph/issues/).
+The `error` event is the most severe. This is usually only emitted when a completely non-recoverable error has been encountered, or a library throws unexpectedly. It usually makes sense to just stop running your script if you hit this one. It's also likely that when you get `error` level events that we'd like to hear about it, as it might indicate a missing error handling in Assetgraph. Please [report these to us](https://www.github.com/assetgraph/assetgraph/issues/).
 
-Let's spice it up with one more logging detail, writing some stats about the assets contained in the graph to stderror:
+Let's spice it up with one more logging detail, writing some stats about the assets contained in the graph to `stderror`:
 
 ```
 queue.writeStatsToStderror();
 ```
 
 
-Populating the dependency graph
+Populating the Dependency Graph
 -------------------------------
 
-We've now arriwed at the core functionality of Assetgraph. The arguably most powerful functionality is the ability to automatically traverse the dependencies of loaded assets and recursively load and traverse. This, as they say, is where the magic happens, and what enables you to work with your web assets in their entire context without having to define large manifest files telling your tool what files you want included.
+We've now arrived at the core functionality of Assetgraph. The arguably most powerful functionality is the ability to automatically traverse the dependencies of loaded assets and recursively load and traverse. This, as they say, is where the magic happens, and what enables you to work with your web assets in their entire context without having to define large manifest files telling your tool what files you want included.
 
-We are using the [`populate`](https://github.com/assetgraph/assetgraph/tree/master/lib/transforms/logEvents.js) transform. The transform can be configured in a multitude of ways, in order to describe how to traverse the dependency graph, what to load, and more importantly, what not to load. Think of this as a web scraper. Let it scrape everyhing and you might end up copying the internet, so **use with care**.
+We are using the [`populate`](https://github.com/assetgraph/assetgraph/tree/master/lib/transforms/logEvents.js) transform. The transform can be configured in a multitude of ways, in order to describe how to traverse the dependency graph, what to load, and more importantly, what not to load. Think of this as a web scraper. Let it scrape everything and you might end up copying the internet, so **use with care**.
 
 Available options are:
 
@@ -207,11 +207,11 @@ Normally a starter guide would end here, but I'll throw in some quick examples t
 Writing files to disc
 ---------------------
 
-Reading files from disc to memory is fun, but it's evn more fun writing them back to disc. Assetgraph lets you rework your dependencies and assets in memory in the transform queue, but the only way you gain anything from that is by actually saving the changes.
+Reading files from disc to memory is fun, but it's even more fun writing them back to disc. Assetgraph lets you rework your dependencies and assets in memory in the transform queue, but the only way you gain anything from that is by actually saving the changes.
 
 To write your files back to disc we'll use the [`writeAssetsToDisc`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/writeAssetsToDisc.js) transform. The first argument is a query object, which we'll make pretty broad, only limiting it to assets that have been loaded (trying to write unloaded assets to disc won't work anyway).
 
-The second argument is the root directory to write the files to. You can leave it blank, which will fall back to the Assetgraph instance root, meaning you are overwriting the files in their existing location. Might be useful, but normally you want to seperate your source files from your output files. We're setting a new outRoot `demo`.
+The second argument is the root directory to write the files to. You can leave it blank, which will fall back to the Assetgraph instance root, meaning you are overwriting the files in their existing location. Might be useful, but normally you want to separate your source files from your output files. We're setting a new outRoot `demo`.
 
 ``` javascript
 queue.writeAssetsToDisc({
@@ -221,7 +221,7 @@ queue.writeAssetsToDisc({
 
 Congratulations, you have now copied all your referenced assets from one directory to another. While you think this might as well have been accomplished with `cp -r app demo`, the important point to note is **your referenced assets**. If you haven't somehow included a file on your website, it won't be in `demo`. Imagine how many unreferenced files get put into production every day by people forgetting about them. Even worse, imagine a bower component has a malicious php file with a rights escalation somewhere in a test directory, and you just copied it to your production server.
 
-So see this as a useful step to only get the essentials on your production site. If something is missing now it's because you didn't refer to it. This coudld easily happen with error pages, favicon.ico, robots.txt or similar. If you want unreferenced files to explicitly be a part of the graph, make sure to include them in the `loadAssets` transform.
+So see this as a useful step to only get the essentials on your production site. If something is missing now it's because you didn't refer to it. This could easily happen with error pages, favicon.ico, robots.txt or similar. If you want unreferenced files to explicitly be a part of the graph, make sure to include them in the `loadAssets` transform.
 
 
 Inlining small images
@@ -250,11 +250,11 @@ queue.inlineRelations({
 File revving
 ------------
 
-File revving is a fancy word for revisioning files for optimal caching in the visitors browser. The optimal way to serve static assets is with a far future cache expiry, since the fastest request is no request at all.
+File revving is a fancy word for revisioning files for optimal caching in the visitor's browser. The optimal way to serve static assets is with a far future cache expiry, since the fastest request is no request at all.
 
-The optimal revisioning strategy is somehow including a hash of the file content in the file name. If the file hasn't changed, the hash isn't changed, giving you the ability to optimally use the cache of the visitors browser for unchanged files and only load the ones that have changed since the last visit.
+The optimal revisioning strategy is including a hash of the file content in the file name. If the file hasn't changed, the hash isn't changed, giving you the ability to optimally use the cache of the visitor's browser for unchanged files and only load the ones that have changed since the last visit.
 
-The easiest way to set up cache headers for static assets is to put them all in the same directory, where the web server will append the correct cach eheader to the http response.
+The easiest way to set up cache headers for static assets is to put them all in the same directory, where the web server will append the correct cache header to the HTTP response.
 
 If none of this made sense, then I highly encourage you to read up on optimal asset delivery for browsers. Your users will thank you.
 
@@ -262,7 +262,7 @@ This is by far the most complex example, but I want to show it because this is a
 
 Our strategy for renaming the files in the right order will be [post order traversal](http://en.wikipedia.org/wiki/Tree_traversal#Post-order), renaming leaf nodes in the graph before branch nodes to assure that the hash we calculate is actually based on the correct file contents including hashed references to decendants.
 
-First we need to craft a query that will only rename the files we want renamed. Some files might be static, but we still want them to keep their oiginal url and take part in a different caching scheme, designed for rapid updates. Think of HTML pages, RSS feeds etc. I have come up with this query combination to target only the files that are safe to rename:
+First we need to craft a query that will only rename the files we want renamed. Some files might be static, but we still want them to keep their original url and take part in a different caching scheme, designed for rapid updates. Think of HTML pages, RSS feeds etc. I have come up with this query combination to target only the files that are safe to rename:
 
 ``` javascript
 var query = AssetGraph.query;
@@ -311,7 +311,7 @@ var moveQuery = query.and(
 
 The above is a distillation of a few years of iteration to try and define best practice for the most common use cases. I'd love to go into depth on this, but that's certainly not fit for a beginners guide. Copy paste this for now and return when you are more comfortable with your understanding of the graph model and the query model.
 
-Now all that is left is to run the [`moveAssetsInOrder`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/moveAssetsInOrder.js) transform, which does our post oder traversal for us. It takes a query as the first argument and a function as the second. The function is called once per asset and the expected return value is the new file name of the asset.
+Now all that is left is to run the [`moveAssetsInOrder`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/moveAssetsInOrder.js) transform, which does our post order traversal for us. It takes a query as the first argument and a function as the second. The function is called once per asset and the expected return value is the new file name of the asset.
 
 We're moving all revved files into `/static` and appending the first 10 chars of the hash of the file to the file name.
 
@@ -331,7 +331,7 @@ Now all that is left to do is configure your web server to serve all files from 
 Summing up
 ----------
 
-You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strenghts and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](http://twitter.com/Munter) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
+You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strengths and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](http://twitter.com/Munter) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
 
 This is the final compilation of all examples, now prettified a bit:
 
