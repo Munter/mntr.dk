@@ -35,7 +35,7 @@ You might want to take a look at the [full list of already implemented Asset typ
 
 ### Relation
 
-A Relation in Assetgraph defined the edges of the graph. The bind the Assets together and define what depends on what and where. Relations not only keep track of which file need what other file. They also keep track of where exactly the relation came from. Be it a Html Script node src attribute or a CSS background image url token. Relations automatically update references when Assets move around, making the dependency graph stable at all times without broken links.
+A Relation in Assetgraph defines the edges of the graph. The bind the Assets together and define what depends on what and where. Relations not only keep track of which file need what other file. They also keep track of where exactly the relation came from. Be it a Html Script node src attribute or a CSS background image url token. Relations automatically update references when Assets move around, making the dependency graph stable at all times without broken links.
 
 Relations have `type`, `to`, `from`, `href` and `href` properties that are highly relevant when querying the graph for them.
 
