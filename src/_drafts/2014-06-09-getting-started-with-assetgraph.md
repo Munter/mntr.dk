@@ -29,7 +29,7 @@ An Asset in Assetgraph is a model of the contents of a file including its metada
 
 The most interesting things happen in the Asset constructors for more specific data types, like [`Html`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/Html.js) or [`JavaScript`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/JavaScript.js), where each Asset instance also has a highlevel instance of the Assets types data model. For HTML this is the DOM, modelled with [jsdom](https://www.npmjs.org/package/jsdom). For JavaScript it's the [uglify-js](https://www.npmjs.org/package/uglify-js) AST.
 
-Using these highlevel interfaces you have the abolity to manipulate each assets as you see fit, using familiar highlevel abstractions you would also find in the browser.
+Using these highlevel interfaces you have the ability to manipulate each assets as you see fit, using familiar highlevel abstractions you would also find in the browser.
 
 You might want to take a look at the [full list of already implemented Asset types](https://github.com/assetgraph/assetgraph/tree/master/lib/assets).
 
