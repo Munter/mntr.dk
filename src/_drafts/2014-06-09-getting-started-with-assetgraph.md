@@ -282,7 +282,7 @@ Base64 inlining images. A tedious and stupid workflow. In development you want t
 
 We'll limit ourselves to only images that are CSS backgrounds, as inlining content images requires some more specific knowledge of the context. I choose a completely arbitrary number for the file size of images to inline: 4096 bytes. Feel free to experiment on both accounts.
 
-We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/inlineRelations.js), which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
+We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/inlineRelations.js) transform, which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
 
 ``` javascript
 queue.inlineRelations({
