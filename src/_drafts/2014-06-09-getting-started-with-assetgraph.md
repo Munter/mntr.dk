@@ -25,17 +25,17 @@ Like many bigger projects Assetgraph has some project specific vocabulary. We've
 
 ### Asset
 
-An Asset in Assetgraph is a model of the contents of a file including its metadata. Assets have a bunch of base properties that are relevant to all asset types, like content-type, url, file name, file extension, loaded state, inlined or not. All Assets have a `rawSrc` getter and setter, giving you direct access to the raw file behind the asset. They also have a bunch of convenience methods like `md5Hex`, `clone` and `replaceWith`, along with a `populate` method to parse and find outgoing relations in the source code fo the asset.
+An Asset in Assetgraph is a model of the contents of a file including its metadata. Assets have a bunch of base properties that are relevant to all asset types, like content-type, url, file name, file extension, loaded state, inlined or not. All Assets have a `rawSrc` getter and setter, giving you direct access to the raw file behind the asset. They also have a bunch of convenience methods like `md5Hex`, `clone` and `replaceWith`, along with a `populate` method to parse and find outgoing relations in the source code of the asset.
 
 The most interesting things happen in the Asset constructors for more specific data types, like [`Html`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/Html.js) or [`JavaScript`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/JavaScript.js), where each Asset instance also has a highlevel instance of the Assets types data model. For HTML this is the DOM, modelled with [jsdom](https://www.npmjs.org/package/jsdom). For JavaScript it's the [uglify-js](https://www.npmjs.org/package/uglify-js) AST.
 
-Using these highlevel interfaces you have the abolity to manipulate each assets as you see fit, using familiar highlevel abstractions you would also find in the browser.
+Using these highlevel interfaces you have the ability to manipulate each assets as you see fit, using familiar highlevel abstractions you would also find in the browser.
 
 You might want to take a look at the [full list of already implemented Asset types](https://github.com/assetgraph/assetgraph/tree/master/lib/assets).
 
 ### Relation
 
-A Relation in Assetgraph defined the edges of the graph. The bind the Assets together and define what depends on what and where. Relations not only keep track of which file need what other file. They also keep track of where exactly the relation came from. Be it a Html Script node src attribute or a CSS background image url token. Relations automatically update references when Assets move around, making the dependency graph stable at all times without broken links.
+A Relation in Assetgraph defines the edges of the graph. The bind the Assets together and define what depends on what and where. Relations not only keep track of which file need what other file. They also keep track of where exactly the relation came from. Be it a Html Script node src attribute or a CSS background image url token. Relations automatically update references when Assets move around, making the dependency graph stable at all times without broken links.
 
 Relations have `type`, `to`, `from`, `href` and `href` properties that are highly relevant when querying the graph for them.
 
@@ -282,7 +282,7 @@ Base64 inlining images. A tedious and stupid workflow. In development you want t
 
 We'll limit ourselves to only images that are CSS backgrounds, as inlining content images requires some more specific knowledge of the context. I choose a completely arbitrary number for the file size of images to inline: 4096 bytes. Feel free to experiment on both accounts.
 
-We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/inlineRelations.js), which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
+We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/inlineRelations.js) transform, which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
 
 ``` javascript
 queue.inlineRelations({
