@@ -8,19 +8,21 @@ disquss: true
 draft: true
 ---
 
-When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be a high level interface for your websites, while still providing low level interfaces to individual assets. A toolkit that lets you build your own tools that fit more specific to your need.
+When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be a high level interface for your websites, while still providing low level interfaces for individual assets. A toolkit that lets you build your own tools that fit more specificly to your need.
 
-I have spoken at lengths about how Assetgraph differs from other build tools that most are variations over a theme of thin configurable unix tool wrappers. In the following I will assume you have already heard me sing Assetgraphs praises. If you haven't, [here is your chance](https://www.youtube.com/watch?v=N_gRlmmF4Rc).
+I have spoken at lengths about how Assetgraph distinguishes itself from other build tools by not just being a unix tool configuration wrapper. In the following I will assume you have already heard me sing Assetgraphs praises. If you haven't, [watch my talk from EmporeJS](https://www.youtube.com/watch?v=N_gRlmmF4Rc).
 
 Assetgraph is a node module and this post assumes that you are relatively comfortable writing and executing node scripts. By the end you should have learned enough about Assetgraph to get your hands dirty and write your own tools with it.
+
+If you want to see how easy it is to build tools that [filter out unused files](), [inlines you images]() or [rename files for optimal caching](), you are in for a treat!
 
 
 Assetgraph Vocabulary
 ---------------------
 
-Before we get started it's useful to get some vocabulary straight. If you want to skip to the part where you get your hands dirty, [click here]().
+Before we get started it's useful to get some vocabulary straight. If you're not easily confused you might want to skip to the part where you [get your hands dirty]().
 
-Like many bigger projects Assetgraph has some project specific vocabulary. We've tried not to be too magical about the terms we chose, so hopefully you'll get what things are from their name. Sometimes the inherent properties that go with the names are non-obvious though. This is an attempt at an explanation
+Like many bigger projects Assetgraph has some project specific vocabulary. We've tried not to be too magical about the terms we chose, so hopefully you'll get what things are from their name. Sometimes the inherent properties that go with the names are non-obvious though. This is an attempt at an explanation.
 
 
 ### Asset
@@ -37,7 +39,7 @@ You might want to take a look at the [full list of already implemented Asset typ
 
 A Relation in Assetgraph defines the edges of the graph. The bind the Assets together and define what depends on what and where. Relations not only keep track of which file need what other file. They also keep track of where exactly the relation came from. Be it a Html Script node src attribute or a CSS background image url token. Relations automatically update references when Assets move around, making the dependency graph stable at all times without broken links.
 
-Relations have `type`, `to`, `from`, `href` and `href` properties that are highly relevant when querying the graph for them.
+Relations have `type`, `to`, `from` and `href` properties that are highly relevant when querying the graph for them.
 
 There are a bunch of convenience functions available to more lowlevel graph manipulation, which I'll skip for now as this is just an introduction.
 
@@ -79,24 +81,28 @@ var nested = query({
 
 ```
 
-Most interactions with Assetgraph happen trough queries to the graph. It is recommended that you get to know the query model if you want to be an effective tool maker. Often times you'll see simple query objects being passet to Assetgrapg methods or Transforms without the `query()` call. Assetgraph will automatically turn such objects into queries for your convenience.
+Most interactions with Assetgraph happen trough queries to the graph. It is recommended that you get to know the query model if you want to be an effective tool maker. Often times you'll see simple query objects being passed into Assetgraph methods or Transforms without the `query()` call. Assetgraph will automatically turn such objects into queries for your convenience.
 
 Take a look at the [Assetgraph Query source code](https://github.com/assetgraph/assetgraph/blob/master/lib/query.js).
 
 ### Assetgraph
-TODO
+The Assetgraph is the instance that ties all of this together. This is where the Assets and Relations are stored and where you can use a Query to find them all again. There are a bunch of convenience methods for pre-order and post-order traversal and of course the most used ones [`findAssets`]() and [`findRelations`]().
 
 ### Transform
-TODO
+Assetgraph is cool, but always diving into the lowlevel code of specific Asset syntax trees becomes bothersome pretty quickly. Transforms are highlevel functions that can manipulate the Assetgraph instance in different and more convenient ways. Assetgraph is extensible, so you can write your own highlevel transforms that fit your specific needs. Assetgraph already comes preloaded with a lot of very useful transforms, most of which are written with web performance optimization in mind, but don't let yourself be limited by that!
+
+There are soem fine descriptions of most of the available core transforms in the [Assetgraph README](https://github.com/assetgraph/assetgraph/blob/master/README.md).
 
 ### Transform Queue
-TODO
+The Transform Queue is what lets you chain a number of transforms together to form a pipeline that applies multiple transforms in order. While all installed transforms are available directly on the Transform Queue __and__ Assetgraph instance for you convenience, they all return a reference to the Transform Queue they are in, enabling you to easily chain Transforms. There are a few convenience methods on the Transform Queue, like `if`, `endif` and `queue` (way to write an inline transform function for quick hacks), the most important one is `run`.
+
+If you don't `.run()` the Transform Queue, nothing will happen.
 
 
 Minimum Assetgraph Lifecycle
 ----------------------------
 
-While tools have great diversity, there will always be some common boilerplate that needs to be written in order to bootstrap it. The same goes for Assetgraph based ones. The typical bootstrapping configurations of tools that manipulate web assets have to set up some configuration of basic project setup, where to find the files to manipulate and so forth. This will be an explanation of how a bare minimum setup will look with Assetgraph.
+While tools have great diversity, there will always be some common boilerplate that needs to be written in order to bootstrap them. The same goes for Assetgraph-based ones. This will be an explanation of how a bare minimum setup will look with Assetgraph.
 
 First, it's important to remember that Assetgraph can only work with websites if their internal references are valid. This may sound like an obvious best practice, since that is the only way a website can actually be loaded in a browser. Sadly I need to point this out, as most existing web performance build chains actually set you up with non-working websites, that are then assembled by the tool or some configuration of a static file server. If you want to get the most out of Assetgraph, build your websites so they work in the browser with no magic in between. Incidentally this simplifies your workflow greatly and lessens the pain for front-end developers considerably, so I consider it best pratice.
 
