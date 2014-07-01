@@ -290,7 +290,7 @@ Base64 encoding and inlining images. A tedious and stupid workflow. In developme
 
 We'll limit ourselves to only images that are CSS backgrounds, as inlining content images requires some more specific knowledge of the context. I choose a completely arbitrary number for the file size of images to inline: 4096 bytes. Feel free to experiment on both accounts.
 
-We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph#assetgraphinlinerelationsqueryobjs) transform, which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
+We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph#assetgraphinlinerelationsqueryobj) transform, which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
 
 ``` javascript
 queue.inlineRelations({
@@ -390,13 +390,13 @@ Now all that is left to do is configure your web server to serve all files from 
 Summing up
 ----------
 
-You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strengths and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](http://twitter.com/Munter) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
+You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strengths and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](http://twitter.com/_munter_) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
 
 I'm always asked for comparisons with other popular tools, like Grunt, Gulp, Broccoli or similar. Assetgraph is not one to one comparable, as is primarily focuses on fully functional references, while the other tools primarily deal with files. This enables the other tools to do whatever, while Assetgraph needs your page to actually work before you can unlock the full potential. This makes Assetgraph wel suited as a post processing tool that you apply to the already assembled page. If you use one of the other tools to achieve this assembly is up to you.
 
-I'm also often asked about run time speed. Assetgraph is generally faster than Grunt, due to the limited file I/O. Assetgraph is generally slower then Gulp, since Gulp has you predefine your files and can run pipes in parallel while Assetgraph has to discover the file sincrementally and runs transforms sequentially.
+I'm also often asked about run time speed. Assetgraph is generally faster than Grunt, due to the limited file I/O. Assetgraph is generally slower than Gulp, since Gulp has you predefine your files and can run pipes in parallel while Assetgraph has to discover the files incrementally and runs transforms sequentially.
 
-If you wish to use Assetgraph for web performance optimization it is my recommendation to make it a part of your deployment step, not your development loop. Web performance optimization is about transforming code to be machine optimized, while your development loop is about optimizing for humans. When you move these concerns out of the daily workflow you will see that the time it takes to run a build suddenly is of much lesser importance.
+If you wish to use Assetgraph for web performance optimization it is my recommendation to make it a part of your deployment step, not your development loop. Web performance optimization is about transforming code to be machine optimized, while your development loop is about optimizing for humans. When you move these concerns out of the development loop you will see that your development speeds up, and the time it takes to run a build suddenly is of much lesser importance.
 
 This is the final compilation of all examples, now prettified a bit:
 
@@ -472,4 +472,4 @@ graph.on('addAsset', function (asset) {
     .run();
 ```
 
-I hope you found this introduction useful an now have some inspiration to get started with your own tools. I bet you can come up with some amazing ideas I've never thought about.
+I hope you found this introduction useful and now have some inspiration to get started with your own tools. I bet you can come up with some amazing ideas I've never thought about.
