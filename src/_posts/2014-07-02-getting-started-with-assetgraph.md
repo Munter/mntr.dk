@@ -1,11 +1,10 @@
 ---
 layout: post
 title:  "Getting started with Assetgraph"
-date:   2014-06-10 21:05:29
+date:   2014-07-02 00:15:00
 categories: frontend build assetgraph tooling
 twittertext: "Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do."
 disquss: true
-draft: true
 ---
 
 When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be exactly this. A high level interface for your websites, yet still providing low level interfaces for individual assets. A toolkit that lets you build your own tools that fit very specificly to your individual needs.
@@ -14,7 +13,7 @@ I have spoken at lengths about how Assetgraph distinguishes itself from other bu
 
 Assetgraph is a node module and this post assumes that you are relatively comfortable writing and executing node scripts. By the end you should have learned enough about Assetgraph to get your hands dirty and write your own tools with it.
 
-If you want to see how easy it is to build tools that [filter out unused files](#toc_10), [inlines your images](#toc_11) or [rename files for optimal caching](#toc_12), you are in for a treat!
+If you want to see how easy it is to build tools that [filter out unused files](/2014/getting-started-with-assetgraph/#toc_10), [inlines your images](/2014/getting-started-with-assetgraph/#toc_11) or [rename files for optimal caching](/2014/getting-started-with-assetgraph/#toc_12), you are in for a treat!
 
 
 Assetgraph Vocabulary
