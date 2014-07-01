@@ -7,7 +7,7 @@ destination: ./build
 plugins:     ./src/_plugins
 layouts:     ./src/_layouts
 include:     []
-exclude:     ['Gemfile', 'Gemfile.lock', 'README.md']
+exclude:     ['Gemfile', 'Gemfile.lock', 'README.md', 'node_modules', 'demo', 'demo.js']
 keep_files:  ['.git','.svn']
 gems:        []
 timezone:    Europe/Copenhagen

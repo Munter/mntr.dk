@@ -3,7 +3,7 @@ layout: post
 title:  "Getting started with Assetgraph"
 date:   2014-07-02 00:15:00
 categories: frontend build assetgraph tooling
-twittertext: "Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do."
+twittertext: "Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do"
 disquss: true
 ---
 
