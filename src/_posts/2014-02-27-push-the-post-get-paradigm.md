@@ -75,7 +75,7 @@ You might be able to build a server that knows how to interpret [HAR files](http
 
 ### Static analysis
 
-This one is my favorite, and where I get to pitch one of my personal projects. [Assetgraph](https://github.com/assetgraph/assetgraph) can be used to statically analyze your web assets and create a graph model that contains all files and relations between them. Think of it as a browser that scrapes your entire site, except it only ever visits every resource once and can run directly on your file system. Having your static file server traverse the entire dependency graph on startup would seed it with all the contextual knowledge it needs for SPDY PUSH.
+This one is my favorite, and where I get to pitch one of my personal projects. [Assetgraph](https://github.com/assetgraph/assetgraph/) can be used to statically analyze your web assets and create a graph model that contains all files and relations between them. Think of it as a browser that scrapes your entire site, except it only ever visits every resource once and can run directly on your file system. Having your static file server traverse the entire dependency graph on startup would seed it with all the contextual knowledge it needs for SPDY PUSH.
 
 
 ## Making it happen
@@ -86,7 +86,7 @@ I started out with the idea of using Assetgraph for all the graph knowledge. I h
 
 So after a few hours of hacking I came up with [expush](https://github.com/Munter/expush). A small proof of concept static file server that will search for html-files in the web root and auto discover any outgoing dependencies recursively, creating a dependency graph which the file server will look at before it falls back to serving files from the file system. Whenever an HTML-page is requested, the entire dependency sub graph from it is traversed and a PUSH request is initiated for each asset.
 
-These are early days. It's quite buggy and has no finish at all, but it's enough to prove that this can be done. There are all sorts of bugs, like errors being thrown when reloading a page before the keep-alive dies and [Chrome not actually supporting ETag cache header response properly](https://groups.google.com/d/msg/spdy-dev/TetVOinB-LM/rODtXlx1KUQJ), so every asset is pushed over the wire in its entirety. I do think that this experiment should be enough to do some initial speed tests and comparisons with various other web performance optimization setups.
+These are early days. It's quite buggy and has no finish at all, but it's enough to prove that this can be done. There are all sorts of bugs, like errors being thrown when reloading a page before the keep-alive dies and [Chrome not actually supporting ETag cache header response properly](https://groups.google.com/forum/#!msg/spdy-dev/TetVOinB-LM/rODtXlx1KUQJ), so every asset is pushed over the wire in its entirety. I do think that this experiment should be enough to do some initial speed tests and comparisons with various other web performance optimization setups.
 
 As has hopefully been established by this post, latency is a big killer. If you're not convinced you should watch [Paul Irish's Fluent 2014 keynote](https://www.youtube.com/watch?v=R8W_6xWphtw). I hope SPDY push can make a serious contribution to speeding up the web by eliminating a lot of latency issues.
 

@@ -7,7 +7,7 @@ twittertext: "Are Unix pipes inadequate to cover our needs in frontend build sys
 disquss: true
 ---
 
-I attended the [Edge Conference](http://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should receive high praises.
+I attended the [Edge Conference](https://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should receive high praises.
 
 During the build system panel some remarks were made about the Unix philosophy in response to a question I asked. I did get a counter argument in, but the available time only allowed for tweet size comments, so I don't think I got my point across properly. I'll try to go a bit in depth on my reasoning here.
 
@@ -44,7 +44,7 @@ After the Unix tool response by the panel, I mentioned powershell because it all
 
 While I usually hate on Microsoft for providing a pretty bad development platform out of the box on Windows, this thing is a real gem. One that is underappreciated and underutilized.
 
-When we created [Assetgraph](http://github.com/assetgraph/assetgraph/), we set out to create a data model that could describe a web page in its entirety. It would be a platform for making all of these complex code base transformations easy, while still giving you a guarantee of dependency coherence. However, piping this data model through a Unix pipe would be the death of it, since all state would be lost.
+When we created [Assetgraph](https://github.com/assetgraph/assetgraph/), we set out to create a data model that could describe a web page in its entirety. It would be a platform for making all of these complex code base transformations easy, while still giving you a guarantee of dependency coherence. However, piping this data model through a Unix pipe would be the death of it, since all state would be lost.
 
 Had Unix pipes provided capability of piping objects instead of only text, we wouldn't have had to create an entire plugin and pipeline architecture, forcing users to write things "the Assetgraph way". We wouldn't have to be competitors with "the Grunt way", "the Gulp way" or "the Broccoli way". We could instead have focused on strengthening the core data model and let users write decoupled *Unixy* functions that made use of this data model, adopting a philosophy of "web in, web out".
 

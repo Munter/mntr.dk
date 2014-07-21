@@ -24,7 +24,7 @@ title: Thoughts - Peter Müller
         <div class="post-meta">
             <div class="sharing">
                 {% capture twittertext %}{% if post.twittertext %}{{ post.twittertext }}{% else %}{{ post.title }}{% endif %}{% endcapture %}
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ post.url }}" data-text="{{ twittertext }}">Tweet</a>
+                <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ post.url }}" data-text="{{ twittertext }}">Tweet</a>
             </div>
             <p>
                 <a href="{{ post.url}}">Read full post</a>

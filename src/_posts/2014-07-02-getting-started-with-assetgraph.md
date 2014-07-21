@@ -139,7 +139,7 @@ An Assetgraph instance in itself, without any data, is quite useless. So next up
 ``` javascript
 graph.loadAssets('index.html');
 ```
-The `loadAssets` transform takes a range of inputs to make your life easier. The most useful to you now will be the string or array of strings. Each string, just like before, may be a full url or a protocol relative url in the previously described schemes. All relations in the graph will use the Assetgraph root to resolve paths, not the file system root. If you want to get more advanced with the `loadAssets` transform it might be useful to consult the [source code](https://github.com/assetgraph/assetgraph/tree/master/lib/transforms/loadAssets.js) for now.
+The `loadAssets` transform takes a range of inputs to make your life easier. The most useful to you now will be the string or array of strings. Each string, just like before, may be a full url or a protocol relative url in the previously described schemes. All relations in the graph will use the Assetgraph root to resolve paths, not the file system root. If you want to get more advanced with the `loadAssets` transform it might be useful to consult the [source code](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/loadAssets.js) for now.
 
 Before we can run the script there is one more piece of boilerplate code that needs to be added. What we are doing when calling Assetgraph transforms with configuration parameters, is actually not executing them right away. Instead, we are appending them to a transform queue, which is what is returned from the transform call. To make this explicit in this example we save the return value in a new variable:
 
@@ -186,7 +186,7 @@ Furthermore there are some different error levels that are especially useful to 
 
 If you see `warn` events you should take note, as these usually describe problems in your web application that have to be fixed by you. Things like parse errors or missing files that would cause a 404 response in production etc.
 
-The `error` event is the most severe. This is usually only emitted when a completely non-recoverable error has been encountered, or a library throws unexpectedly. It usually makes sense to just stop running your script if you hit this one. It's also likely that when you get `error` level events that we'd like to hear about it, as it might indicate a missing error handling in Assetgraph. Please [report these to us](https://www.github.com/assetgraph/assetgraph/issues/).
+The `error` event is the most severe. This is usually only emitted when a completely non-recoverable error has been encountered, or a library throws unexpectedly. It usually makes sense to just stop running your script if you hit this one. It's also likely that when you get `error` level events that we'd like to hear about it, as it might indicate a missing error handling in Assetgraph. Please [report these to us](https://github.com/assetgraph/assetgraph/issues/).
 
 Let's spice it up with one more logging detail, writing some stats about the assets contained in the graph to `stderror`:
 
@@ -389,7 +389,7 @@ Now all that is left to do is configure your web server to serve all files from 
 Summing up
 ----------
 
-You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strengths and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](http://twitter.com/_munter_) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
+You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strengths and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](https://twitter.com/_munter_) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
 
 I'm always asked for comparisons with other popular tools, like Grunt, Gulp, Broccoli or similar. Assetgraph is not one to one comparable, as is primarily focuses on fully functional references, while the other tools primarily deal with files. This enables the other tools to do whatever, while Assetgraph needs your page to actually work before you can unlock the full potential. This makes Assetgraph wel suited as a post processing tool that you apply to the already assembled page. If you use one of the other tools to achieve this assembly is up to you.
 
