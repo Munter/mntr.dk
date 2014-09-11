@@ -15,6 +15,8 @@ Assetgraph is a node module and this post assumes that you are relatively comfor
 
 If you want to see how easy it is to build tools that [filter out unused files](/2014/getting-started-with-assetgraph/#toc_10), [inlines your images](/2014/getting-started-with-assetgraph/#toc_11) or [rename files for optimal caching](/2014/getting-started-with-assetgraph/#toc_12), you are in for a treat!
 
+If you are more into just consuming a well tested out-of-the-box build tool, take a look at [assetgraph-builder](https://github.com/assetgraph/assetgraph-builder) or its grunt-wrapper [grunt-reduce](https://github.com/Munter/grunt-reduce).
+
 
 Assetgraph Vocabulary
 ---------------------
