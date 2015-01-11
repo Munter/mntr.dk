@@ -1,6 +1,6 @@
 digraph {
-    label = "CSS import";
-    graph[rankdir=LR];
+    label = "JavaScript require";
+    graph[rankdir=LRTB];
 
     subgraph "clusterComponent" {
         label = "component";
@@ -10,11 +10,8 @@ digraph {
         "component.html";
     }
 
-    "index.html" -> "main.scss"[label="<style>"];
-    "index.html" -> "component.scss"[label="@import"];
+    { rank=same; "index.html" -> "main.scss"[label="<style>"] };
     "index.html" -> "component.js"[label="<script>"];
+    "component.js" -> "component.scss"[label="require()"];
     "component.js" -> "component.html"[label="require()"];
-
-    //{ rank=same; "index.html" "component.js" "component.html"}
-    { rank=same; "index.html" "main.scss"}
 }
