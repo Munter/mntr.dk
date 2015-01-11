@@ -1,0 +1,20 @@
+digraph {
+    label = "CSS import";
+    graph[rankdir=LR];
+
+    subgraph "clusterComponent" {
+        label = "component";
+        "component.scss";
+        "component.js";
+        "component.scss";
+        "component.html";
+    }
+
+    "index.html" -> "main.scss"[label="<style>"];
+    "index.html" -> "component.scss"[label="@import"];
+    "index.html" -> "component.js"[label="<script>"];
+    "component.js" -> "component.html"[label="require()"];
+
+    //{ rank=same; "index.html" "component.js" "component.html"}
+    { rank=same; "index.html" "main.scss"}
+}

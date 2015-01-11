@@ -1,0 +1,20 @@
+digraph {
+    label = "Web component";
+    graph[rankdir=LR];
+
+    subgraph "clusterComponent" {
+        label = "component";
+        "component.scss";
+        "component.js";
+        "component.scss";
+        "component.html";
+    }
+
+    "index.html" -> "main.scss"[label="<style>"];
+    "index.html" -> "component.html"[label="<link>"];
+    "component.html" -> "component.scss"[label="<style>"];
+    "component.html" -> "component.js"[label="<script>"];
+
+    //{ rank=same; "index.html" "component.js" "component.html"}
+    { rank=same; "index.html" "main.scss"}
+}
