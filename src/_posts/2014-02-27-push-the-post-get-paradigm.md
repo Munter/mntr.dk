@@ -8,7 +8,7 @@ twittertext: "Imagine delivering web assets quicker than today, with better cach
 
 Web performance these days is non-optional. If your web page is slow, you lose business. Our visitors are an impatient lot, and though they are not actively counting milliseconds, web developers have to, just in order to keep visitors' thoughts away from cat videos and flappy bird.
 
-In our hunt for milliseconds we, the web developers, are going through a great ordeal just to keep up. We are following [the 14 rules](http://stevesouders.com/hpws/rules.php), we are fighting off marketing's [bigger is better](http://www.milwaukeepolicenews.com/) and we are setting up automated torture machines for our code. All for the milliseconds, all to keep our visitors' attention.
+In our hunt for milliseconds we, the web developers, are going through a great ordeal just to keep up. We are following [the 14 rules](http://stevesouders.com/hpws/rules.php), we are fighting off marketing's [~~bigger is better~~](http://www.milwaukeepolicenews.com/) and we are setting up automated torture machines for our code. All for the milliseconds, all to keep our visitors' attention.
 
 
 Needless to say, reshaping, contorting, torturing your code in order to conform to the 14 rules, also leaves you with something that is utterly unapproachable from a developer's standpoint. Well optimized production grade static assets are almost as far away from good development practices as you can possibly get. One module per file? Forget it, too expensive. Each image as a separate file? You must be crazy, go decode this base64 or pull out an image editor to reconstruct it from a sprite. And that JavaScript error you're trying to debug? Start unwrapping uglified concatenated code in your head, under time pressure of course; production is down you know...
@@ -71,7 +71,7 @@ Imagine that your server uses the [refer<strike>r</strike>er](http://en.wikipedi
 
 ### HAR file mapping
 
-You might be able to build a server that knows how to interpret [HAR files](http://www.speedawarenessmonth.com/what-is-a-har-file-and-what-do-i-use-it-for/). These files are basically what you are looking at when using your favorite browser developer tools network tab. So you might be able to set up some preproduction step that automates a headless webkit to scrape all your pages and export a series of HAR files, which the server can use to reconstruct a dependency graph of your files.
+You might be able to build a server that knows how to interpret [HAR files](https://www.maxcdn.com/one/visual-glossary/har-file/). These files are basically what you are looking at when using your favorite browser developer tools network tab. So you might be able to set up some preproduction step that automates a headless webkit to scrape all your pages and export a series of HAR files, which the server can use to reconstruct a dependency graph of your files.
 
 ### Static analysis
 
