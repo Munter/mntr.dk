@@ -20,15 +20,15 @@ We are being held hostage by the protocols that serve us. I hope you haven't dev
 
 ## All hail SPDY/HTTP2
 
-Our savior is here. SPDY promises deliverance from all the hardships we have endured. In the future we will all have [gzipped HTTP headers](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-2.6.10.1-Compression), [multiplexed HTTP streams](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-4.3-One-Connection-Per-Domain) mitigating a lot of hand shaking and [slow-start](http://en.wikipedia.org/wiki/Slow-start)s. All of this with keep-alive that works properly. Oh the rejoicing. And all that for just the cost of [adding SSL](http://en.wikipedia.org/wiki/SPDY#Design).
+Our savior is here. SPDY promises deliverance from all the hardships we have endured. In the future we will all have [gzipped HTTP headers](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-2.6.10.1-Compression), [multiplexed HTTP streams](http://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3#TOC-4.3-One-Connection-Per-Domain) mitigating a lot of hand shaking and [slow-start](https://en.wikipedia.org/wiki/Slow-start)s. All of this with keep-alive that works properly. Oh the rejoicing. And all that for just the cost of [adding SSL](https://en.wikipedia.org/wiki/SPDY#Design).
 
 > Wait, what?
 
-Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are also forced to accept the added overhead of a [TLS handshake](http://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake), a slow ordeal ([tweakable though](http://unhandledexpression.com/2013/01/25/5-easy-tips-to-accelerate-ssl/)).
+Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are also forced to accept the added overhead of a [TLS handshake](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake), a slow ordeal ([tweakable though](http://unhandledexpression.com/2013/01/25/5-easy-tips-to-accelerate-ssl/)).
 
 So suddenly it comes down to a tradeoff. HTTP handshake overhead versus TLS handshake overhead. Which one to choose depends on the nature of your site, and that may change over time. So no simple answers here. Jimmy Durante seems to sum up [this situation](https://www.youtube.com/watch?v=bY-zmJ1VCQI) pretty well.
 
-And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](http://en.wikipedia.org/wiki/Latency_\(engineering\)#Packet-switched_networks) isn't a thing that magically vanishes.
+And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](https://en.wikipedia.org/wiki/Latency_\(engineering\)#Packet-switched_networks) isn't a thing that magically vanishes.
 
 There may be a way to change the game though.
 
@@ -52,7 +52,7 @@ But imagine serving every asset individually. Suddenly a change to a single file
 
 So you might rightfully ask, how can the server know if the browser has an asset cached already if the browser doesn't initiate a request for the asset, not sending any request headers for that particular file? Good question. It can't know. Instead the server just opens the flood gates by starting a PUSH stream for every asset you might need, and starts pumping. For the server and the performance hungry engineer, it's all about saturating the bandwidth as much as possible and getting that data over the wire.
 
-Each PUSH request starts with a header, though. Properly configured, say with an [ETag](http://en.wikipedia.org/wiki/HTTP_ETag) with a last modified timestamp or hash of the file content, the browser knows within the first few packets if it needs the rest of the transmission or not. The browser can simply hang up that particular stream. So the server might push a few packets in vain and stop when the browser tells it to. It's an optimistic and greedy approach. But it does leverage the cache properly, and the extra spent bytes don't cost a huge time overhead, since the stream termination request goes over the wire in the same time a normal HTTP GET round trip would take just to request some initial data from a server. It's a tradeoff, lower latency for higher data transfer.
+Each PUSH request starts with a header, though. Properly configured, say with an [ETag](https://en.wikipedia.org/wiki/HTTP_ETag) with a last modified timestamp or hash of the file content, the browser knows within the first few packets if it needs the rest of the transmission or not. The browser can simply hang up that particular stream. So the server might push a few packets in vain and stop when the browser tells it to. It's an optimistic and greedy approach. But it does leverage the cache properly, and the extra spent bytes don't cost a huge time overhead, since the stream termination request goes over the wire in the same time a normal HTTP GET round trip would take just to request some initial data from a server. It's a tradeoff, lower latency for higher data transfer.
 
 So this is the theory. HTTP GET round trip latency removed, improved bandwidth saturation, better cache reuse. Assuming the server knows what to send.
 
@@ -67,7 +67,7 @@ So let's look at some strategies for making your static web server context aware
 
 ### Referrer header mapping
 
-Imagine that your server uses the [refer<strike>r</strike>er](http://en.wikipedia.org/wiki/HTTP_referer) to record the relations between files over time. HTML → CSS → Image and so forth. Gradually the server can build up a relation graph and thus predict a set of other assets likely to be requested next when seeing a GET request for an HTML file. The downside here is that this functionality may take some time to warm up, and while it does, your visitors will be paying the price of multiple request latencies.
+Imagine that your server uses the [refer<strike>r</strike>er](https://en.wikipedia.org/wiki/HTTP_referer) to record the relations between files over time. HTML → CSS → Image and so forth. Gradually the server can build up a relation graph and thus predict a set of other assets likely to be requested next when seeing a GET request for an HTML file. The downside here is that this functionality may take some time to warm up, and while it does, your visitors will be paying the price of multiple request latencies.
 
 ### HAR file mapping
 
