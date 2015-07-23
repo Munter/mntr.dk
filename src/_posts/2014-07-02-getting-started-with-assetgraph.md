@@ -320,7 +320,7 @@ If none of this made sense, then I highly encourage you to read up on optimal as
 
 This is by far the most complex example, but I want to show it because this is a place where Assetgraph shines compared to other build tools that do not have a dependency graph model at their core.
 
-Our strategy for renaming the files in the right order will be [post order traversal](http://en.wikipedia.org/wiki/Tree_traversal#Post-order), renaming leaf nodes in the graph before branch nodes to assure that the hash we calculate is actually based on the correct file contents including hashed references to decendants.
+Our strategy for renaming the files in the right order will be [post order traversal](https://en.wikipedia.org/wiki/Tree_traversal#Post-order), renaming leaf nodes in the graph before branch nodes to assure that the hash we calculate is actually based on the correct file contents including hashed references to decendants.
 
 First we need to craft a query that will only rename the files we want renamed. Some files might be static, but we still want them to keep their original url and take part in a different caching scheme, designed for rapid updates. Think of HTML pages, RSS feeds etc. I have come up with this query combination to target only the files that are safe to rename:
 
