@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Content-addressable Browser Caching"
-date:   2016-05-11 10:00:00
-categories:
+date:   2016-05-24 17:41:11
+categories: browser cache subresource-integrity content-addressable
 ---
 
 What if it were possible to use content-addressable caching in browsers instead of URL-based caching? The increased cache hits would be highly beneficial, especially for sites depending on 3rd party libraries via a CDN. It turns out this **is** possible. The subresource integrity specification gives us all we need. But it turns out it's not that simple.
