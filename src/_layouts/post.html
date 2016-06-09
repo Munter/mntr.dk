@@ -34,13 +34,13 @@ layout: default
             {% endif %}
         </div>
 
-        {% if page.disquss == true %}
+        {% if page.disquss != false %}
             <div id="disqus_thread"></div>
         {% endif %}
     </article>
 
 
-    {% if page.disquss == true %}
+    {% if page.disquss != false %}
         <script type="text/javascript">
             var disqus_shortname = 'mntrdk';
             (function() {
