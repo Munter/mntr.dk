@@ -77,16 +77,16 @@
         <header class="site-head">
             <div class="vertical">
                 <div class="site-head-content inner">
-                    <a class="blog-logo" href="/"><img src="/assets/images/logo-white.svg"></a>
+                    <a class="blog-logo" href="/" aria-label="home"><img src="/assets/images/logo-white.svg"></a>
                     <h1 class="blog-title">{{ site.name }}</h1>
                     <h2 class="blog-description">{{ site.description }}</h2>
                 </div>
             </div>
         </header>
 
-        <div class="site">
+        <main role="main">
             {{ content }}
-        </div>
+        </main>
 
         <footer class="site-footer">
             <div class="vertical">

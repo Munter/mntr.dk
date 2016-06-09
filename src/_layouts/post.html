@@ -2,53 +2,49 @@
 layout: default
 ---
 
-<main class="content" role="main">
+<article class="post">
+    <h1 class="post-title">{{ page.title }}</h1>
 
-    <article class="post">
-        <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+        <time datetime="{{ page.date | date_to_string }}">{{ page.date | date_to_string }}</time><!-- —
+        {% for category in page.categories %}
+            <span class="category">#{{ category }}</span>
+        {% endfor %}
+    -->
+    </div>
 
-        <div class="post-meta">
-            <time datetime="{{ page.date | date_to_string }}">{{ page.date | date_to_string }}</time><!-- —
-            {% for category in page.categories %}
-                <span class="category">#{{ category }}</span>
-            {% endfor %}
-        -->
-        </div>
+    <section class="post-content">
+        {{ content }}
+    </section>
 
-        <section class="post-content">
-            {{ content }}
-        </section>
+    <div class="sharing">
+        {% capture twittertext %}{% if page.twittertext %}{{ page.twittertext }}{% else %}{{ page.title }}{% endif %}{% endcapture %}
+        <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ page.url }}" data-text="{{ twittertext }}">Tweet</a>
+    </div>
 
-        <div class="sharing">
-            {% capture twittertext %}{% if page.twittertext %}{{ page.twittertext }}{% else %}{{ page.title }}{% endif %}{% endcapture %}
-            <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ page.url }}" data-text="{{ twittertext }}">Tweet</a>
-        </div>
-
-        <div class="post-meta" style="overflow: auto">
-            {% if page.previous.url %}
-                <a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}" style="float: left">&laquo; {{page.previous.title}}</a>
-            {% endif %}
-
-            {% if page.next.url %}
-                <a href="{{page.next.url}}" title="Next Post: {{page.next.title}}" style="float: right">{{page.next.title}} &raquo;</a>
-            {% endif %}
-        </div>
-
-        {% if page.disquss != false %}
-            <div id="disqus_thread"></div>
+    <div class="post-meta" style="overflow: auto">
+        {% if page.previous.url %}
+            <a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}" style="float: left">&laquo; {{page.previous.title}}</a>
         {% endif %}
-    </article>
 
+        {% if page.next.url %}
+            <a href="{{page.next.url}}" title="Next Post: {{page.next.title}}" style="float: right">{{page.next.title}} &raquo;</a>
+        {% endif %}
+    </div>
 
     {% if page.disquss != false %}
-        <script type="text/javascript">
-            var disqus_shortname = 'mntrdk';
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
+        <div id="disqus_thread"></div>
     {% endif %}
+</article>
 
-</main>
+
+{% if page.disquss != false %}
+    <script type="text/javascript">
+        var disqus_shortname = 'mntrdk';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+{% endif %}
