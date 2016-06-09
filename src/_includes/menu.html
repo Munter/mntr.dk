@@ -1,0 +1,19 @@
+<nav aria-role="navigation" class="inner">
+    <ul class="nav-main">
+        {% if page.url == '/index.html' or page.url == '/' %}
+          <li class="active">
+        {% else %}
+          <li>
+        {% endif %}
+            <a href="/">Thoughts</a>
+        </li>
+
+        {% if page.url == '/talks/' %}
+          <li class="active">
+        {% else %}
+          <li>
+        {% endif %}
+            <a href="/talks/">Talks</a>
+        </li>
+    </ul>
+</nav>

@@ -6,6 +6,7 @@ source:      ./
 destination: ./build
 plugins_dir: ./src/_plugins
 layouts_dir: ./src/_layouts
+includes_dir: ./src/_includes
 include:     []
 exclude:     ['Gemfile', 'Gemfile.lock', 'README.md', 'node_modules', 'demo', 'demo.js']
 keep_files:  ['.git','.svn']

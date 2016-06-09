@@ -74,14 +74,14 @@
     </head>
     <body>
 
-        <header class="site-head">
-            <div class="vertical">
-                <div class="site-head-content inner">
-                    <a class="blog-logo" href="/" aria-label="home"><img src="/assets/images/logo-white.svg"></a>
-                    <h1 class="blog-title">{{ site.name }}</h1>
-                    <h2 class="blog-description">{{ site.description }}</h2>
-                </div>
+        <header role="banner" class="site-head">
+            <div class="site-head-content inner">
+                <a class="blog-logo" href="/" aria-label="home"><img src="/assets/images/logo-white.svg"></a>
+                <h1 class="blog-title">{{ site.name }}</h1>
+                <h2 class="blog-description">{{ site.description }}</h2>
             </div>
+
+            {% include menu.html %}
         </header>
 
         <main role="main">
