@@ -33,7 +33,7 @@ layout: default
                 </a>
             {% elsif page.video.service == 'vimeo' %}
                 <a href="https://vimeo.com/{{ page.video.id }}" class="playable">
-                    <img src="https://i.vimeocdn.com/video/{{ talk.video.image-id }}_700.jpg" alt="Watch video">
+                    <img src="https://i.vimeocdn.com/video/{{ page.video.image-id }}_700.jpg" alt="Watch video">
                 </a>
             {% elsif page.video.url %}
                 <video controls>
