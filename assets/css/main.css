@@ -211,7 +211,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid #efefef;
-    margin: 3.2em 0;
+    margin: 1em 0;
     padding: 0;
 }
 
@@ -374,7 +374,6 @@ margin on the iframe, cause it breaks stuff. */
 
 /* Creates a responsive wrapper that makes our content scale nicely */
 .inner {
-    position: relative;
     width: 80%;
     max-width: 700px;
     margin: 0 auto;
@@ -393,10 +392,8 @@ margin on the iframe, cause it breaks stuff. */
 
 /* Big cover image on the home page */
 .site-head {
-    position: relative;
-    display: table;
     width: 100%;
-    padding: 5% 0;
+    padding-top: 5%;
     margin-bottom: 5rem;
     text-align: center;
     color: #fff;
@@ -437,6 +434,27 @@ margin on the iframe, cause it breaks stuff. */
     text-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
 
+.nav-main {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 3% 0 0;
+}
+
+
+.nav-main a {
+    display: block;
+    padding: 5px 30px;
+    color: #57A3E8;
+    text-decoration: none;
+}
+
+.nav-main li.active a {
+    color: #50585D;
+    background: white;
+}
+
 /* Every post, on every page, gets this style on its <article> tag */
 .post {
     position: relative;
@@ -445,6 +463,53 @@ margin on the iframe, cause it breaks stuff. */
     margin: 4rem auto;
     word-break: break-word;
     hyphens: auto;
+}
+
+.post-video img,
+.post-video video {
+    width: 100%;
+}
+
+.talk-abstract-image {
+    margin: 2em 0 0.8em 0.8em;
+    float: right;
+}
+
+.talk-no-abstract-image {
+    width: 100%;
+    margin-top: 2em;
+}
+
+.post .post-video {
+    margin: 1em 0;
+}
+
+.post .playable {
+    display: block;
+    position: relative;
+}
+
+.post .playable:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80px;
+    width: 80px;
+
+    transform: translate(-50%, -50%);
+
+    content: "▶";
+    font-size: 300%;
+    color: rgba(255, 255, 255, 0.7);
+    border: 5px solid;
+    line-height: 80px;
+    text-indent: 22px;
+    border-radius: 50%;
+    transition: color 0.2s;
+}
+
+.post .playable:hover:before {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .excerpts .post:not(:last-child) {
@@ -557,6 +622,10 @@ margin on the iframe, cause it breaks stuff. */
     width: 126%;
     max-width: none;
     margin: 0 -13%;
+}
+
+.talks-list h4 {
+    margin-bottom: 0;
 }
 
 /* ==========================================================================
@@ -743,10 +812,6 @@ margin on the iframe, cause it breaks stuff. */
 
     blockquote {
         margin-left: 0;
-    }
-
-    .site-head {
-        min-height: 240px;
     }
 
     .blog-title {
