@@ -211,7 +211,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid #efefef;
-    margin: 3.2em 0;
+    margin: 1em 0;
     padding: 0;
 }
 
@@ -465,6 +465,53 @@ margin on the iframe, cause it breaks stuff. */
     hyphens: auto;
 }
 
+.post-video img,
+.post-video video {
+    width: 100%;
+}
+
+.talk-abstract-image {
+    margin: 2em 0 0.8em 0.8em;
+    float: right;
+}
+
+.talk-no-abstract-image {
+    width: 100%;
+    margin-top: 2em;
+}
+
+.post .post-video {
+    margin: 1em 0;
+}
+
+.post .playable {
+    display: block;
+    position: relative;
+}
+
+.post .playable:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80px;
+    width: 80px;
+
+    transform: translate(-50%, -50%);
+
+    content: "▶";
+    font-size: 300%;
+    color: rgba(255, 255, 255, 0.7);
+    border: 5px solid;
+    line-height: 80px;
+    text-indent: 22px;
+    border-radius: 50%;
+    transition: color 0.2s;
+}
+
+.post .playable:hover:before {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .excerpts .post:not(:last-child) {
   padding-bottom: 4rem;
   border-bottom: 1px solid #EBF2F6;
@@ -575,6 +622,10 @@ margin on the iframe, cause it breaks stuff. */
     width: 126%;
     max-width: none;
     margin: 0 -13%;
+}
+
+.talks-list h4 {
+    margin-bottom: 0;
 }
 
 /* ==========================================================================

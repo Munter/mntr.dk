@@ -68,3 +68,8 @@ kramdown:
 
 redcloth:
   hard_breaks: true
+
+collections:
+    talks:
+        output: true
+        permalinks: /talks/:path/
