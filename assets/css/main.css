@@ -471,6 +471,7 @@ margin on the iframe, cause it breaks stuff. */
 }
 
 .talk-abstract-image {
+    max-width: 50%;
     margin: 2em 0 0.8em 0.8em;
     float: right;
 }
@@ -880,6 +881,13 @@ margin on the iframe, cause it breaks stuff. */
         margin-right: 16px;
         font-size: 0.8em;
         line-height: 1.6em;
+    }
+
+    .talk-abstract-image {
+        float: none;
+        max-width: 100%;
+        width: 100%;
+        margin: 2em 0 0 0;
     }
 
     .blog-title {
