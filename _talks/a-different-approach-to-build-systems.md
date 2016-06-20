@@ -3,6 +3,8 @@ layout: talk
 title: A different approach to build systems
 date: 2012-10-03 21:00:00
 
+twittertext: Why is it that every web build system needs you to adapt to its way of working?
+
 video:
     url: https://fronteers.nl/_downloads/2012/peter-muller-a-different-approach-to-build-systems.webm
     page: https://fronteers.nl/congres/2012/jam-session/a-different-approach-to-build-systems-peter-muller
