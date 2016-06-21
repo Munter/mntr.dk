@@ -1,7 +1,7 @@
 ---
 layout: talk
 title: Making development workflows simple
-date:   2014-05-08 16:00:00
+date:   2015-05-08 16:00:00
 
 twittertext: Getting into web development has never had a steeper learning curve. Are we scaring newcomers?
 
