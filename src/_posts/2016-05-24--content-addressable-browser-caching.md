@@ -64,7 +64,6 @@ From my point of view, this attack is potentially devastating, but a successful 
 
 The shared cache based on content identity was very promising since it would create a collaborative caching ecosystem with no investment from the browsing user, and little investment from site developers. However, there are other ways to improve shared caching of 3rd party assets.
 
-<<<<<<< fb0f0d441f7cf5b4e20f423f326c118c827e5ddf:src/_posts/2016-05-24--content-addressable-browser-caching.md
 One solution is for the frontend community to come together and standardize on a single CDN so all sites reference the same URL's, thus increasing the chances of cache hits. This makes it a people problem rather than a technical one. For that reason I see very little chance of this ever happening.
 
 Another solution is one that the browser users themselves can opt into. The [Web Boost Chrome extension](https://chrome.google.com/webstore/detail/web-boost-wait-less-brows/ahbkhnpmoamidjgbneafjipbmdfpefad) maintains a list of blessed URL's of known and popular 3rd party libraries and the content of the libraries. It intercepts requests to these URL's and serves a response from the plugins own distribution. The downside is that is the extension ever gets hacked or the author becomes a malicious actor it's very hard to know and avoid for the users that have this installed.
