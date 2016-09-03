@@ -1,0 +1,8 @@
+#
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+
+# Far future expires for hashed file names
+/static/*
+    Cache-Control: max-age=31536000
