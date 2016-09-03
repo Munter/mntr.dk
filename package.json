@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "mntr.dk",
+  "version": "1.0.0",
+  "description": "Peter Müller's blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gh:Munter/munter.github.io"
+  },
+  "author": "Peter Müller <munter@fumle.dk>",
+  "license": "ISC"
+}
