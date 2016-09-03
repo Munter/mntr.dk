@@ -2,11 +2,11 @@ name: Peter Müller
 description: My thoughts. The ones that didn't slip away
 url: https://mntr.dk
 
-source:      ./
-destination: ./build
-plugins_dir: ./src/_plugins
-layouts_dir: ./src/_layouts
-includes_dir: ./src/_includes
+source:      src
+destination: build
+plugins_dir: _plugins
+layouts_dir: _layouts
+includes_dir: _includes
 include:     []
 exclude:     ['Gemfile', 'Gemfile.lock', 'README.md', 'node_modules', 'demo', 'demo.js']
 keep_files:  ['.git','.svn']
