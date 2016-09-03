@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "jekyll serve -D -w -o",
-    "build": "rm -rf build dist && jekyll build && buildProduction --outroot dist build/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy"
+    "build": "rm -rf build dist && jekyll build && buildProduction --outroot dist build/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/"
   },
   "repository": {
     "type": "git",
