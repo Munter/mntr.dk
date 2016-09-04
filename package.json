@@ -16,7 +16,7 @@
   "author": "Peter Müller <munter@fumle.dk>",
   "license": "ISC",
   "devDependencies": {
-    "assetgraph-builder": "^5.0.0-8",
+    "assetgraph-builder": "^5.0.0-9",
     "svgo": "^0.7.0"
   }
 }
