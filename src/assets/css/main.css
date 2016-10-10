@@ -558,6 +558,7 @@ margin on the iframe, cause it breaks stuff. */
 }
 
 .post-meta {
+    overflow: auto;
     margin: 0 0 5px 0;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.5rem;
@@ -583,6 +584,14 @@ margin on the iframe, cause it breaks stuff. */
 
 .post-meta .sharing iframe {
   margin: 0;
+}
+
+.post-meta__prev {
+    float: left;
+}
+
+.post-meta__next {
+    float: right;
 }
 
 .publish-meta {
