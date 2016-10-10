@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "name": "mntr.dk",
+  "version": "1.0.0",
+  "description": "Peter Müller's blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "jekyll serve -D -w -o",
+    "build": "rm -rf build dist && jekyll build && buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html --sharedbundles --asyncscripts --optimizeimages --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/ && node tools/netlify-headers.js >> dist/_headers"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gh:Munter/munter.github.io"
+  },
+  "author": "Peter Müller <munter@fumle.dk>",
+  "license": "ISC",
+  "devDependencies": {
+    "assetgraph-builder": "^5.0.0-20",
+    "svgo": "^0.7.0"
+  }
+}
