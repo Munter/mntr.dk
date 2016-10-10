@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "jekyll serve -D -w -o",
-    "build": "rm -rf build dist && jekyll build && buildProduction --outroot dist build/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/"
+    "build": "rm -rf build dist && jekyll build && buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   "author": "Peter Müller <munter@fumle.dk>",
   "license": "ISC",
   "devDependencies": {
-    "assetgraph-builder": "^5.0.0-9",
+    "assetgraph-builder": "^5.0.0-20",
     "svgo": "^0.7.0"
   }
 }
