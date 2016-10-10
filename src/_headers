@@ -6,4 +6,4 @@
 
 ## Far future expires for hashed file names
 /static/*
-    Cache-Control: max-age=31536000
+  Cache-Control: max-age=31536000
