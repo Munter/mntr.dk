@@ -15,7 +15,7 @@ new AssetGraph({ root: 'dist' })
         var headerMap = {};
 
         assets.forEach(function (asset) {
-            var url = '/' + asset.url.replace(assetGraph.root, '').replace(/#.*/, '');
+            var url = '/' + asset.url.replace(assetGraph.root, '').replace(/#.*/, '').replace('index.html', '');
 
             headers.forEach(function (header) {
                 var node = asset.parseTree.querySelector('meta[http-equiv=' + header + ']');
