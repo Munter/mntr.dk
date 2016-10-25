@@ -2,6 +2,7 @@
 layout: post
 title:  "Check your link rot"
 date:   2015-04-06 23:10:29
+twittertext: Keep your links unbroken and fresh with Hyperlink, a tool that automates finding broken and inefficient links
 categories: web development link url link-rot hyperlink regressions jenkins
 ---
 

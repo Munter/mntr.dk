@@ -56,7 +56,7 @@ layout: default
 
     <div class="sharing">
         {% capture twittertext %}{% if page.twittertext %}{{ page.twittertext }}{% else %}{{ page.title }}{% endif %}{% endcapture %}
-        <a href="https://twitter.com/intent/tweet" class="twitter-share-button" data-via="_munter_" data-url="{{ site.url }}{{ page.url }}" data-text="{{ twittertext }}">Tweet</a>
+        <a href="https://twitter.com/intent/tweet?text={{ twittertext | cgi_escape }}&amp;url={{ site.url | cgi_escape }}{{ page.url | cgi_escape }}" class="twitter-share-button">Tweet this</a>
     </div>
 
     <div class="post-meta" style="overflow: auto">

@@ -2,6 +2,7 @@
 layout: post
 title:  "Content-addressable Browser Caching"
 date:   2016-05-24 17:41:11
+twittertext: What if it were possible to use content-addressable caching in browsers to get cache hits across domains?
 categories: browser cache subresource-integrity content-addressable
 ---
 
