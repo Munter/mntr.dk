@@ -10,6 +10,7 @@ title: Peters Ønskeliste
 - [Baby Woody Bumble Hoptimist](http://hoptimist.dk/produkter/trae/) - Røget eg
 - [Frankfurter Brett Mono](https://www.frankfurter-brett.de/en/mono) - Oak, Stainless steel bracket, stainless steel containers
 - [Anova Precision Cooker](https://store.anovaculinary.com/products/anova-precision-cooker) - 220V EU plug!
+- [Demystifying Public Speaking](https://abookapart.com/products/demystifying-public-speaking)
 
 ### Research mangler
 - Robotstøvsuger
