@@ -206,7 +206,7 @@ We are using the [`populate`](https://github.com/assetgraph/assetgraph#transform
 
 Available options are:
 
-```
+``` javascript
 {
     followRelations: <Assetgraph.query>,
     startAssets: <Assetgraph.query>,
