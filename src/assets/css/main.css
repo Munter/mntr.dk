@@ -408,7 +408,7 @@ margin on the iframe, cause it breaks stuff. */
 /* Yo-logo. Yolo-go. Upload one in ghost/settings/ */
 .blog-logo img {
     display: block;
-    max-height: 140px;
+    height: 140px;
     width: auto;
     margin: 0 auto;
     line-height: 0;
@@ -878,7 +878,7 @@ main {
 @media only screen and (max-width: 500px) {
 
     .blog-logo img {
-        max-height: 80px;
+        height: 80px;
     }
 
     .inner,
