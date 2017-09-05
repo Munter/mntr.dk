@@ -17,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "assetgraph-builder": "^5.1.2",
+    "subfont": "^1.0.0",
     "svgo": "^0.7.2"
   }
 }
