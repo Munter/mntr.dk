@@ -5,16 +5,12 @@ if (typeof navigator.share === 'function') {
         anchor.textContent = 'Share this';
 
         anchor.addEventListener('click', function (e) {
-            var queryParams = anchor.href.split('?').pop().split('&').reduce(function (prev, string) {
-                var pair = string.split('=');
-
-                prev[pair[1]] = decodeURIComponent(pair[2]).replace('+', ''); // Jekyll cgi_escape adds '+' instead or '%20'
-            }, {});
+            var url = new URL(anchor.href);
 
             navigator.share({
-                title: queryParams.title,
-                text: queryParams.text,
-                url: queryParams.url
+                title: url.searchParams.get('title'),
+                text: url.searchParams.get('text'),
+                url: url.searchParams.get('url')
             })
 
             e.preventDefault();
