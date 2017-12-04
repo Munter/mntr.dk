@@ -67,7 +67,7 @@ So let's look at some strategies for making your static web server context aware
 
 ### Referrer header mapping
 
-Imagine that your server uses the [refer<strike>r</strike>er](https://en.wikipedia.org/wiki/HTTP_referer) to record the relations between files over time. HTML → CSS → Image and so forth. Gradually the server can build up a relation graph and thus predict a set of other assets likely to be requested next when seeing a GET request for an HTML file. The downside here is that this functionality may take some time to warm up, and while it does, your visitors will be paying the price of multiple request latencies.
+Imagine that your server uses the [refer<strike>r</strike>er](https://en.wikipedia.org/wiki/HTTP_referer) to record the relations between files over time. HTML --&gt; CSS --&gt; Image and so forth. Gradually the server can build up a relation graph and thus predict a set of other assets likely to be requested next when seeing a GET request for an HTML file. The downside here is that this functionality may take some time to warm up, and while it does, your visitors will be paying the price of multiple request latencies.
 
 ### HAR file mapping
 
