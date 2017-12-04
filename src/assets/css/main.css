@@ -492,9 +492,16 @@ main {
 .post .playable {
     display: block;
     position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s;
+}
+
+.post .playable:hover {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .post .playable:before {
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
@@ -503,18 +510,23 @@ main {
 
     transform: translate(-50%, -50%);
 
-    content: "▶";
-    font-size: 300%;
-    color: rgba(255, 255, 255, 0.7);
     border: 5px solid;
-    line-height: 80px;
-    text-indent: 22px;
     border-radius: 50%;
-    transition: color 0.2s;
 }
 
-.post .playable:hover:before {
-    color: rgba(255, 255, 255, 0.9);
+.post .playable:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border: 26px solid transparent;
+    border-left: 42px solid currentColor;
+    border-right: 0px;
+    margin-left: 7px; /* visual centering */
+
 }
 
 .excerpts .post:not(:last-child) {
