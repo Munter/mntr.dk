@@ -28,7 +28,7 @@ Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are al
 
 So suddenly it comes down to a tradeoff. HTTP handshake overhead versus TLS handshake overhead. Which one to choose depends on the nature of your site, and that may change over time. So no simple answers here. Jimmy Durante seems to sum up [this situation](https://www.youtube.com/watch?v=bY-zmJ1VCQI) pretty well.
 
-And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](https://en.wikipedia.org/wiki/Latency_\(engineering\)#Packet-switched_networks) isn't a thing that magically vanishes.
+And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](https://en.wikipedia.org/wiki/Latency_(engineering)#Packet-switched_networks) isn't a thing that magically vanishes.
 
 There may be a way to change the game though.
 
