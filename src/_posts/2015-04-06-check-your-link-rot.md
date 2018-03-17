@@ -86,7 +86,7 @@ node_modules/.bin/hyperlink https://podio.com/site -r | tee site.tap | node_modu
 
 The only little piece of magic going on here is in `tee site.tap`. [Tee](https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html) is a very useful little tool that lets you write `stdin` to a file, while also piping it to `stdout`. This enables me to save the TAP report for later analysis but also get a useful log output in the log section of the running task. In my case I only care for the failing tests and to see things are running, so [tap-dot](https://www.npmjs.com/package/tap-dot) is fine for me in the log output.
 
-In the "Post-build Actions" section I added a [Publish TAP Results](https://wiki.jenkins-ci.org/display/JENKINS/TAP+Plugin) block and configured it with `site.tap`. This generates a decent looking report I can use for later. This also generates a nice graph for me on the tasks status page, giving me an overview of changes over time.
+In the "Post-build Actions" section I added a [Publish TAP Results](https://wiki.jenkins.io/display/JENKINS/TAP+Plugin) block and configured it with `site.tap`. This generates a decent looking report I can use for later. This also generates a nice graph for me on the tasks status page, giving me an overview of changes over time.
 
 I haven't set up any alert actions yet, as this is pretty new and there still might be false negatives that need to be weeded out. But it's a very good starting point and was quick to set up. So now I have a daily report of broken or inefficient links on my site including the ability to detect changes over time.
 
