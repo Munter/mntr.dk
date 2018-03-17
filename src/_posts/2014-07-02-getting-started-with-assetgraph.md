@@ -13,9 +13,11 @@ I have spoken at lengths about how Assetgraph distinguishes itself from other bu
 
 Assetgraph is a node module and this post assumes that you are relatively comfortable writing and executing node scripts. By the end you should have learned enough about Assetgraph to get your hands dirty and write your own tools with it.
 
-If you want to see how easy it is to build tools that [filter out unused files](/2014/getting-started-with-assetgraph/#writing-files-to-disc), [inlines your images](/2014/getting-started-with-assetgraph/#nlining-small-images) or [rename files for optimal caching](/2014/getting-started-with-assetgraph/#file-revving), you are in for a treat!
+If you want to see how easy it is to build tools that [filter out unused files](/2014/getting-started-with-assetgraph/#writing-files-to-disc), [inlines your images](/2014/getting-started-with-assetgraph/#inlining-small-images) or [rename files for optimal caching](/2014/getting-started-with-assetgraph/#file-revving), you are in for a treat!
 
 If you are more into just consuming a well tested out-of-the-box build tool, take a look at [assetgraph-builder](https://github.com/assetgraph/assetgraph-builder) or its grunt-wrapper [grunt-reduce](https://github.com/Munter/grunt-reduce).
+
+**NOTE: THIS ARTICLE DESCRIBES ASSETGRAPH VERSION 3, NEWER VERSIONS ARE AVAILABLE.**
 
 
 Assetgraph Vocabulary
@@ -30,11 +32,11 @@ Like many bigger projects Assetgraph has some project specific vocabulary. We've
 
 An Asset in Assetgraph is a model of the contents of a file including its metadata. Assets have a bunch of base properties that are relevant to all asset types, like content-type, url, file name, file extension, loaded state, inlined or not. All Assets have a `rawSrc` getter and setter, giving you direct access to the raw file behind the asset. They also have a bunch of convenience methods like `md5Hex`, `clone` and `replaceWith`, along with a `populate` method to parse and find outgoing relations in the source code of the asset.
 
-The most interesting things happen in the Asset constructors for more specific data types, like [`Html`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/Html.js) or [`JavaScript`](https://github.com/assetgraph/assetgraph/blob/master/lib/assets/JavaScript.js), where each Asset instance also has a highlevel instance of the Assets types data model. For HTML this is the DOM, modelled with [jsdom](https://www.npmjs.com/package/jsdom). For JavaScript it's the [uglify-js](https://www.npmjs.com/package/uglify-js) AST.
+The most interesting things happen in the Asset constructors for more specific data types, like [`Html`](https://github.com/assetgraph/assetgraph/blob/v3/lib/assets/Html.js) or [`JavaScript`](https://github.com/assetgraph/assetgraph/blob/v3/lib/assets/JavaScript.js), where each Asset instance also has a highlevel instance of the Assets types data model. For HTML this is the DOM, modelled with [jsdom](https://www.npmjs.com/package/jsdom). For JavaScript it's the [uglify-js](https://www.npmjs.com/package/uglify-js) AST.
 
 Using these highlevel interfaces you have the ability to manipulate each assets as you see fit, using familiar highlevel abstractions you would also find in the browser.
 
-You might want to take a look at the [full list of already implemented Asset types](https://github.com/assetgraph/assetgraph/tree/master/lib/assets).
+You might want to take a look at the [full list of already implemented Asset types](https://github.com/assetgraph/assetgraph/tree/v3/lib/assets).
 
 ### Relation
 
@@ -44,7 +46,7 @@ Relations have `type`, `to`, `from` and `href` properties that are highly releva
 
 There are a bunch of convenience functions available for more lowlevel graph manipulation, which I'll skip for now as this is just an introduction.
 
-Here is [the full list of Assetgraph Relations](https://github.com/assetgraph/assetgraph/tree/master/lib/relations).
+Here is [the full list of Assetgraph Relations](https://github.com/assetgraph/assetgraph/tree/v3/lib/relations).
 
 ### Query
 
@@ -84,7 +86,7 @@ var nested = query({
 
 Most interactions with Assetgraph happen trough queries to the graph. It is recommended that you get to know the query model if you want to be an effective tool maker. Often times you'll see simple query objects being passed into Assetgraph methods or Transforms without the `query()` call. Assetgraph will automatically turn such objects into queries for your convenience.
 
-Take a look at the [Assetgraph Query source code](https://github.com/assetgraph/assetgraph/blob/master/lib/query.js).
+Take a look at the [Assetgraph Query source code](https://github.com/assetgraph/assetgraph/blob/v3/lib/query.js).
 
 ### Assetgraph
 The Assetgraph is the instance that ties all of the above together. This is where the Assets and Relations are stored and where you can use a Query to find them all again. There are a bunch of convenience methods for pre-order and post-order traversal and of course the most used ones [`findAssets`](https://github.com/assetgraph/assetgraph#querying-the-graph) and [`findRelations`](https://github.com/assetgraph/assetgraph#querying-the-graph).
@@ -92,7 +94,7 @@ The Assetgraph is the instance that ties all of the above together. This is wher
 ### Transform
 Assetgraph is cool, but always diving into the lowlevel code of specific Asset syntax trees becomes bothersome pretty quickly. Transforms are highlevel functions that wrap these lowlevel calls, manipulating the Assetgraph instance in more convenient ways. Assetgraph is extensible, so you can write your own highlevel transforms that fit your specific needs. Assetgraph already comes preloaded with a lot of very useful transforms, most of which are written with web performance optimization in mind, but don't let yourself be limited by that!
 
-There are some fine descriptions of most of the available core transforms in the [Assetgraph README](https://github.com/assetgraph/assetgraph/blob/master/README.md).
+There are some fine descriptions of most of the available core transforms in the [Assetgraph README](https://github.com/assetgraph/assetgraph/blob/v3/README.md).
 
 ### Transform Queue
 The Transform Queue is what lets you chain a number of transforms together to form a pipeline that applies multiple transforms in order. While all installed transforms are available directly on the Transform Queue __and__ Assetgraph instance for you convenience, they all return a reference to the Transform Queue they are in, enabling you to easily chain Transforms. There are a few convenience methods on the Transform Queue, like `if`, `endif` and `queue` (for quick inline transforms), the most important one is `run`.
@@ -141,7 +143,7 @@ An Assetgraph instance in itself, without any data, is quite useless. So next up
 ``` javascript
 graph.loadAssets('index.html');
 ```
-The `loadAssets` transform takes a range of inputs to make your life easier. The most useful to you now will be the string or array of strings. Each string, just like before, may be a full url or a protocol relative url in the previously described schemes. All relations in the graph will use the Assetgraph root to resolve paths, not the file system root. If you want to get more advanced with the `loadAssets` transform it might be useful to consult the [source code](https://github.com/assetgraph/assetgraph/blob/master/lib/transforms/loadAssets.js) for now.
+The `loadAssets` transform takes a range of inputs to make your life easier. The most useful to you now will be the string or array of strings. Each string, just like before, may be a full url or a protocol relative url in the previously described schemes. All relations in the graph will use the Assetgraph root to resolve paths, not the file system root. If you want to get more advanced with the `loadAssets` transform it might be useful to consult the [source code](https://github.com/assetgraph/assetgraph/blob/v3/lib/transforms/loadAssets.js) for now.
 
 Before we can run the script there is one more piece of boilerplate code that needs to be added. What we are doing when calling Assetgraph transforms with configuration parameters, is actually not executing them right away. Instead, we are appending them to a transform queue, which is what is returned from the transform call. To make this explicit in this example we save the return value in a new variable:
 
