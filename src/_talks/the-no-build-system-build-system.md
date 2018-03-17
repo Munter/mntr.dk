@@ -12,7 +12,7 @@ event:
     date: 2014-05-05 14:30:00
     url: http://2014.empirejs.org/
 
-slides: http://mntr.dk/no-build-system/#/
+slides: https://munter.github.io/no-build-system/#/
 
 abstract:
 ---

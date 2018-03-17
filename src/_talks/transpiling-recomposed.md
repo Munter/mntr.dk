@@ -14,7 +14,7 @@ event:
     date: 2015-09-24 14:15:00
     url: http://2015.jsconf.eu/
 
-slides: http://mntr.dk/talk-transpiling-recomposed/#/
+slides: https://munter.github.io/talk-transpiling-recomposed/#/
 
 abstract: |-
     Modern web developers have become heavily dependent on abstractions like jade, sass or ES6. These are powerful tools, but to themselves require new abstractions, wrappers and runners. The rate at which new tools, workflows and even languages are appearing is staggering. Each iteration adds more complexity and less interoperability.
