@@ -13,7 +13,7 @@ I have spoken at lengths about how Assetgraph distinguishes itself from other bu
 
 Assetgraph is a node module and this post assumes that you are relatively comfortable writing and executing node scripts. By the end you should have learned enough about Assetgraph to get your hands dirty and write your own tools with it.
 
-If you want to see how easy it is to build tools that [filter out unused files](/2014/getting-started-with-assetgraph/#toc_10), [inlines your images](/2014/getting-started-with-assetgraph/#toc_11) or [rename files for optimal caching](/2014/getting-started-with-assetgraph/#toc_12), you are in for a treat!
+If you want to see how easy it is to build tools that [filter out unused files](/2014/getting-started-with-assetgraph/#writing-files-to-disc), [inlines your images](/2014/getting-started-with-assetgraph/#nlining-small-images) or [rename files for optimal caching](/2014/getting-started-with-assetgraph/#file-revving), you are in for a treat!
 
 If you are more into just consuming a well tested out-of-the-box build tool, take a look at [assetgraph-builder](https://github.com/assetgraph/assetgraph-builder) or its grunt-wrapper [grunt-reduce](https://github.com/Munter/grunt-reduce).
 
@@ -21,7 +21,7 @@ If you are more into just consuming a well tested out-of-the-box build tool, tak
 Assetgraph Vocabulary
 ---------------------
 
-Before we get started it's useful to get some vocabulary straight. If you're not easily confused you might want to skip to the part where you [get your hands dirty](#toc_7).
+Before we get started it's useful to get some vocabulary straight. If you're not easily confused you might want to skip to the part where you [get your hands dirty](#minimum-assetgraph-lifecycle).
 
 Like many bigger projects Assetgraph has some project specific vocabulary. We've tried not to be too magical about the terms we chose, so hopefully you'll get what things are from their name. Sometimes the inherent properties that go with the names are non-obvious though. This is an attempt at an explanation.
 
