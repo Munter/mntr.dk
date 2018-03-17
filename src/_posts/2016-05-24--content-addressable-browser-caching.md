@@ -53,7 +53,7 @@ However, if the attacker also controlled the server the user is visiting, which 
 
 ## Cache Poisoning
 
-[Cache poisoning](http://th.informatik.uni-mannheim.de/people/lucks/HashCollisions/) is the act of injecting malicious content into the user's cache under a trusted name. Being able to substitute a jQuery cache hit on a user's browser with a malicious script would be of great value to an evildoer.
+[Cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) is the act of injecting malicious content into the user's cache under a trusted name. Being able to substitute a jQuery cache hit on a user's browser with a malicious script would be of great value to an evildoer.
 
 Since subresource integrity would already provide a guarantee that the content to be cached matches a developer defined cryptographic hash, a cache poisoning attack is fairly difficult to execute. The attacker would have to brute force generate an attack script that matches the same cryptographic hash as the intended target asset to impersonate. This alone is difficult. Furthermore, this would have to be done for exactly the hash function that the specific site that the attacker wants to inject their script in. Choosing a strong enough hash function for your integrity hash would make this an almost impossible task in the first place.
 
