@@ -71,7 +71,7 @@ Imagine that your server uses the [refer<strike>r</strike>er](https://en.wikiped
 
 ### HAR file mapping
 
-You might be able to build a server that knows how to interpret [HAR files](https://www.maxcdn.com/one/visual-glossary/har-file/). These files are basically what you are looking at when using your favorite browser developer tools network tab. So you might be able to set up some preproduction step that automates a headless webkit to scrape all your pages and export a series of HAR files, which the server can use to reconstruct a dependency graph of your files.
+You might be able to build a server that knows how to interpret [HAR files](https://blog.stackpath.com/glossary/har-file/). These files are basically what you are looking at when using your favorite browser developer tools network tab. So you might be able to set up some preproduction step that automates a headless webkit to scrape all your pages and export a series of HAR files, which the server can use to reconstruct a dependency graph of your files.
 
 ### Static analysis
 
