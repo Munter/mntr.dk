@@ -50,7 +50,7 @@ Here is [the full list of Assetgraph Relations](https://github.com/assetgraph/as
 
 ### Query
 
-The Assetgraph Query model is a [MongoDB inspired](http://docs.mongodb.org/manual/tutorial/query-documents/) model where you can combine some simple boolean AND, OR, NOT statements into a powerful expression to specificly target only the Assets or Relations you are interested in.
+The Assetgraph Query model is a [MongoDB inspired](https://docs.mongodb.com/manual/tutorial/query-documents/) model where you can combine some simple boolean AND, OR, NOT statements into a powerful expression to specificly target only the Assets or Relations you are interested in.
 
 Each query is a function that matches the properties of each Asset or Relation with the corresponding property or the object in the query. The query object can use strings, numbers, arrays, regexes, user defined functions and even recursive query objects to match the subject.
 
