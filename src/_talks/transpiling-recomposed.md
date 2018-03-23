@@ -12,7 +12,7 @@ video:
 event:
     name: JSConf.eu 2015
     date: 2015-09-24 14:15:00
-    url: http://2015.jsconf.eu/
+    url: https://2015.jsconf.eu/
 
 slides: https://munter.github.io/talk-transpiling-recomposed/#/
 
