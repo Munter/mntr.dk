@@ -24,7 +24,7 @@ Our savior is here. SPDY promises deliverance from all the hardships we have end
 
 > Wait, what?
 
-Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are also forced to accept the added overhead of a [TLS handshake](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake), a slow ordeal ([tweakable though](http://unhandledexpression.com/2013/01/25/5-easy-tips-to-accelerate-ssl/)).
+Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are also forced to accept the added overhead of a [TLS handshake](https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake), a slow ordeal ([tweakable though](https://unhandledexpression.com/2013/01/25/5-easy-tips-to-accelerate-ssl/)).
 
 So suddenly it comes down to a tradeoff. HTTP handshake overhead versus TLS handshake overhead. Which one to choose depends on the nature of your site, and that may change over time. So no simple answers here. Jimmy Durante seems to sum up [this situation](https://www.youtube.com/watch?v=bY-zmJ1VCQI) pretty well.
 
