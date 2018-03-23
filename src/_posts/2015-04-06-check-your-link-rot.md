@@ -73,7 +73,7 @@ Formatting can be done like so: `hyperlink https://mntr.dk | tap-colorize`
 
 ## Jenkins integration
 
-Obviously running command line tools manually is only fun the first few times, then the novelty subsides and you'd rather do other things. Luckily these days we can get robots to do our dirty work. Where I work we use [Jenkins](https://jenkins-ci.org/), but any CI setup should be able to easily do the same. Here's how I set up an automated task with Jenkins.
+Obviously running command line tools manually is only fun the first few times, then the novelty subsides and you'd rather do other things. Luckily these days we can get robots to do our dirty work. Where I work we use [Jenkins](https://jenkins.io/), but any CI setup should be able to easily do the same. Here's how I set up an automated task with Jenkins.
 
 I want to keep my company site links fresh, but I don't need to run link checks on every deploy. On the other hand link rot can happen even when my site is not updated, so the ideal strategy for me is to set up a periodical build, which I chose in the "Build Triggers" section of my task. I chose to go with a daily check at 5am, a time where our CI is usually not busy. The cron schedule for this is simple: `H 5 * * *`
 
