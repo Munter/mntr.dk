@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "bundle exec jekyll serve -D -w -o",
     "prebuild": "rm -rf build dist",
-    "build": "bundle exec jekyll build",
+    "build": "bundle exec jekyll build && subfont build/index.html --inline-css -i",
     "postbuild": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/ && node tools/netlify-headers.js >> dist/_headers"
   },
   "repository": {
@@ -19,6 +19,7 @@
   "license": "ISC",
   "devDependencies": {
     "assetgraph-builder": "^5.1.2",
+    "subfont": "^3.2.1",
     "svgo": "^0.7.2"
   }
 }
