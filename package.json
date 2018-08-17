@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "bundle exec jekyll serve -D -w -o",
     "prebuild": "rm -rf build dist",
-    "build": "bundle exec jekyll build && cp src/_headers dist/ && cp src/_redirects dist/ && subfont build/index.html --inline-css -i",
-    "postbuild": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && node tools/netlify-headers.js >> dist/_headers"
+    "build": "bundle exec jekyll build && subfont build/index.html --inline-css -i",
+    "postbuild": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/ && cp src/_redirects dist/ && node tools/netlify-headers.js >> dist/_headers"
   },
   "repository": {
     "type": "git",
