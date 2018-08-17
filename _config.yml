@@ -73,3 +73,7 @@ collections:
     talks:
         output: true
         permalinks: /talks/:path/
+
+include:
+    - _headers
+    - _redirects
