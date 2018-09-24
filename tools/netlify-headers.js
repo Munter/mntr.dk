@@ -1,4 +1,4 @@
-var AssetGraph = require('assetgraph');
+var AssetGraph = require('assetgraph-builder');
 
 var headers = [
     'Content-Security-Policy'
@@ -7,10 +7,13 @@ var headers = [
 new AssetGraph({ root: 'dist' })
     .loadAssets('index.html')
     .populate({
-        followRelations: { type: 'HtmlAnchor', crossorigin: false }
+        followRelations: {
+            type: { $or: ['HtmlAnchor', 'FileRedirect'] },
+            crossorigin: false
+        }
     })
     .queue(function (assetGraph) {
-        var assets = assetGraph.findAssets({ type: 'Html', isInline: false });
+        var assets = assetGraph.findAssets({ type: 'Html', isInline: false, isLoaded: true });
 
         var headerMap = {};
 
