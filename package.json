@@ -3,13 +3,11 @@
   "name": "mntr.dk",
   "version": "1.0.0",
   "description": "Peter Müller's blog",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bundle exec jekyll serve -D -w -o",
+    "start": "eleventy --serve",
     "prebuild": "rm -rf build dist",
-    "build": "bundle exec jekyll build && subfont build/index.html --inline-css -i",
-    "postbuild": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/ && node tools/netlify-headers.js >> dist/_headers"
+    "build": "eleventy"
   },
   "repository": {
     "type": "git",
@@ -18,6 +16,7 @@
   "author": "Peter Müller <munter@fumle.dk>",
   "license": "ISC",
   "devDependencies": {
+    "@11ty/eleventy": "^0.8.3",
     "assetgraph-builder": "^6.4.2",
     "subfont": "^3.6.2",
     "svgo": "^0.7.2"
