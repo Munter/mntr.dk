@@ -1,16 +1,15 @@
 ---
 layout: post
-title:  "I love the Unix philosophy, but..."
-date:   2014-03-23 21:05:29
+title: 'I love the Unix philosophy, but...'
+date: 2014-03-23 21:05:29
 categories: frontend build assetgraph grunt gulp broccoli unix
-twittertext: "Are Unix pipes inadequate to cover our needs in frontend build systems?"
+twittertext: 'Are Unix pipes inadequate to cover our needs in frontend build systems?'
 disquss: true
 ---
 
 I attended the [Edge Conference](https://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should receive high praises.
 
 During the build system panel some remarks were made about the Unix philosophy in response to a question I asked. I did get a counter argument in, but the available time only allowed for tweet size comments, so I don't think I got my point across properly. I'll try to go a bit in depth on my reasoning here.
-
 
 My question was this (somewhat rewritten by the moderator):
 
@@ -20,7 +19,7 @@ Most of the panel responded that they like tools that follow the unix philosophy
 
 I agree with this sentiment. I love these tools as well. I live on the command line, and never would have if these tools weren't so powerful and versatile, individually and in combination.
 
-So the feedback from the panel was that a proper set of *Unixy* tools put together in the right order would be a better solution than an opinionated tool which keeps some of the internals hidden, reducing the amount of control and adding an aura of magic. Developers like control and dislike magic.
+So the feedback from the panel was that a proper set of _Unixy_ tools put together in the right order would be a better solution than an opinionated tool which keeps some of the internals hidden, reducing the amount of control and adding an aura of magic. Developers like control and dislike magic.
 
 And this is where I feel the need for nuance. The simple tool chain works extremely well in cases where you have one file as input and one as output. It might have been through all sorts of compilations and minifications on its way through the pipe, but it's still just text. And text fits really well into the Unix philosophy. The same is true for a collection of files of similar type, the concatenation case.
 
@@ -46,7 +45,7 @@ While I usually hate on Microsoft for providing a pretty bad development platfor
 
 When we created [Assetgraph](https://github.com/assetgraph/assetgraph/), we set out to create a data model that could describe a web page in its entirety. It would be a platform for making all of these complex code base transformations easy, while still giving you a guarantee of dependency coherence. However, piping this data model through a Unix pipe would be the death of it, since all state would be lost.
 
-Had Unix pipes provided capability of piping objects instead of only text, we wouldn't have had to create an entire plugin and pipeline architecture, forcing users to write things "the Assetgraph way". We wouldn't have to be competitors with "the Grunt way", "the Gulp way" or "the Broccoli way". We could instead have focused on strengthening the core data model and let users write decoupled *Unixy* functions that made use of this data model, adopting a philosophy of "web in, web out".
+Had Unix pipes provided capability of piping objects instead of only text, we wouldn't have had to create an entire plugin and pipeline architecture, forcing users to write things "the Assetgraph way". We wouldn't have to be competitors with "the Grunt way", "the Gulp way" or "the Broccoli way". We could instead have focused on strengthening the core data model and let users write decoupled _Unixy_ functions that made use of this data model, adopting a philosophy of "web in, web out".
 
 All of these implementations are workarounds to the limitations of the Unix pipe. Hack by hack we've dug ourselves deeper into our individual holes and have trench wars about which hack is best, yet we still salute Unix pipes as the end all be all of data transformation.
 

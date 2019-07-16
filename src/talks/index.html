@@ -13,8 +13,7 @@ title: Talks
   <p>If you are a conference organizer and would like me to talk at your conference, shoot me an email. Contact information is in the page footer.</p>
 
   <section class="talks-list">
-    {% assign talks = site.talks %}
-    {% for talk in talks reversed %}
+    {% for talk in collections.talks %}
       <hr>
 
       <article>
