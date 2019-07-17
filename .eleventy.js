@@ -1,5 +1,6 @@
 const { human, iso } = require('./filters/date');
 const excerpt = require('./filters/excerpt');
+const slug = require('./filters/slug');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias('default', 'layouts/default.html');
@@ -21,6 +22,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('excerpt', excerpt);
   eleventyConfig.addFilter('isodate', iso);
   eleventyConfig.addFilter('humandate', human);
+  eleventyConfig.addFilter('slug', slug);
 
   eleventyConfig.addPassthroughCopy('src/assets');
   eleventyConfig.addPassthroughCopy('src/favicon.ico');
