@@ -23,6 +23,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('humandate', human);
 
   eleventyConfig.addPassthroughCopy('src/assets');
+  eleventyConfig.addPassthroughCopy('src/favicon.ico');
 
   return {
     templateFormats: ['md', 'html'],
