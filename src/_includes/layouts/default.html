@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css"
     href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700,400i|Open+Sans:700,400">
 
-  <title>{{ page.title }}</title>
+  <title>{{ title }}</title>
   <meta name="description" content="Web, workflow, tools and random thoughts">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,24 +62,18 @@
     <meta property="og:video" content="https://vimeo.com/{{ video.id }}"> -->
   {% elsif video.url %}
   <meta property="og:video" content="{{ video.url }}">
+  {% endif %}
+  {% endif %}
+
   <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="500">
   <meta property="og:image:height" content="500">
-  {% endif %}
-  {% elsif %}
-  <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="500">
-  <meta property="og:image:height" content="500">
-  {% endif %}
 
   <!-- Twitter stuff -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@_munter_">
   <meta name="twitter:creator" content="@_munter_">
-  <meta name="twitter:title" content="{{ title }}">
-  <meta name="twitter:description" content="{{ description }}">
 
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
 </head>
