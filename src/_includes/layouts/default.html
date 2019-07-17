@@ -62,13 +62,17 @@
     <meta property="og:video" content="https://vimeo.com/{{ video.id }}"> -->
   {% elsif video.url %}
   <meta property="og:video" content="{{ video.url }}">
-  {% endif %}
-  {% endif %}
-
   <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="500">
   <meta property="og:image:height" content="500">
+  {% endif %}
+  {% else %}
+  <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="500">
+  <meta property="og:image:height" content="500">
+  {% endif %}
 
   <!-- Twitter stuff -->
   <meta name="twitter:card" content="summary_large_image">
