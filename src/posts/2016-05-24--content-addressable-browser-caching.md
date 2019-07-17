@@ -1,14 +1,16 @@
 ---
 layout: post
-title: "Content-addressable Browser Caching"
+title: 'Content-addressable Browser Caching'
 date: 2016-05-24 17:41:11
-twittertext: What if it were possible to use content-addressable caching in browsers to get cache hits across domains?
+description: What if it were possible to use content-addressable caching in browsers to get cache hits across domains?
 categories: browser cache subresource-integrity content-addressable
 ---
 
 What if it were possible to use content-addressable caching in browsers instead of URL-based caching? The increased cache hits would be highly beneficial, especially for sites depending on 3rd party libraries via a CDN. It turns out this **is** possible. The subresource integrity specification gives us all we need. But it turns out it's not that simple.
 
 None of the ideas I'm describing here are new, and none of them are concieved by me. I just happened to get this idea, like many others, and tried to get the standards bodies to implement it. This lead to a lot of historical digging because much of the knowledge about this is buried in mailing lists, blog posts that only exist in historical web archives and spec maintainers' heads. I'm writing this post in the hope that next time someone gets this great idea, they won't have to do the same work I just did.
+
+<!--more-->
 
 ## Content-addressable
 

@@ -3,13 +3,14 @@ layout: post
 title: 'I love the Unix philosophy, but...'
 date: 2014-03-23 21:05:29
 categories: frontend build assetgraph grunt gulp broccoli unix
-twittertext: 'Are Unix pipes inadequate to cover our needs in frontend build systems?'
-disquss: true
+description: 'Are Unix pipes inadequate to cover our needs in frontend build systems?'
 ---
 
 I attended the [Edge Conference](https://edgeconf.com/2014-london) in London, for which [Andrew Betts](https://twitter.com/triblondon) should receive high praises.
 
 During the build system panel some remarks were made about the Unix philosophy in response to a question I asked. I did get a counter argument in, but the available time only allowed for tweet size comments, so I don't think I got my point across properly. I'll try to go a bit in depth on my reasoning here.
+
+<!--more-->
 
 My question was this (somewhat rewritten by the moderator):
 

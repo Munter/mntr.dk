@@ -3,7 +3,7 @@ layout: talk
 title: One-color - Easy JS colors
 date: 2011-10-20 19:00:00
 
-twittertext: Easy JavaScript color manipulation with implicit color space conversions and a great api. One-color
+description: Easy JavaScript color manipulation with implicit color space conversions and a great api. One-color
 
 video:
   service: vimeo

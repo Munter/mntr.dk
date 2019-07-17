@@ -2,13 +2,15 @@
 layout: post
 title: 'Check your link rot'
 date: 2015-04-06 23:10:29
-twittertext: Keep your links unbroken and fresh with Hyperlink, a tool that automates finding broken and inefficient links
+description: Keep your links unbroken and fresh with Hyperlink, a tool that automates finding broken and inefficient links
 categories: web development link url link-rot hyperlink regressions jenkins
 ---
 
 When we develop websites we often take the greatest care that all details are right. People are checking the design, the implementation, the responsiveness, the performance, and hordes of people are clicking all the links so ensure that everything is as it should be. We congratulate each other, high five our team, put our work in production and move on to other things.
 
 However our perfectly crafted website is now all but a snapshot of a distant past. As we move on, the pages stick around and become a part of the ever growing public record of the internet. But even though the site was perfect when concieved it's now in a new state. Decay. From now on things can only get worse.
+
+<!--more-->
 
 ## Link-rot
 

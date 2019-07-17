@@ -3,8 +3,7 @@ layout: post
 title: 'Getting started with Assetgraph'
 date: 2014-07-02 00:15:00
 categories: frontend build assetgraph tooling
-twittertext: 'Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do'
-disquss: true
+description: 'Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do'
 ---
 
 When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be exactly this. A high level interface for your websites, yet still providing low level interfaces for individual assets. A toolkit that lets you build your own tools that fit very specificly to your individual needs.
@@ -18,6 +17,8 @@ If you want to see how easy it is to build tools that [filter out unused files](
 If you are more into just consuming a well tested out-of-the-box build tool, take a look at [assetgraph-builder](https://github.com/assetgraph/assetgraph-builder) or its grunt-wrapper [grunt-reduce](https://github.com/Munter/grunt-reduce).
 
 **NOTE: THIS ARTICLE DESCRIBES ASSETGRAPH VERSION 3, NEWER VERSIONS ARE AVAILABLE.**
+
+<!--more-->
 
 ## Assetgraph Vocabulary
 

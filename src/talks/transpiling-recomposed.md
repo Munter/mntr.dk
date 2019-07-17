@@ -3,7 +3,7 @@ layout: talk
 title: Transpiling Recomposed
 date: 2015-09-24 14:15:00
 
-twittertext: What if we could move the complexity of web asset transpilers from our build systems to a filesystem?
+description: What if we could move the complexity of web asset transpilers from our build systems to a filesystem?
 
 video:
   service: youtube

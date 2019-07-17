@@ -3,85 +3,70 @@ layout: default
 ---
 
 <article class="post post-video">
-    <h1 class="post-title">{{ page.title }}</h1>
+  <h1 class="post-title">{{ title }}</h1>
 
-    <div class="post-meta">
-        <time datetime="{{ page.date | date_to_string }}">{{ page.date | date_to_string }}</time>
+  <div class="post-meta">
+    {% include date.liquid, date: date %}
 
-        {% if page.event %}
-            <span>at</span>
+    {% if event %}
+    <span>at</span>
 
-            {% if page.event.url %}
-                <a href="{{ page.event.url}}">{{ page.event.name }}</a>
-            {% else %}
-                <span>{{ page.event.name }}</span>
-            {% endif %}
-        {% endif %}
-    </div>
+    {% if event.url %}
+    <a href="{{ event.url}}">{{ event.name }}</a>
+    {% else %}
+    <span>{{ event.name }}</span>
+    {% endif %}
+    {% endif %}
+  </div>
 
-    {% if page.abstract %}
-        <section class="post-abstract">
-            {{ page.abstract | markdownify }}
-        </section>
+  <section class="post-abstract">
+    {{ abstract }}
+  </section>
+
+  {% if video %}
+  <section class="post-video">
+    {% if video.service == 'youtube' %}
+    <a href="https://www.youtube.com/watch?v={{ video.id }}" class="playable">
+      <img src="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg" alt="Watch video">
+    </a>
+    {% elsif video.service == 'vimeo' %}
+    <a href="https://vimeo.com/{{ video.id }}" class="playable">
+      <img src="https://i.vimeocdn.com/video/{{ video.image-id }}_700.jpg" alt="Watch video">
+    </a>
+    {% elsif video.url %}
+    <video controls>
+      <source src="{{ video.url }}">
+      <a href="{{ video.page }}">Watch video</a>
+    </video>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if slides %}
+  <p>
+    <strong>Slides:</strong> <a href="{{ slides }}">{{ slides }}</a>
+  </p>
+  {% endif %}
+
+  <section class="post-content">
+    {{ content }}
+  </section>
+
+  <div class="sharing">
+    {% capture twittertext %}{% if twittertext %}{{ twittertext }}{% else %}{{ title }}{% endif %}{% endcapture %}
+    <a href="https://twitter.com/intent/tweet?text={{ twittertext | cgi_escape }}&amp;title={{ title | cgi_escape }}&amp;url={{ site.url | cgi_escape }}{{ url | cgi_escape }}"
+      class="twitter-share-button">Tweet this</a>
+  </div>
+
+  <div class="post-meta" style="overflow: auto">
+    {% if previous.url %}
+    <a href="{{previous.url}}" title="Previous Talk: {{previous.title}}" style="float: left">&laquo;
+      {{previous.title}}</a>
     {% endif %}
 
-    {% if page.video %}
-        <section class="post-video">
-            {% if page.video.service == 'youtube' %}
-                <a href="https://www.youtube.com/watch?v={{ page.video.id }}" class="playable">
-                    <img src="https://img.youtube.com/vi/{{ page.video.id }}/maxresdefault.jpg" alt="Watch video">
-                </a>
-            {% elsif page.video.service == 'vimeo' %}
-                <a href="https://vimeo.com/{{ page.video.id }}" class="playable">
-                    <img src="https://i.vimeocdn.com/video/{{ page.video.image-id }}_700.jpg" alt="Watch video">
-                </a>
-            {% elsif page.video.url %}
-                <video controls>
-                    <source src="{{ page.video.url }}"></source>
-                    <a href="{{ page.video.page }}">Watch video</a>
-                </video>
-            {% endif %}
-        </section>
+    {% if next.url %}
+    <a href="{{next.url}}" title="Next Talk: {{next.title}}" style="float: right">{{next.title}}
+      &raquo;</a>
     {% endif %}
-
-    {% if page.slides %}
-        <p>
-            <strong>Slides:</strong> <a href="{{ page.slides }}">{{ page.slides }}</a>
-        </p>
-    {% endif %}
-
-    <section class="post-content">
-        {{ content }}
-    </section>
-
-    <div class="sharing">
-        {% capture twittertext %}{% if page.twittertext %}{{ page.twittertext }}{% else %}{{ page.title }}{% endif %}{% endcapture %}
-        <a href="https://twitter.com/intent/tweet?text={{ twittertext | cgi_escape }}&amp;title={{ page.title | cgi_escape }}&amp;url={{ site.url | cgi_escape }}{{ page.url | cgi_escape }}" class="twitter-share-button">Tweet this</a>
-    </div>
-
-    <div class="post-meta" style="overflow: auto">
-        {% if page.previous.url %}
-            <a href="{{page.previous.url}}" title="Previous Talk: {{page.previous.title}}" style="float: left">&laquo; {{page.previous.title}}</a>
-        {% endif %}
-
-        {% if page.next.url %}
-            <a href="{{page.next.url}}" title="Next Talk: {{page.next.title}}" style="float: right">{{page.next.title}} &raquo;</a>
-        {% endif %}
-    </div>
-
-    {% if page.disquss != false %}
-        <div id="disqus_thread"></div>
-    {% endif %}
+  </div>
 </article>
-
-
-{% if page.disquss != false %}
-    <script type="text/javascript" nonce="developmentonly">
-        var disqus_shortname = 'mntrdk';
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-{% endif %}

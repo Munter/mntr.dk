@@ -6,59 +6,61 @@ title: Talks
 <article class="post">
   <h1>Conference Talks</h1>
 
-  <p>I have a lot of ideas and occasionally some of them are good. When they are I try to contribute them to the community by giving talks about them at web development conferences and meetups.</p>
+  <p>I have a lot of ideas and occasionally some of them are good. When they are I try to contribute them to the
+    community by giving talks about them at web development conferences and meetups.</p>
 
   <p>This is a list of some of my talks that got caught on video for you to enjoy and me to cringe over.</p>
 
-  <p>If you are a conference organizer and would like me to talk at your conference, shoot me an email. Contact information is in the page footer.</p>
+  <p>If you are a conference organizer and would like me to talk at your conference, shoot me an email. Contact
+    information is in the page footer.</p>
 
   <section class="talks-list">
     {% for talk in collections.talks %}
-      <hr>
+    <hr>
 
-      <article>
-        <div class="post-meta">
-          <time datetime="{{ talk.date | date_to_string }}">{{ talk.date | date_to_string }}</time>
+    <article>
+      <div class="post-meta">
+        {% include date.liquid, date: talk.date %}
 
-          {% if talk.event %}
-            <span>at</span>
+        {% if talk.data.event %}
+        <span>at</span>
 
-            {% if talk.event.url %}
-              <a href="{{ talk.event.url}}">{{ talk.event.name }}</a>
-            {% else %}
-              <span>{{ talk.event.name }}</span>
-            {% endif %}
-          {% endif %}
-        </div>
-
-        <h4>
-          <a href="{{ talk.url }}">{{ talk.title }}</a>
-        </h4>
-
-        {% if talk.video %}
-          {% if talk.video.service == 'youtube' %}
-            <a href="{{ talk.url }}">
-              {% if talk.abstract %}
-                <img class="talk-abstract-image" src="https://img.youtube.com/vi/{{ talk.video.id }}/mqdefault.jpg">
-              {% else %}
-                <img class="talk-no-abstract-image" src="https://img.youtube.com/vi/{{ talk.video.id }}/maxresdefault.jpg">
-              {% endif %}
-            </a>
-          {% elsif talk.video.service == 'vimeo' %}
-            <a href="{{ talk.url }}">
-              {% if talk.abstract %}
-                <img class="talk-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.video.image-id }}_320.jpg">
-              {% else %}
-                <img class="talk-no-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.video.image-id }}_700.jpg">
-              {% endif %}
-            </a>
-          {% endif %}
+        {% if talk.data.event.url %}
+        <a href="{{ talk.data.event.url}}">{{ talk.data.event.name }}</a>
+        {% else %}
+        <span>{{ talk.data.event.name }}</span>
         {% endif %}
-
-        {% if talk.abstract %}
-          {{ talk.abstract | markdownify }}
         {% endif %}
-      </article>
+      </div>
+
+      <h4>
+        <a href="{{ talk.url }}">{{ talk.data.title }}</a>
+      </h4>
+
+      {% if talk.data.video %}
+      {% if talk.data.video.service == 'youtube' %}
+      <a href="{{ talk.url }}">
+        {% if talk.data.abstract %}
+        <img class="talk-abstract-image" src="https://img.youtube.com/vi/{{ talk.data.video.id }}/mqdefault.jpg">
+        {% else %}
+        <img class="talk-no-abstract-image" src="https://img.youtube.com/vi/{{ talk.data.video.id }}/maxresdefault.jpg">
+        {% endif %}
+      </a>
+      {% elsif talk.data.video.service == 'vimeo' %}
+      <a href="{{ talk.url }}">
+        {% if talk.data.abstract %}
+        <img class="talk-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.data.video.image-id }}_320.jpg">
+        {% else %}
+        <img class="talk-no-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.data.video.image-id }}_700.jpg">
+        {% endif %}
+      </a>
+      {% endif %}
+      {% endif %}
+
+      {% if talk.data.abstract %}
+      {{ talk.data.abstract }}
+      {% endif %}
+    </article>
 
 
     {% endfor %}

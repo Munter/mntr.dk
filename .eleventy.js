@@ -1,3 +1,6 @@
+const { human, iso } = require('./filters/date');
+const excerpt = require('./filters/excerpt');
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias('default', 'layouts/default.html');
   eleventyConfig.addLayoutAlias('post', 'layouts/post.html');
@@ -15,13 +18,9 @@ module.exports = function(eleventyConfig) {
   // eleventyConfig.setFrontMatterParsingOptions({
   //   excerpt: true
   // });
-  eleventyConfig.addFilter('excerpt', (content = '') => content.split('<!--more-->')[0]);
-
-  eleventyConfig.addFilter('isodate', date => date.toISOString());
-  eleventyConfig.addFilter('humandate', date => {
-    console.log('date', date);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  });
+  eleventyConfig.addFilter('excerpt', excerpt);
+  eleventyConfig.addFilter('isodate', iso);
+  eleventyConfig.addFilter('humandate', human);
 
   eleventyConfig.addPassthroughCopy('src/assets');
 
