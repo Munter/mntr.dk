@@ -54,17 +54,19 @@
   <meta property="og:description" content="{{ description }}">
 
   {% if video %}
-  <section class="post-video">
-    {% if video.service == 'youtube' %}
-    <meta property="og:image" content="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg">
-    <meta property="og:video" content="https://www.youtube.com/v/{{ video.id }}">
-    {% elsif video.service == 'vimeo' %}
-    <meta property="og:image" content="https://i.vimeocdn.com/video/{{ video.image-id }}_700.jpg">
-    <meta property="og:video" content="https://vimeo.com/{{ video.id }}">
-    {% elsif video.url %}
-    <meta property="og:video" content="https://vimeo.com/{{ video.url }}">
-    {% endif %}
-  </section>
+  {% if video.service == 'youtube' %}
+  <meta property="og:image" content="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg">
+  <meta property="og:video" content="https://www.youtube.com/v/{{ video.id }}">
+  {% elsif video.service == 'vimeo' %}
+  <!-- <meta property="og:image" content="https://i.vimeocdn.com/video/{{ video.image-id }}_700.jpg">
+    <meta property="og:video" content="https://vimeo.com/{{ video.id }}"> -->
+  {% elsif video.url %}
+  <meta property="og:video" content="{{ video.url }}">
+  <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="500">
+  <meta property="og:image:height" content="500">
+  {% endif %}
   {% elsif %}
   <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
   <meta property="og:image:type" content="image/png">
