@@ -58,8 +58,8 @@
   <meta property="og:image" content="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg">
   <meta property="og:video" content="https://www.youtube.com/v/{{ video.id }}">
   {% elsif video.service == 'vimeo' %}
-  <!-- <meta property="og:image" content="https://i.vimeocdn.com/video/{{ video.image-id }}_700.jpg">
-    <meta property="og:video" content="https://vimeo.com/{{ video.id }}"> -->
+  <meta property="og:image" content="https://i.vimeocdn.com/video/{{ video.image-id }}_700.jpg">
+  <!-- <meta property="og:video" content="https://vimeo.com/{{ video.id }}"> -->
   {% elsif video.url %}
   <meta property="og:video" content="{{ video.url }}">
   <meta property="og:image" content="{{ site.url }}/assets/images/favicon/opengraph.png">
