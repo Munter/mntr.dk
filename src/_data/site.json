@@ -1,5 +1,9 @@
 {
   "name": "Peter Müller",
   "description": "My thoughts. The ones that didn't slip away",
-  "url": "https://mntr.dk"
+  "url": "https://mntr.dk",
+  "author": {
+    "name": "Peter Brandt Müller",
+    "email": "munter@fumle.dk"
+  }
 }

@@ -1,8 +1,12 @@
+const pluginRss = require('@11ty/eleventy-plugin-rss');
+
 const { human, iso } = require('./filters/date');
 const excerpt = require('./filters/excerpt');
 const slug = require('./filters/slug');
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(pluginRss);
+
   eleventyConfig.addLayoutAlias('default', 'layouts/default.html');
   eleventyConfig.addLayoutAlias('post', 'layouts/post.html');
   eleventyConfig.addLayoutAlias('talk', 'layouts/talk.html');
@@ -28,7 +32,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/favicon.ico');
 
   return {
-    templateFormats: ['md', 'html'],
+    templateFormats: ['md', 'html', 'njk'],
 
     markdownTemplateEngine: 'liquid',
     htmlTemplateEngine: 'liquid',
