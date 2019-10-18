@@ -1,0 +1,9 @@
+build:
+  publish: "dist"
+  command: "npm run build"
+
+plugins:
+  subfont:
+    type: netlify-plugin-subfont
+    config:
+      inlineCss: true
