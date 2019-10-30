@@ -8,7 +8,7 @@
     "test:links": "hyperlink --canonicalroot https://mntr.dk -r -i build/index.html --todo og:video | tap-spot",
     "start": "eleventy --serve",
     "build:fonts": "subfont build/index.html --inline-css -ri",
-    "build:perf": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity",
+    "build:perf": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent",
     "build:headers": "node tools/netlify-headers.js dist >> dist/_headers",
     "prebuild": "rm -rf build dist",
     "build": "eleventy",
