@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+<article class="post post-video">
+  <h1 class="post-title">{{ title }}</h1>
+
+  <div class="post-meta">
+    {% include date.liquid, date: date %}
+
+    {% if event %}
+    <span>at</span>
+
+    {% if event.url %}
+    <a href="{{ event.url}}">{{ event.name }}</a>
+    {% else %}
+    <span>{{ event.name }}</span>
+    {% endif %}
+    {% endif %}
+  </div>
+
+  <section class="post-abstract">
+    {{ abstract | markdown }}
+  </section>
+
+  {% if video %}
+  <section class="post-video">
+    {% if video.service == 'youtube' %}
+    <a href="https://www.youtube.com/watch?v={{ video.id }}" class="playable">
+      <img src="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg" alt="Watch video">
+    </a>
+    {% elsif video.service == 'vimeo' %}
+    <a href="https://vimeo.com/{{ video.id }}" class="playable">
+      <img src="https://i.vimeocdn.com/video/{{ video.image-id }}.jpg" alt="Watch video">
+    </a>
+    {% elsif video.url %}
+    <video controls>
+      <source src="{{ video.url }}">
+      <a href="{{ video.page }}">Watch video</a>
+    </video>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  {% if slides %}
+  <p>
+    <strong>Slides:</strong> <a href="{{ slides }}">{{ slides }}</a>
+  </p>
+  {% endif %}
+
+  <section class="post-content">
+    {{ content }}
+  </section>
+
+  <div class="sharing">
+    {% capture twittertext %}{% if twittertext %}{{ twittertext }}{% else %}{{ title }}{% endif %}{% endcapture %}
+    <a href="https://twitter.com/intent/tweet?text={{ twittertext | cgi_escape }}&amp;title={{ title | cgi_escape }}&amp;url={{ site.url | cgi_escape }}{{ url | cgi_escape }}"
+      class="twitter-share-button">Tweet this</a>
+  </div>
+</article>

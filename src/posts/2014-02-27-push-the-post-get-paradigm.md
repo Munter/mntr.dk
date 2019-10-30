@@ -1,22 +1,22 @@
 ---
 layout: post
-title:  "PUSH, the post GET paradigm"
-date:   2014-03-17 02:25:29
+title: 'PUSH, the post GET paradigm'
+date: 2014-03-17 02:25:29
 categories: webperf spdy push assetgraph
-twittertext: "Imagine delivering web assets quicker than today, with better caching and a much simpler build process"
+description: 'Imagine delivering web assets quicker than today, with better caching and a much simpler build process'
 ---
 
 Web performance these days is non-optional. If your web page is slow, you lose business. Our visitors are an impatient lot, and though they are not actively counting milliseconds, web developers have to, just in order to keep visitors' thoughts away from cat videos and flappy bird.
 
 In our hunt for milliseconds we, the web developers, are going through a great ordeal just to keep up. We are following [the 14 rules](http://stevesouders.com/hpws/rules.php), we are fighting off marketing's [~~bigger is better~~](http://www.milwaukeepolicenews.com/) and we are setting up automated torture machines for our code. All for the milliseconds, all to keep our visitors' attention.
 
+<!--more-->
 
 Needless to say, reshaping, contorting, torturing your code in order to conform to the 14 rules, also leaves you with something that is utterly unapproachable from a developer's standpoint. Well optimized production grade static assets are almost as far away from good development practices as you can possibly get. One module per file? Forget it, too expensive. Each image as a separate file? You must be crazy, go decode this base64 or pull out an image editor to reconstruct it from a sprite. And that JavaScript error you're trying to debug? Start unwrapping uglified concatenated code in your head, under time pressure of course; production is down you know...
 
 Unmaintainable. Complex. Prone to errors.
 
 We are being held hostage by the protocols that serve us. I hope you haven't developed Stockholm syndrome by now.
-
 
 ## All hail SPDY/HTTP2
 
@@ -28,7 +28,7 @@ Oh yes, no SSL, no SPDY. So we're getting a lot of nice enhancements, but are al
 
 So suddenly it comes down to a tradeoff. HTTP handshake overhead versus TLS handshake overhead. Which one to choose depends on the nature of your site, and that may change over time. So no simple answers here. Jimmy Durante seems to sum up [this situation](https://www.youtube.com/watch?v=bY-zmJ1VCQI) pretty well.
 
-And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](https://en.wikipedia.org/wiki/Latency_(engineering)#Packet-switched_networks) isn't a thing that magically vanishes.
+And even in this new world of SPDY, our old rules of minification still apply. Concatenation still yields fewer requests. And while the overhead of each request is lower with SPDY, since we're multiplexing into the existing stream, [latency](<https://en.wikipedia.org/wiki/Latency_(engineering)#Packet-switched_networks>) isn't a thing that magically vanishes.
 
 There may be a way to change the game though.
 
@@ -58,7 +58,6 @@ So this is the theory. HTTP GET round trip latency removed, improved bandwidth s
 
 So how do we teach our servers about that?
 
-
 ## The context aware static file server
 
 The bad news: there is no specified configuration format for telling your server what to push when a specific file is requested. The [Nginx team](https://twitter.com/nginxorg) at least [came up empty handed](https://twitter.com/nginxorg/status/436182316042301440) when asked about it. So we are on our own for now. However many of us are running some sort of server that we have fine grained control over. Frameworks like [express](http://expressjs.com/) certainly make modifications like these easier.
@@ -76,7 +75,6 @@ You might be able to build a server that knows how to interpret [HAR files](http
 ### Static analysis
 
 This one is my favorite, and where I get to pitch one of my personal projects. [Assetgraph](https://github.com/assetgraph/assetgraph/) can be used to statically analyze your web assets and create a graph model that contains all files and relations between them. Think of it as a browser that scrapes your entire site, except it only ever visits every resource once and can run directly on your file system. Having your static file server traverse the entire dependency graph on startup would seed it with all the contextual knowledge it needs for SPDY PUSH.
-
 
 ## Making it happen
 

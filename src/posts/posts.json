@@ -1,0 +1,3 @@
+{
+  "permalink": "{{ page.date | date: '%Y' }}/{{ title | slug }}/index.html"
+}

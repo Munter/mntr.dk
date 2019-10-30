@@ -1,10 +1,9 @@
 ---
 layout: post
-title:  "Getting started with Assetgraph"
-date:   2014-07-02 00:15:00
+title: 'Getting started with Assetgraph'
+date: 2014-07-02 00:15:00
 categories: frontend build assetgraph tooling
-twittertext: "Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do"
-disquss: true
+description: 'Get started with Assetgraph, the web tool makers toolbox that works with your web page like browsers do'
 ---
 
 When presented with the challenges of web performance optimization, or any other kind of manipulation of web sites and assets, it is helpful to have a good set of tools at your disposal. Assetgraph aims to be exactly this. A high level interface for your websites, yet still providing low level interfaces for individual assets. A toolkit that lets you build your own tools that fit very specificly to your individual needs.
@@ -19,14 +18,13 @@ If you are more into just consuming a well tested out-of-the-box build tool, tak
 
 **NOTE: THIS ARTICLE DESCRIBES ASSETGRAPH VERSION 3, NEWER VERSIONS ARE AVAILABLE.**
 
+<!--more-->
 
-Assetgraph Vocabulary
----------------------
+## Assetgraph Vocabulary
 
 Before we get started it's useful to get some vocabulary straight. If you're not easily confused you might want to skip to the part where you [get your hands dirty](#minimum-assetgraph-lifecycle).
 
 Like many bigger projects Assetgraph has some project specific vocabulary. We've tried not to be too magical about the terms we chose, so hopefully you'll get what things are from their name. Sometimes the inherent properties that go with the names are non-obvious though. This is an attempt at an explanation.
-
 
 ### Asset
 
@@ -56,32 +54,34 @@ Each query is a function that matches the properties of each Asset or Relation w
 
 Some examples:
 
-``` javascript
+```javascript
 var query = require('assetgraph').query;
 
 var simple = query({
-    type: 'Html',
-    isLoaded: true
+  type: 'Html',
+  isLoaded: true
 });
 
-var boolean = query.or({
+var boolean = query.or(
+  {
     url: /^http:/
-}, {
-    fileName: function (fileName) {
-        return fileName.length > 8;
+  },
+  {
+    fileName: function(fileName) {
+      return fileName.length > 8;
     }
-});
+  }
+);
 
 var nested = query({
-    type: 'HtmlAnchor',
-    from: {
-        isInline: false
-    },
-    to: {
-        isImage: true
-    }
+  type: 'HtmlAnchor',
+  from: {
+    isInline: false
+  },
+  to: {
+    isImage: true
+  }
 });
-
 ```
 
 Most interactions with Assetgraph happen trough queries to the graph. It is recommended that you get to know the query model if you want to be an effective tool maker. Often times you'll see simple query objects being passed into Assetgraph methods or Transforms without the `query()` call. Assetgraph will automatically turn such objects into queries for your convenience.
@@ -89,28 +89,28 @@ Most interactions with Assetgraph happen trough queries to the graph. It is reco
 Take a look at the [Assetgraph Query source code](https://github.com/assetgraph/assetgraph/blob/v3/lib/query.js).
 
 ### Assetgraph
+
 The Assetgraph is the instance that ties all of the above together. This is where the Assets and Relations are stored and where you can use a Query to find them all again. There are a bunch of convenience methods for pre-order and post-order traversal and of course the most used ones [`findAssets`](https://github.com/assetgraph/assetgraph#querying-the-graph) and [`findRelations`](https://github.com/assetgraph/assetgraph#querying-the-graph).
 
 ### Transform
+
 Assetgraph is cool, but always diving into the lowlevel code of specific Asset syntax trees becomes bothersome pretty quickly. Transforms are highlevel functions that wrap these lowlevel calls, manipulating the Assetgraph instance in more convenient ways. Assetgraph is extensible, so you can write your own highlevel transforms that fit your specific needs. Assetgraph already comes preloaded with a lot of very useful transforms, most of which are written with web performance optimization in mind, but don't let yourself be limited by that!
 
 There are some fine descriptions of most of the available core transforms in the [Assetgraph README](https://github.com/assetgraph/assetgraph/blob/v3/README.md).
 
 ### Transform Queue
-The Transform Queue is what lets you chain a number of transforms together to form a pipeline that applies multiple transforms in order. While all installed transforms are available directly on the Transform Queue __and__ Assetgraph instance for you convenience, they all return a reference to the Transform Queue they are in, enabling you to easily chain Transforms. There are a few convenience methods on the Transform Queue, like `if`, `endif` and `queue` (for quick inline transforms), the most important one is `run`.
+
+The Transform Queue is what lets you chain a number of transforms together to form a pipeline that applies multiple transforms in order. While all installed transforms are available directly on the Transform Queue **and** Assetgraph instance for you convenience, they all return a reference to the Transform Queue they are in, enabling you to easily chain Transforms. There are a few convenience methods on the Transform Queue, like `if`, `endif` and `queue` (for quick inline transforms), the most important one is `run`.
 
 If you don't `.run()` the Transform Queue, nothing will happen.
 
-
-Minimum Assetgraph Lifecycle
-----------------------------
+## Minimum Assetgraph Lifecycle
 
 While tools have great diversity, there will always be some common boilerplate that needs to be written in order to bootstrap them. The same goes for Assetgraph-based ones. This will be an explanation of how a bare minimum setup will look with Assetgraph.
 
 First, it's important to remember that Assetgraph can only work with websites if their internal references are valid. This may sound like an obvious best practice, since that is the only way a website can actually be loaded in a browser. Sadly I need to point this out, as most existing web performance build chains actually set you up with non-working websites, that are then assembled by the tool or some configuration of a static file server. If you want to get the most out of Assetgraph, build your websites so they work in the browser with no magic in between. Incidentally this simplifies your workflow greatly and lessens the pain for front-end developers considerably, so I consider it best pratice.
 
 Now, let's get started. Consider a website structure like this one:
-
 
 ```
 app/
@@ -129,31 +129,33 @@ Your web application is in a directory called `app` and you have som pretty basi
 
 We start out with creating a script that can load the website into an Assetgraph instance:
 
-``` javascript
+```javascript
 var Assetgraph = require('assetgraph');
 
 var graph = new AssetGraph({
-    root: 'app'
+  root: 'app'
 });
 ```
+
 The above creates an Assetgraph instance, configuring it with `app` as the web root. The root must be a string, and may be any valid `file://`, `http://`, `https://` or `ftp://` url. If no protocol is specified, a location on local disc is assumed, and the path is resolved as you would expect on the command line.
 
 An Assetgraph instance in itself, without any data, is quite useless. So next up we're interested in actually loading data from our website into the graph. We can do this using the [`loadAssets`](https://github.com/assetgraph/assetgraph#assetgraphloadassetsfilenamewildcardurlasset-) transform. Loading your `index.html` into the graph can be done like so:
 
-``` javascript
+```javascript
 graph.loadAssets('index.html');
 ```
+
 The `loadAssets` transform takes a range of inputs to make your life easier. The most useful to you now will be the string or array of strings. Each string, just like before, may be a full url or a protocol relative url in the previously described schemes. All relations in the graph will use the Assetgraph root to resolve paths, not the file system root. If you want to get more advanced with the `loadAssets` transform it might be useful to consult the [source code](https://github.com/assetgraph/assetgraph/blob/v3/lib/transforms/loadAssets.js) for now.
 
 Before we can run the script there is one more piece of boilerplate code that needs to be added. What we are doing when calling Assetgraph transforms with configuration parameters, is actually not executing them right away. Instead, we are appending them to a transform queue, which is what is returned from the transform call. To make this explicit in this example we save the return value in a new variable:
 
-``` javascript
+```javascript
 var queue = graph.loadAssets('index.html');
 ```
 
 All transforms in the queue are run in the queue scope and will return the queue, making transforms chainable. All transforms will have the assetgraph instance passed to them as the first parameter. The `loadAssets` call you just added to your script, won't actually be run before the transform queue has been started. We do this using the `run` method:
 
-``` javascript
+```javascript
 queue.run();
 ```
 
@@ -161,21 +163,19 @@ This implementation detail is a bit counter intuitive and can bite you later, so
 
 You can now run your script, and `index.html` will be loaded into the graph model. However this is not terribly exciting yet, since all that happens is reading a file into memory and not logging any output. So let's make it a bit more exciting by adding some logging to the console.
 
-
-Logging and Debugging
----------------------
+## Logging and Debugging
 
 Setting up logging is done on the Assetgraph instance, meaning it goes before the transform queue is run. Your script now looks like this:
 
-``` javascript
+```javascript
 var Assetgraph = require('assetgraph');
 
 var graph = new AssetGraph({
-    root: 'app'
+  root: 'app'
 });
 
-graph.on('addAsset', function (asset) {
-    console.log('addAsset', asset.toString());
+graph.on('addAsset', function(asset) {
+  console.log('addAsset', asset.toString());
 });
 
 var queue = graph.loadAssets('index.html');
@@ -198,9 +198,7 @@ Let's spice it up with one more logging detail, writing some stats about the ass
 queue.writeStatsToStderror();
 ```
 
-
-Populating the Dependency Graph
--------------------------------
+## Populating the Dependency Graph
 
 We've now arrived at the core functionality of Assetgraph. The arguably most powerful functionality is the ability to automatically and recursively traverse the dependencies of loaded assets. This, as they say, is where the magic happens, and what enables you to work with your web assets in their entire context without having to define large manifest files telling your tool what files you want included.
 
@@ -208,7 +206,7 @@ We are using the [`populate`](https://github.com/assetgraph/assetgraph#transform
 
 Available options are:
 
-``` javascript
+```javascript
 {
     followRelations: <Assetgraph.query>,
     startAssets: <Assetgraph.query>,
@@ -224,33 +222,33 @@ For now I'll assume that we are working with a web site on local disc and that w
 
 We can do this like so:
 
-``` javascript
+```javascript
 queue.populate({
-    followRelations: {
-        hrefType: ['relative', 'rootRelative']
-    }
-})
+  followRelations: {
+    hrefType: ['relative', 'rootRelative']
+  }
+});
 ```
 
 This makes your final bootstrap script look like this:
 
-``` javascript
+```javascript
 var AssetGraph = require('assetgraph');
 
 var graph = new AssetGraph({
-    root: 'build'
+  root: 'build'
 });
 
-graph.on('addAsset', function (asset) {
-        console.log('addAsset', asset.toString());
-    });
+graph.on('addAsset', function(asset) {
+  console.log('addAsset', asset.toString());
+});
 
 var queue = graph.loadAssets('index.html');
 
 queue.populate({
-    followRelations: {
-        hrefType: ['relative', 'rootRelative']
-    }
+  followRelations: {
+    hrefType: ['relative', 'rootRelative']
+  }
 });
 
 // Put further transforms here
@@ -258,16 +256,13 @@ queue.populate({
 queue.writeStatsToStderr();
 
 queue.run();
-
 ```
 
 Congratulations, You have now successfully loaded the entirety of your local files, **which you are referring to in your source code**, into Assetgraph. You are now bootstrapped with all you need in order to work with your assets.
 
 Normally a starter guide would end here, but I'll throw in some quick examples that might be of use to you, just so you get some ideas of what is possible.
 
-
-Writing files to disc
----------------------
+## Writing files to disc
 
 Reading files from disc to memory is fun, but it's even more fun writing them back to disc. Assetgraph lets you rework your dependencies and assets in memory in the transform queue, but the only way you gain anything from that is by actually saving the changes.
 
@@ -275,19 +270,20 @@ To write your files back to disc we'll use the [`writeAssetsToDisc`](https://git
 
 The second argument is the root directory to write the files to. You can leave it blank, which will fall back to the Assetgraph instance root, meaning you are overwriting the files in their existing location. Might be useful, but normally you want to separate your source files from your output files. We're setting a new outRoot `demo`.
 
-``` javascript
-queue.writeAssetsToDisc({
+```javascript
+queue.writeAssetsToDisc(
+  {
     isLoaded: true
-}, 'demo');
+  },
+  'demo'
+);
 ```
 
 Congratulations, you have now copied all your referenced assets from one directory to another. While you think this might as well have been accomplished with `cp -r app demo`, the important point to note is **your referenced assets**. If you haven't somehow included a file on your website, it won't be in `demo`. Imagine how many unreferenced files get put into production every day by people forgetting about them. Even worse, imagine a bower component has a malicious php file with a rights escalation somewhere in a test directory, and you just copied it to your production server.
 
 So see this as a useful step to only get the essentials on your production site. If something is missing now it's because you didn't refer to it. This could easily happen with error pages, favicon.ico, robots.txt or similar. If you want unreferenced files to explicitly be a part of the graph, make sure to include them in the `loadAssets` transform.
 
-
-Inlining small images
----------------------
+## Inlining small images
 
 Base64 encoding and inlining images. A tedious and stupid workflow. In development you want to work with your raw images to make it easier to maintain and debug, while in production you want to reduce http requests by bundling or inlining. Automation is the way and Assetgraph can help.
 
@@ -295,22 +291,20 @@ We'll limit ourselves to only images that are CSS backgrounds, as inlining conte
 
 We're using the [`inlineRelations`](https://github.com/assetgraph/assetgraph#assetgraphinlinerelationsqueryobj) transform, which is dead simple. The only thing that is happening here is just a more complex query than I've shown before.
 
-``` javascript
+```javascript
 queue.inlineRelations({
-    type: 'CssImage',
-    to: {
-        isLoaded: true,
-        isInline: false,
-        rawSrc: function (rawSrc) {
-            return rawSrc.length < 4096;
-        }
+  type: 'CssImage',
+  to: {
+    isLoaded: true,
+    isInline: false,
+    rawSrc: function(rawSrc) {
+      return rawSrc.length < 4096;
     }
+  }
 });
 ```
 
-
-File revving
-------------
+## File revving
 
 File revving is a fancy word for revisioning files for optimal caching in the visitor's browser. The optimal way to serve static assets is with a far future cache expiry, since the fastest request is no request at all.
 
@@ -326,49 +320,40 @@ Our strategy for renaming the files in the right order will be [post order trave
 
 First we need to craft a query that will only rename the files we want renamed. Some files might be static, but we still want them to keep their original url and take part in a different caching scheme, designed for rapid updates. Think of HTML pages, RSS feeds etc. I have come up with this query combination to target only the files that are safe to rename:
 
-``` javascript
+```javascript
 var query = AssetGraph.query;
 var moveQuery = query.and(
-    // Find all loaded an non-inlined assets
-    // Except ones of the defined types and fileNames
-    {
-        isLoaded: true,
-        isInline: false,
-        type: query.not([
-            'CacheManifest',
-            'Rss'
-        ]),
-        fileName: query.not([
-            '.htaccess',
-            'humans.txt',
-            'robots.txt',
-            'favicon.ico'
-        ])
-    },
+  // Find all loaded an non-inlined assets
+  // Except ones of the defined types and fileNames
+  {
+    isLoaded: true,
+    isInline: false,
+    type: query.not(['CacheManifest', 'Rss']),
+    fileName: query.not(['.htaccess', 'humans.txt', 'robots.txt', 'favicon.ico'])
+  },
 
-    // Exclude HTML-files that are linked to
+  // Exclude HTML-files that are linked to
+  query.not({
+    type: 'Html',
+    incomingRelations: function(relations) {
+      return relations.some(function(rel) {
+        return rel.type === 'HtmlAnchor';
+      });
+    }
+  }),
+
+  query.or(
+    // Exclude initial assets from renaming
     query.not({
-        type: 'Html',
-        incomingRelations: function (relations) {
-            return relations.some(function (rel) {
-                return rel.type === 'HtmlAnchor';
-            });
-        }
+      isInitial: true
     }),
-
-    query.or(
-        // Exclude initial assets from renaming
-        query.not({
-            isInitial: true
-        }),
-        // Include external HTML templates
-        {
-            type: 'Html',
-            isFragment: true
-        }
-    )
+    // Include external HTML templates
+    {
+      type: 'Html',
+      isFragment: true
+    }
+  )
 );
-
 ```
 
 The above is a distillation of a few years of iteration to try and define best practice for the most common use cases. I'd love to go into depth on this, but that's certainly not fit for a beginners guide. Copy paste this for now and return when you are more comfortable with your understanding of the graph model and the query model.
@@ -377,11 +362,11 @@ Now all that is left is to run the [`moveAssetsInOrder`](https://github.com/asse
 
 We're moving all revved files into `/static` and appending the first 10 chars of the hash of the file to the file name.
 
-``` javascript
-queue.moveAssetsInOrder(moveQuery, function (asset) {
-    var targetUrl = '/static/';
+```javascript
+queue.moveAssetsInOrder(moveQuery, function(asset) {
+  var targetUrl = '/static/';
 
-    return targetUrl + asset.fileName.split('.').shift() + '.' + asset.md5Hex.substr(0, 10) + asset.extension;
+  return targetUrl + asset.fileName.split('.').shift() + '.' + asset.md5Hex.substr(0, 10) + asset.extension;
 });
 ```
 
@@ -389,9 +374,7 @@ Seems pretty easy right? Just like copying. Except, not. This is where the graph
 
 Now all that is left to do is configure your web server to serve all files from `/static` with far future expires cache headers. Look up how to in your relevant server manual or on StackOverflow.
 
-
-Summing up
-----------
+## Summing up
 
 You've hopefully learned a bit more about Assetgraph now and are ready to get your hands dirty and try out new stuff on your own. At the very least I hope you've gained an understanding of the strengths and weaknesses of the paradigm and the toolset, so I am looking forward to getting grilled with relevant questions here, on [Twitter](https://twitter.com/_munter_) or [Github](https://github.com/assetgraph/assetgraph/issues/) or on a [conference we both attend](http://lanyrd.com/profile/_munter_/future/) over a beer ;)
 
@@ -403,7 +386,7 @@ If you wish to use Assetgraph for web performance optimization it is my recommen
 
 This is the final compilation of all examples, now prettified a bit:
 
-``` javascript
+```javascript
 var AssetGraph = require('assetgraph');
 var query = AssetGraph.query;
 var moveQuery = query.and(

@@ -3,13 +3,16 @@
   "name": "mntr.dk",
   "version": "1.0.0",
   "description": "Peter Müller's blog",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bundle exec jekyll serve -D -w -o",
+    "test:links": "hyperlink --canonicalroot https://mntr.dk -r -i build/index.html --todo og:video | tap-spot",
+    "start": "eleventy --serve",
+    "build:fonts": "subfont build/index.html --inline-css -ri",
+    "build:perf": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent",
+    "build:headers": "node tools/netlify-headers.js dist >> dist/_headers",
     "prebuild": "rm -rf build dist",
-    "build": "bundle exec jekyll build && subfont build/index.html --inline-css -i",
-    "postbuild": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy && cp src/_headers dist/ && node tools/netlify-headers.js >> dist/_headers"
+    "build": "eleventy",
+    "postbuild": "run-s test:links build:fonts build:perf build:headers"
   },
   "repository": {
     "type": "git",
@@ -18,8 +21,19 @@
   "author": "Peter Müller <munter@fumle.dk>",
   "license": "ISC",
   "devDependencies": {
-    "assetgraph-builder": "^6.4.2",
-    "subfont": "^3.6.2",
-    "svgo": "^0.7.2"
+    "@11ty/eleventy": "^0.9.0",
+    "@11ty/eleventy-plugin-rss": "^1.0.7",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.3",
+    "assetgraph-builder": "^7.0.0",
+    "autoprefixer": "^9.7.0",
+    "got": "^9.6.0",
+    "hyperlink": "^4.4.0",
+    "markdown-it": "^10.0.0",
+    "markdown-it-anchor": "^5.2.5",
+    "markdown-it-prism": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "subfont": "^4.0.1",
+    "svgo": "^1.3.2",
+    "tap-spot": "^1.1.1"
   }
 }
