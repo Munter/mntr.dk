@@ -1,14 +1,24 @@
 const got = require('got');
-const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
 
 const { human, iso } = require('./filters/date');
 const excerpt = require('./filters/excerpt');
 const slug = require('./filters/slug');
-const markdown = require('./filters/markdown');
+const markdownFilter = require('./filters/markdown');
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPlugin(syntaxHighlight);
+  /* Markdown Plugins */
+  const markdown = require('markdown-it')({
+    html: true,
+    linkify: true
+  });
+
+  markdown.use(require('markdown-it-anchor'));
+
+  markdown.use(require('markdown-it-prism'));
+
+  eleventyConfig.setLibrary('md', markdown);
+
   eleventyConfig.addPlugin(pluginRss);
 
   eleventyConfig.addLayoutAlias('default', 'layouts/default.html');
@@ -49,7 +59,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('isodate', iso);
   eleventyConfig.addFilter('humandate', human);
   eleventyConfig.addFilter('slug', slug);
-  eleventyConfig.addFilter('markdown', markdown);
+  eleventyConfig.addFilter('markdown', markdownFilter);
 
   eleventyConfig.addPassthroughCopy('src/assets');
   eleventyConfig.addPassthroughCopy('src/favicon.ico');

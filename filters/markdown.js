@@ -1,5 +1,7 @@
 const md = require('markdown-it')();
 
-module.exports = function(string) {
-  return md.render(string);
+module.exports = function(str) {
+  if (typeof str === 'string') {
+    return md.render(str);
+  }
 };
