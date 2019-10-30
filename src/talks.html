@@ -58,7 +58,7 @@ title: Talks
       {% endif %}
 
       {% if talk.data.abstract %}
-      {{ talk.data.abstract }}
+      {{ talk.data.abstract | markdown }}
       {% endif %}
     </article>
 

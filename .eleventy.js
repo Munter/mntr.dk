@@ -3,6 +3,7 @@ const pluginRss = require('@11ty/eleventy-plugin-rss');
 const { human, iso } = require('./filters/date');
 const excerpt = require('./filters/excerpt');
 const slug = require('./filters/slug');
+const markdown = require('./filters/markdown');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -27,6 +28,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter('isodate', iso);
   eleventyConfig.addFilter('humandate', human);
   eleventyConfig.addFilter('slug', slug);
+  eleventyConfig.addFilter('markdown', markdown);
 
   eleventyConfig.addPassthroughCopy('src/assets');
   eleventyConfig.addPassthroughCopy('src/favicon.ico');
