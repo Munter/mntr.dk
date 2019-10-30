@@ -57,16 +57,4 @@ layout: default
     <a href="https://twitter.com/intent/tweet?text={{ twittertext | cgi_escape }}&amp;title={{ title | cgi_escape }}&amp;url={{ site.url | cgi_escape }}{{ url | cgi_escape }}"
       class="twitter-share-button">Tweet this</a>
   </div>
-
-  <div class="post-meta" style="overflow: auto">
-    {% if previous.url %}
-    <a href="{{previous.url}}" title="Previous Talk: {{previous.title}}" style="float: left">&laquo;
-      {{previous.title}}</a>
-    {% endif %}
-
-    {% if next.url %}
-    <a href="{{next.url}}" title="Next Talk: {{next.title}}" style="float: right">{{next.title}}
-      &raquo;</a>
-    {% endif %}
-  </div>
 </article>
