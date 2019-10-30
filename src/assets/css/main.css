@@ -267,9 +267,36 @@ pre {
     font-family: Inconsolata, monospace, sans-serif;
     font-size: 0.9em;
     white-space: pre;
-    overflow: auto;
     background: #F7FAFB;
     border-radius: 3px;
+}
+
+pre[class*='language-'] {
+  position: relative;
+}
+
+pre[class*='language-html']::before,
+pre[class*='language-css']::before,
+pre[class*='language-javascript']::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-100%);
+  padding: 6px 10px;
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+pre[class*='language-html']::before {
+  content: 'HTML'
+}
+
+pre[class*='language-css']::before {
+  content: 'CSS';
+}
+
+pre[class*='language-javascript']::before {
+  content: 'JavaScript';
 }
 
 pre code, tt {

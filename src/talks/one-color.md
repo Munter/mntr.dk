@@ -8,7 +8,6 @@ description: Easy JavaScript color manipulation with implicit color space conver
 video:
   service: vimeo
   id: 49026951
-  image-id: 338204334
 
 event:
   name: CopenhagenJS - October 2011
