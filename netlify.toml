@@ -9,7 +9,7 @@
 #    that is where we will look for package.json/.nvmrc/etc not repo root!
 
 [build]
-  publish = "build"
+  publish = "dist"
   command = "npm run build"
 
 [[headers]]
