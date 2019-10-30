@@ -5,7 +5,7 @@
   "description": "Peter Müller's blog",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:links": "hyperlink --canonicalroot https://mntr.dk -r -i build/index.html | tap-spot",
+    "test:links": "hyperlink --canonicalroot https://mntr.dk -r -i build/index.html --todo og:video | tap-spot",
     "start": "eleventy --serve",
     "build:fonts": "subfont build/index.html --inline-css -i",
     "build:perf": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent --subresourceintegrity --contentsecuritypolicy",
