@@ -49,9 +49,9 @@ title: Talks
       {% elsif talk.data.video.service == 'vimeo' %}
       <a href="{{ talk.url }}">
         {% if talk.data.abstract %}
-        <img class="talk-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.data.video.image-id }}_320.jpg">
+        <img class="talk-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.data.video.image-id }}_640.jpg">
         {% else %}
-        <img class="talk-no-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.data.video.image-id }}_700.jpg">
+        <img class="talk-no-abstract-image" src="https://i.vimeocdn.com/video/{{ talk.data.video.image-id }}.jpg">
         {% endif %}
       </a>
       {% endif %}

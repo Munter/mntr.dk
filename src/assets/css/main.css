@@ -401,9 +401,9 @@ margin on the iframe, cause it breaks stuff. */
 
 /* Creates a responsive wrapper that makes our content scale nicely */
 .inner {
-    width: 80%;
-    max-width: 700px;
+    max-width: 60ch;
     margin: 0 auto;
+    padding: 0 16px;
 }
 
 /* Centres vertically yo. (IE8+) */
@@ -483,9 +483,9 @@ margin on the iframe, cause it breaks stuff. */
 }
 
 main {
-    width:80%;
-    max-width: 700px;
+    max-width: 60ch;
     margin: auto;
+    padding: 0 16px;
     word-break: break-word;
     hyphens: auto;
 }
@@ -705,8 +705,8 @@ main {
 /* The main wrapper for our pagination links */
 .pagination {
     position: relative;
-    width: 80%;
-    max-width: 700px;
+    max-width: 60ch;
+    padding: 0 16px;
     margin: 4rem auto;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.3rem;
@@ -773,12 +773,6 @@ main {
     color: #57A3E8;
 }
 
-/* The subscribe icon on the footer */
-.subscriptions {
-  margin-top: 2rem;
-  text-align: center;
-}
-
 .author {
   margin: 2rem 0;
 }
@@ -796,17 +790,29 @@ main {
     margin-right: 20px;
 }
 
+/* The subscribe icon on the footer */
+.subscriptions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.subscriptions > * + * {
+  margin-left: 10px;
+}
 
 .subscribe {
-    display: inline-block;
-    position: relative;
-    padding: 24px;
-    margin: 0 5px;
+    width: 40px;
+    height: 40px;
     transition: all 0.1s ease;
 
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 80%;
+}
+
+.subscribe:hover {
+    background-size: 100%;
 }
 
 .subscribe.social-twitter {
@@ -833,29 +839,6 @@ main {
     background-image: url(../images/social/social-feed.svg);
 }
 
-.subscribe:hover {
-    background-size: 100%;
-}
-
-/* The RSS icon, inserted via icon font */
-.subscribe:before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-
-    color: #FFF;
-    font-size: 16px;
-    font-weight: bold;
-
-    transition: all 0.1s ease;
-}
-
-.subscribe:hover:before {
-  font-size: 20px;
-  color: #57A3E8;
-}
 
 /* ==========================================================================
    9. Media Queries - Smaller than 900px
@@ -920,17 +903,7 @@ main {
         height: 80px;
     }
 
-    .inner,
-    .pagination {
-        width: auto;
-        margin-left: 16px;
-        margin-right: 16px;
-    }
-
     .post {
-        width:auto;
-        margin-left: 16px;
-        margin-right: 16px;
         font-size: 0.8em;
         line-height: 1.6em;
     }
