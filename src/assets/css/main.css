@@ -661,7 +661,8 @@ main {
    ========================================================================== */
 
 /* Keep images centred and within the bounds of the post-width */
-.post-content img {
+.post-content img,
+.post-content video  {
     display: block;
     max-width: 100%;
     height: auto;
