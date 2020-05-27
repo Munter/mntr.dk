@@ -12,7 +12,7 @@
     "build:headers": "node tools/netlify-headers.js dist >> dist/_headers",
     "prebuild": "rm -rf build dist",
     "build": "eleventy",
-    "postbuild": "run-s test:links build:fonts build:perf build:headers"
+    "postbuild": "run-s build:perf build:headers"
   },
   "repository": {
     "type": "git",
