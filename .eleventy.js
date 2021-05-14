@@ -38,7 +38,8 @@ module.exports = function(eleventyConfig) {
       const { service, id } = video;
 
       if (service === 'vimeo') {
-        const { body } = await got(`https://vimeo.com/api/v2/video/${id}.json`, { json: true });
+        const { body } = await got(`https://vimeo.com/api/v2/video/${id}.json`, { responseType: 'json'});
+
         const imageId = body[0].thumbnail_large
           .split('_')[0]
           .split('/')
