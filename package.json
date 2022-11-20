@@ -8,7 +8,7 @@
     "test:links": "hyperlink --canonicalroot https://mntr.dk -r -i build/index.html --todo og:video | tap-spot",
     "start": "eleventy --serve",
     "build:fonts": "subfont build/index.html --inline-css -ri",
-    "build:perf": "buildProduction --canonicalroot https://mntr.dk/ --outroot dist build/index.html build/wishlist/index.html build/font-demo/index.html --sharedbundles --asyncscripts --optimizeimages --sourcemaps --sourcescontent",
+    "build:perf": "cp -r build dist",
     "build:headers": "node tools/netlify-headers.js dist >> dist/_headers",
     "prebuild": "rm -rf build dist",
     "build": "eleventy",
@@ -24,7 +24,7 @@
     "@11ty/eleventy": "^0.9.0",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.0",
-    "assetgraph-builder": "^8.1.1",
+    "assetgraph": "^7.10.0",
     "autoprefixer": "^10.2.5",
     "got": "^11.8.2",
     "hyperlink": "^4.4.0",
@@ -32,7 +32,7 @@
     "markdown-it-anchor": "^7.1.0",
     "markdown-it-prism": "^2.0.3",
     "npm-run-all": "^4.1.5",
-    "subfont": "^4.0.1",
+    "subfont": "^6.12.2",
     "svgo": "^2.3.0",
     "tap-spot": "^1.1.1"
   }

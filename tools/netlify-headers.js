@@ -2,7 +2,7 @@
 
 const [root] = process.argv.slice(2);
 
-const AssetGraph = require('assetgraph-builder');
+const AssetGraph = require('assetgraph');
 
 const headers = ['Content-Security-Policy'];
 
