@@ -815,6 +815,10 @@ main {
     background-size: 100%;
 }
 
+.subscribe.social-mastodon {
+    background-image: url(../images/social/social-mastodon.svg);
+}
+
 .subscribe.social-twitter {
     background-image: url(../images/social/social-twitter.svg);
 }
