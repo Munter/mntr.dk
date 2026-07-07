@@ -21,6 +21,9 @@
   },
   "author": "Peter Müller <munter@fumle.dk>",
   "license": "ISC",
+  "engines": {
+    "node": "^24"
+  },
   "devDependencies": {
     "@astrojs/rss": "^4.0.12",
     "assetgraph": "^7.10.0",
