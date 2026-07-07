@@ -1,0 +1,153 @@
+---
+import Menu from '../components/Menu.astro';
+import site from '../data/site.json';
+
+const { title, description, video } = Astro.props;
+
+const pageUrl = site.url + Astro.url.pathname;
+
+// Open Graph video/image resolution, ported from the old default layout.
+let ogVideo;
+let ogImage;
+let ogImageIsFallback = false;
+
+if (video?.service === 'youtube') {
+  ogImage = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
+  ogVideo = `https://www.youtube.com/v/${video.id}`;
+} else if (video?.service === 'vimeo') {
+  ogImage = `https://i.vimeocdn.com/video/${video['image-id']}_700.jpg`;
+  ogVideo = `https://vimeo.com/${video.id}`;
+} else if (video?.url) {
+  ogVideo = video.url;
+  ogImage = `${site.url}/assets/images/favicon/opengraph.png`;
+  ogImageIsFallback = true;
+} else {
+  ogImage = `${site.url}/assets/images/favicon/opengraph.png`;
+  ogImageIsFallback = true;
+}
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700,400i|Open+Sans:700,400"
+    />
+
+    <title>{title}</title>
+    <meta name="description" content="Web, workflow, tools and random thoughts" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Default favicon, placed in root to support browsers that ignore this tag -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/favicon/152.png" sizes="152x152" />
+
+    <!-- For iPad with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/favicon/144.png" sizes="144x144" />
+
+    <!-- IE 10 Metro tile icon (Metro equivalent of apple-touch-icon) -->
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/images/favicon/144.png" />
+
+    <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/favicon/120.png" sizes="120x120" />
+
+    <!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/favicon/114.png" sizes="114x114" />
+
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/favicon/72.png" sizes="72x72" />
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/favicon/57.png" sizes="57x57" />
+
+    <!-- Certain chrome versions -->
+    <link rel="icon" href="/assets/images/favicon/32.png" sizes="32x32" />
+    <link rel="icon" href="/assets/images/favicon/16.png" sizes="16x16" />
+
+    <!-- Open Graph stuff -->
+    <meta property="og:site_name" content={site.description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description ?? ''} />
+
+    <meta property="og:image" content={ogImage} />
+    {ogVideo && <meta property="og:video" content={ogVideo} />}
+    {
+      ogImageIsFallback && (
+        <>
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content="500" />
+          <meta property="og:image:height" content="500" />
+        </>
+      )
+    }
+
+    <!-- Twitter stuff -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@_munter_" />
+    <meta name="twitter:creator" content="@_munter_" />
+
+    <link rel="alternate" type="application/rss+xml" title="Blog posts" href="/feed.xml" />
+  </head>
+
+  <body>
+    <header role="banner" class="site-head">
+      <div class="site-head-content inner">
+        <a class="blog-logo" href="/" aria-label="home"><img src="/assets/images/logo-white.svg" /></a>
+        <h1 class="blog-title">{site.name}</h1>
+        <h2 class="blog-description">{site.description}</h2>
+      </div>
+
+      <Menu />
+    </header>
+
+    <main role="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <section class="author">
+          <img class="author-avatar" src="/assets/images/munter.jpg" width="120" height="120" />
+          <h4>Peter Müller</h4>
+          <p>
+            <a href="http://copenhagenjs.dk/">CopenhagenJS</a> organizer, <a
+              href="https://github.com/assetgraph/">Assetgraph</a
+            > maintainer, <a href="https://github.com/Munter">Open Source enthusiast</a>, JavaScript hacker and
+            occasional <a href="/talks/">public speaker</a>.
+          </p>
+        </section>
+
+        <div class="subscriptions">
+          <a rel="me" class="subscribe social-mastodon" href="https://webperf.social/@munter"
+            ><span class="sr-only">Mastodon</span></a
+          >
+          <a rel="me" class="subscribe social-twitter" href="https://twitter.com/_munter_"
+            ><span class="sr-only">Twitter</span></a
+          >
+          <a rel="me" class="subscribe social-github" href="https://github.com/Munter"
+            ><span class="sr-only">Github</span></a
+          >
+          <a rel="me" class="subscribe social-linkedin" href="https://dk.linkedin.com/in/petermuller"
+            ><span class="sr-only">Linkedin</span></a
+          >
+          <a class="subscribe social-email" href="mailto:pingvin@gmail.com"><span class="sr-only">Email</span></a>
+          <a class="subscribe social-rss" href="/feed.xml"><span class="sr-only">RSS</span></a>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline src="/assets/js/web-share.js" async></script>
+  </body>
+</html>

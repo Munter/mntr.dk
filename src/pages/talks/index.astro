@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import Default from '../../layouts/Default.astro';
+import DateTag from '../../components/DateTag.astro';
+import { renderMarkdown } from '../../lib/markdown.js';
+import { byDateDesc } from '../../lib/posts.js';
+import { resolveVideo } from '../../lib/vimeo.js';
+
+const talks = await Promise.all(
+  (await getCollection('talks')).sort(byDateDesc).map(async (talk) => ({
+    ...talk,
+    video: await resolveVideo(talk.data.video)
+  }))
+);
+---
+
+<Default title="Talks">
+  <article class="post">
+    <h1>Conference Talks</h1>
+
+    <p>
+      I have a lot of ideas and occasionally some of them are good. When they are I try to contribute them to the
+      community by giving talks about them at web development conferences and meetups.
+    </p>
+
+    <p>This is a list of some of my talks that got caught on video for you to enjoy and me to cringe over.</p>
+
+    <p>
+      If you are a conference organizer and would like me to talk at your conference, shoot me an email. Contact
+      information is in the page footer.
+    </p>
+
+    <section class="talks-list">
+      {
+        talks.map((talk) => {
+          const url = `/talks/${talk.id}/`;
+          const { event, abstract, title } = talk.data;
+          const video = talk.video;
+
+          return (
+            <>
+              <hr />
+
+              <article>
+                <div class="post-meta">
+                  <DateTag date={talk.data.date} />
+
+                  {event && (
+                    <>
+                      <span>at</span>
+                      {event.url ? <a href={event.url}>{event.name}</a> : <span>{event.name}</span>}
+                    </>
+                  )}
+                </div>
+
+                <h4>
+                  <a href={url}>{title}</a>
+                </h4>
+
+                {video?.service === 'youtube' && (
+                  <a href={url}>
+                    {abstract ? (
+                      <img class="talk-abstract-image" src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`} />
+                    ) : (
+                      <img
+                        class="talk-no-abstract-image"
+                        src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
+                      />
+                    )}
+                  </a>
+                )}
+                {video?.service === 'vimeo' && (
+                  <a href={url}>
+                    {abstract ? (
+                      <img
+                        class="talk-abstract-image"
+                        src={`https://i.vimeocdn.com/video/${video['image-id']}_640.jpg`}
+                      />
+                    ) : (
+                      <img class="talk-no-abstract-image" src={`https://i.vimeocdn.com/video/${video['image-id']}.jpg`} />
+                    )}
+                  </a>
+                )}
+
+                {abstract && <Fragment set:html={renderMarkdown(abstract)} />}
+              </article>
+            </>
+          );
+        })
+      }
+    </section>
+  </article>
+</Default>

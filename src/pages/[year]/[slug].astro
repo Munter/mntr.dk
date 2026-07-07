@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import Default from '../../layouts/Default.astro';
+import DateTag from '../../components/DateTag.astro';
+import TweetButton from '../../components/TweetButton.astro';
+import slug from '../../lib/slug.js';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+
+  return posts.map((post) => ({
+    params: {
+      year: String(post.data.date.getFullYear()),
+      slug: slug(post.data.title)
+    },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Default title={post.data.title} description={post.data.description}>
+  <article class="post">
+    <h1 class="post-title">{post.data.title}</h1>
+
+    <div class="post-meta">
+      <DateTag date={post.data.date} />
+    </div>
+
+    <section class="post-content">
+      <Content />
+    </section>
+
+    <div class="sharing">
+      <TweetButton title={post.data.title} twittertext={post.data.twittertext} url={Astro.url.pathname} />
+    </div>
+  </article>
+</Default>

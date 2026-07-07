@@ -1,0 +1,10 @@
+---
+// Layout for plain markdown pages in src/pages/.
+import Default from './Default.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Default title={frontmatter.title}>
+  <slot />
+</Default>

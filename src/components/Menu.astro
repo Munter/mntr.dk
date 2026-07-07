@@ -1,0 +1,17 @@
+---
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/' || pathname === '/index.html';
+const isTalks = pathname === '/talks/';
+---
+
+<nav aria-role="navigation" class="inner">
+  <ul class="nav-main">
+    <li class:list={[{ active: isHome }]}>
+      <a href="/">Thoughts</a>
+    </li>
+
+    <li class:list={[{ active: isTalks }]}>
+      <a href="/talks/">Talks</a>
+    </li>
+  </ul>
+</nav>

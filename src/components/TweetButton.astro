@@ -1,0 +1,14 @@
+---
+import site from '../data/site.json';
+
+// The web-share.js progressive enhancement rewrites these twitter intent
+// links to use navigator.share where available.
+const { title, twittertext, url } = Astro.props;
+
+const text = twittertext || title;
+const href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&title=${encodeURIComponent(
+  title
+)}&url=${encodeURIComponent(site.url + url)}`;
+---
+
+<a href={href} class="twitter-share-button">Tweet this</a>

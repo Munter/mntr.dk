@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Default from '../layouts/Default.astro';
+import DateTag from '../components/DateTag.astro';
+import TweetButton from '../components/TweetButton.astro';
+import { renderMarkdown, excerpt } from '../lib/markdown.js';
+import { postUrl, byDateDesc } from '../lib/posts.js';
+
+const posts = (await getCollection('posts')).sort(byDateDesc).slice(0, 5);
+---
+
+<Default title="Thoughts - Peter Müller">
+  <section class="excerpts">
+    {
+      posts.map((post) => (
+        <article class="post">
+          <header class="post-header">
+            <div class="post-meta">
+              <DateTag date={post.data.date} />
+            </div>
+            <h2 class="post-title">
+              <a href={postUrl(post)}>{post.data.title}</a>
+            </h2>
+          </header>
+          <section class="post-excerpt" set:html={renderMarkdown(excerpt(post.body))} />
+          <footer class="post-meta">
+            <div class="sharing">
+              <TweetButton title={post.data.title} twittertext={post.data.twittertext} url={postUrl(post)} />
+            </div>
+            <p>
+              <a href={postUrl(post)}>Read full post</a>
+            </p>
+          </footer>
+        </article>
+      ))
+    }
+  </section>
+</Default>
