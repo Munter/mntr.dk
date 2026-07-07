@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from 'astro:content';
+import Default from '../../layouts/Default.astro';
+import DateTag from '../../components/DateTag.astro';
+import TweetButton from '../../components/TweetButton.astro';
+import { renderMarkdown } from '../../lib/markdown.js';
+import { resolveVideo } from '../../lib/vimeo.js';
+
+export async function getStaticPaths() {
+  const talks = await getCollection('talks');
+
+  return talks.map((talk) => ({
+    params: { slug: talk.id },
+    props: { talk }
+  }));
+}
+
+const { talk } = Astro.props;
+const { title, event, abstract, slides } = talk.data;
+const video = await resolveVideo(talk.data.video);
+const { Content } = await render(talk);
+---
+
+<Default title={title} description={talk.data.description} video={video}>
+  <article class="post post-video">
+    <h1 class="post-title">{title}</h1>
+
+    <div class="post-meta">
+      <DateTag date={talk.data.date} />
+
+      {
+        event && (
+          <>
+            <span>at</span>
+            {event.url ? <a href={event.url}>{event.name}</a> : <span>{event.name}</span>}
+          </>
+        )
+      }
+    </div>
+
+    <section class="post-abstract">
+      <Fragment set:html={renderMarkdown(abstract)} />
+    </section>
+
+    {
+      video && (
+        <section class="post-video">
+          {video.service === 'youtube' && (
+            <a href={`https://www.youtube.com/watch?v=${video.id}`} class="playable">
+              <img src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`} alt="Watch video" />
+            </a>
+          )}
+          {video.service === 'vimeo' && (
+            <a href={`https://vimeo.com/${video.id}`} class="playable">
+              <img src={`https://i.vimeocdn.com/video/${video['image-id']}.jpg`} alt="Watch video" />
+            </a>
+          )}
+          {!video.service && video.url && (
+            <video controls>
+              <source src={video.url} />
+              <a href={video.page}>Watch video</a>
+            </video>
+          )}
+        </section>
+      )
+    }
+
+    {
+      slides && (
+        <p>
+          <strong>Slides:</strong> <a href={slides}>{slides}</a>
+        </p>
+      )
+    }
+
+    <section class="post-content">
+      <Content />
+    </section>
+
+    <div class="sharing">
+      <TweetButton title={title} twittertext={talk.data.twittertext} url={Astro.url.pathname} />
+    </div>
+  </article>
+</Default>

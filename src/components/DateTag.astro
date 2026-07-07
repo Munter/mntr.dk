@@ -1,0 +1,9 @@
+---
+// Port of the old date.liquid include: <time> with ISO datetime and a
+// human-readable en-US long date.
+const { date } = Astro.props;
+---
+
+<time datetime={date.toISOString()}
+  >{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time
+>
